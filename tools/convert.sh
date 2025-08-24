@@ -25,17 +25,55 @@ fi
 
 process_file() {
   local file="$1"
-  local content
-  content="$(cat "$file")"
+  # Extract frontmatter (line-based parsing to avoid unsupported non-greedy regex)
+  local fm=""
+  local body=""
+  local in_fm=0
+  local in_body=0
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    if [[ "$in_fm" -eq 0 && "$line" == "---" ]]; then
+      in_fm=1
+      continue
+    fi
+    if [[ "$in_fm" -eq 1 && "$line" == "---" ]]; then
+      in_fm=0
+      in_body=1
+      continue
+    fi
+    if [[ "$in_fm" -eq 1 ]]; then
+      fm+="$line"$'\n'
+    elif [[ "$in_body" -eq 1 ]]; then
+      body+="$line"$'\n'
+    fi
+  done < "$file"
+  # Remove trailing newlines
+  fm="${fm%$'\n'}"
+  body="${body%$'\n'}"
 
-  # Extract frontmatter
-  if [[ "$content" =~ ^---$'\n'(.+?)$'\n'---$'\n'(.*) ]]; then
-    local fm="${BASH_REMATCH[1]}"
-    local body="${BASH_REMATCH[2]}"
-
-    if [[ "$MODE" == "yaml" ]]; then
-      echo "# $file"
-      echo "$fm"
+  # Extract frontmatter (line-based parsing to avoid unsupported non-greedy regex)
+  local fm=""
+  local body=""
+  local in_fm=0
+  local in_body=0
+  while IFS= read -r line || [[ -n "$line" ]]; do
+    if [[ "$in_fm" -eq 0 && "$line" == "---" ]]; then
+      in_fm=1
+      continue
+    fi
+    if [[ "$in_fm" -eq 1 && "$line" == "---" ]]; then
+      in_fm=0
+      in_body=1
+      continue
+    fi
+    if [[ "$in_fm" -eq 1 ]]; then
+      fm+="$line"$'\n'
+    elif [[ "$in_body" -eq 1 ]]; then
+      body+="$line"$'\n'
+    fi
+  done < "$file"
+  # Remove trailing newlines
+  fm="${fm%$'\n'}"
+  body="${body%$'\n'}"
       echo
     else
       # naive YAML to JSON-ish (only handles simple key: value & list inline)
