@@ -33,8 +33,10 @@ def extract_frontmatter(text: str) -> Dict[str, Any]:
             else:
                 meta[key] = val.strip('"').strip("'")
             current_key = key
-        elif line.startswith("  -") and current_key:
-            meta.setdefault(current_key, []).append(line[3:].strip())
+        elif re.match(r"^\s*-\s", line) and current_key:
+            # Find the first dash and extract everything after it
+            dash_index = line.find("-")
+            meta.setdefault(current_key, []).append(line[dash_index + 1:].strip())
     return meta
 
 def scan_prompts(root: pathlib.Path) -> List[Dict[str, Any]]:
