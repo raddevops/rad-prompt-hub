@@ -45,8 +45,18 @@ process_file() {
         if [[ "$line" =~ ^([a-zA-Z0-9_]+):[[:space:]]*(.*)$ ]]; then
           key="${BASH_REMATCH[1]}"
           val="${BASH_REMATCH[2]}"
-          if [[ "$val" =~ ^\[.*\]$ ]]; then
-            json+="\"$key\": $val, "
+            # Validate and re-serialize array value using Python
+            valid_json=$(echo "$val" | python3 -c 'import sys, json; import re; s=sys.stdin.read().strip(); 
+try: 
+    arr=json.loads(s)
+    print(json.dumps(arr))
+except Exception: 
+    sys.exit(1)')
+            if [[ $? -eq 0 ]]; then
+              json+="\"$key\": $valid_json, "
+            else
+              echo "Warning: Invalid JSON array for key '$key' in file '$file': $val" >&2
+            fi
           else
             val="${val%\"}"; val="${val#\"}"
             json+="\"$key\": \"${val//\"/\\\"}\", "
