@@ -94,11 +94,11 @@ def main():
         return
 
     width_path = max(len(p["path"]) for p in filtered)
-    width_title = max(len(p["title"] or "") for p in filtered)
+    width_title = max(len(str(p["title"] or "")) for p in filtered)
     print(f"{'Path'.ljust(width_path)}  {'Title'.ljust(width_title)}  Tags")
     print("-" * (width_path + width_title + 8))
     for p in filtered:
-        print(f"{p['path'].ljust(width_path)}  {p['title'].ljust(width_title)}  {', '.join(p['tags'])}")
+        print(f"{p['path'].ljust(width_path)}  {str(p['title'] or '').ljust(width_title)}  {', '.join(p['tags'])}")
 
 if __name__ == "__main__":
     main()
