@@ -60,16 +60,24 @@ process_file() {
           key="${BASH_REMATCH[1]}"
           val="${BASH_REMATCH[2]}"
             # Validate and re-serialize array value using Python
-            valid_json=$(echo "$val" | python3 -c 'import sys, json; import re; s=sys.stdin.read().strip(); 
+            if [[ "$val" =~ ^\[.*\]$ ]]; then
+              valid_json=""
+              if valid_json=$(echo "$val" | python3 -c 'import sys, json; s=sys.stdin.read().strip(); 
 try: 
     arr=json.loads(s)
-    print(json.dumps(arr))
+    if isinstance(arr, list):
+        print(json.dumps(arr))
+    else:
+        sys.exit(1)
 except Exception: 
-    sys.exit(1)')
-            if [[ $? -eq 0 ]]; then
-              json+="\"$key\": $valid_json, "
+    sys.exit(1)'); then
+                json+="\"$key\": $valid_json, "
+              else
+                echo "Warning: Invalid JSON array for key '$key' in file '$file': $val" >&2
+              fi
             else
-              echo "Warning: Invalid JSON array for key '$key' in file '$file': $val" >&2
+              # Not an array, treat as string
+              json+="\"$key\": \"${val//\"/\\\"}\", "
             fi
           else
             val="${val%\"}"; val="${val#\"}"
