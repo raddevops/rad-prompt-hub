@@ -65,9 +65,9 @@ except Exception:
       done <<< "$fm"
       json="${json%, }"
       json+="}"
-      # Escape body newlines minimally
-      body_escaped=$(printf "%s" "$body" | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read()))')
-      echo "{\"file\": \"${file}\", \"metadata\": $json, \"body\": $body_escaped}"
+      # Escape body newlines and double quotes minimally for JSON
+      body_escaped=$(printf "%s" "$body" | sed ':a;N;$!ba;s/"/\\"/g;s/\n/\\n/g')
+      echo "{\"file\": \"${file}\", \"metadata\": $json, \"body\": \"${body_escaped}\"}"
     fi
   else
     echo "Skipping (no frontmatter): $file" >&2
