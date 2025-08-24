@@ -50,7 +50,9 @@ process_file() {
   fm="${fm%$'\n'}"
   body="${body%$'\n'}"
 
-      echo
+  if [[ -n "$fm" ]]; then
+    if [[ "$MODE" == "yaml" ]]; then
+      echo "$fm"
     else
       # naive YAML to JSON-ish (only handles simple key: value & list inline)
       local json="{"
@@ -59,6 +61,7 @@ process_file() {
         if [[ "$line" =~ ^([a-zA-Z0-9_]+):[[:space:]]*(.*)$ ]]; then
           key="${BASH_REMATCH[1]}"
           val="${BASH_REMATCH[2]}"
+          if [[ -n "$val" ]]; then
             # Validate and re-serialize array value using Python
             if [[ "$val" =~ ^\[.*\]$ ]]; then
               valid_json=""
