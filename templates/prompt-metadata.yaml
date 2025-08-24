@@ -1,0 +1,205 @@
+# Metadata Schema (Guidance Only)
+
+This document describes the YAML frontmatter schema for rad-prompt-hub prompts.
+
+## Required Fields
+
+### title (string)
+Human-readable name for the prompt.
+- Keep descriptive and specific (≤ 8 words preferred)
+- Use title case: "Code Review Assistant"
+- Avoid generic terms like "Helper" or "Tool"
+
+**Examples:**
+```yaml
+title: "Code Review Assistant"
+title: "User Story Generator"  
+title: "Blog Post Outline Creator"
+```
+
+### tags (array of strings)
+Categorization labels for discovery and filtering.
+- Include 2-5 tags minimum
+- Use lowercase, kebab-case for multi-word tags
+- First tag should be the domain: engineering, product, writing, research
+- Second tag should be the primary function
+- Additional tags can be style, methodology, or tool-specific
+
+**Examples:**
+```yaml
+tags: ["engineering", "code-review", "quality", "readability"]
+tags: ["product", "user-story", "agile", "backlog"]
+tags: ["writing", "outline", "content-strategy", "blog"]
+tags: ["research", "analysis", "synthesis", "evaluation"]
+```
+
+### author (string)
+Attribution identifier for the prompt creator.
+- Use GitHub handle, email prefix, or team identifier
+- Maintain consistency across contributions
+
+**Examples:**
+```yaml
+author: "raddevops"
+author: "jane-doe"
+author: "engineering-team"
+```
+
+### last_updated (string)
+ISO date format indicating when prompt was last modified.
+- Format: YYYY-MM-DD
+- Update when making any substantive changes
+- Used for freshness assessment and version tracking
+
+**Examples:**
+```yaml
+last_updated: "2025-08-24"
+last_updated: "2025-12-15"
+```
+
+## Optional Fields (Future Extensions)
+
+### version (string)
+Semantic version number for significant changes.
+```yaml
+version: "1.0.0"
+version: "2.1.3"
+```
+
+### inputs (array of objects)
+Structured description of expected variables.
+```yaml
+inputs:
+  - name: code_snippet
+    type: string
+    description: Source code to analyze
+    required: true
+  - name: language
+    type: string  
+    description: Programming language context
+    required: false
+    default: "auto-detect"
+```
+
+### outputs (object)
+Expected response format specification.
+```yaml
+outputs:
+  format: json
+  description: Structured analysis report
+  schema:
+    type: object
+    properties:
+      summary: {type: string}
+      issues: {type: array}
+      recommendations: {type: array}
+```
+
+### difficulty (string)
+Complexity indicator for prompt usage.
+```yaml
+difficulty: "beginner"    # Simple, straightforward usage
+difficulty: "intermediate" # Requires some customization
+difficulty: "advanced"    # Complex setup or domain expertise
+```
+
+### estimated_tokens (integer)
+Approximate token count for cost estimation.
+```yaml
+estimated_tokens: 150
+```
+
+### model_compatibility (array of strings)
+Known working LLM implementations.
+```yaml
+model_compatibility: ["gpt-4", "claude-3", "gemini-pro"]
+```
+
+## Validation Rules
+
+### Required Field Validation
+All four required fields must be present and non-empty:
+- `title`: Non-empty string
+- `tags`: Array with at least 2 elements
+- `author`: Non-empty string  
+- `last_updated`: Valid ISO date string
+
+### Tag Validation
+- Must contain at least one domain tag: engineering, product, writing, research
+- All tags must be lowercase strings
+- No spaces in tags (use hyphens for multi-word)
+- Maximum 8 tags recommended
+
+### Date Validation
+- `last_updated` must be valid ISO date (YYYY-MM-DD)
+- Cannot be future date
+- Should be updated when content changes
+
+## Schema Evolution
+
+### Adding New Fields
+When proposing new metadata fields:
+
+1. **Document the use case**: Explain why existing fields are insufficient
+2. **Provide examples**: Show how the field would be used across multiple prompts
+3. **Ensure backward compatibility**: New fields should be optional
+4. **Update validation**: Include new field in validation scripts
+5. **Update templates**: Add to prompt-template.md with clear guidance
+
+### Deprecating Fields
+If fields become obsolete:
+
+1. **Mark as deprecated**: Add deprecation notice to this schema
+2. **Provide migration path**: Explain how to convert to new approach
+3. **Support legacy**: Continue parsing deprecated fields during transition
+4. **Remove after notice period**: Allow sufficient time for migration
+
+## Usage Examples
+
+### Minimal Required Metadata
+```yaml
+---
+title: "Simple Code Formatter"
+tags: ["engineering", "formatting"]
+author: "dev-team"
+last_updated: "2025-08-24"
+---
+```
+
+### Extended Metadata (Future)
+```yaml
+---
+title: "Advanced Security Analyzer"
+tags: ["engineering", "security", "analysis", "vulnerability"]
+author: "security-team"
+last_updated: "2025-08-24"
+version: "2.1.0"
+difficulty: "advanced"
+estimated_tokens: 200
+inputs:
+  - name: source_code
+    type: string
+    description: Code to analyze for security issues
+    required: true
+  - name: security_focus
+    type: string
+    description: Specific security domain to emphasize
+    required: false
+    options: ["authentication", "data-validation", "crypto", "general"]
+outputs:
+  format: json
+  description: Security analysis report with prioritized findings
+model_compatibility: ["gpt-4", "claude-3-opus"]
+---
+```
+
+## Notes
+
+- This schema may evolve based on community needs
+- Validation scripts should be updated when schema changes
+- Consider both human readability and machine parsing when extending
+- Keep metadata lightweight to avoid overshadowing prompt content
+
+---
+
+For questions about schema extensions, open an issue with your proposed changes and rationale.
