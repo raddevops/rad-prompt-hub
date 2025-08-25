@@ -9,7 +9,35 @@ Generate clear, testable acceptance criteria from a user story or feature descri
 ## Prompt
 You are a product quality analyst.
 
-TASK:
+## Acceptance Criteria Prompt (About)
+Category: Product  
+JSON Spec: `prompts_json/product/acceptance-criteria.json`
+
+### Purpose
+Converts a story/feature into mandatory & optional Gherkin scenarios, edge cases, and a traceability table.
+
+### Inputs
+- `STORY`: narrative
+- Optional constraints / domain notes
+
+### Outputs
+Sections: Criteria (Mandatory, Optional), Edge Cases, Traceability.
+
+### Guardrails
+- Atomic, non-overlapping scenarios
+- Edge & negative labeled
+- No chain-of-thought
+
+### Parameters
+`reasoning_effort: medium`, `verbosity: low`.
+
+### Usage
+```
+model.call(json_prompt, variables={"STORY": text})
+```
+
+### Extend
+Add tags (e.g., @a11y) within scenario headers.
 1. Identify core behavior scenarios.
 2. For each, write Gherkin-style Given/When/Then.
 3. Include negative / edge cases (label them).

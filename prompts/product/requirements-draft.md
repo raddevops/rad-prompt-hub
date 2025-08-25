@@ -9,7 +9,27 @@ Transform unstructured stakeholder notes into a structured initial product requi
 ## Prompt
 You are a product analyst.
 
-TASK:
+## Requirements Draft Prompt (About)
+Category: Product  
+JSON Spec: `prompts_json/product/requirements-draft.json`
+
+### Purpose
+Derives initial structured requirements (goals, users, functional, non-functional, assumptions, open questions, risks) from raw notes.
+
+### Guardrails
+- Functional ≤10, testable
+- Inferred marked (assumed)
+
+### Parameters
+`reasoning_effort: medium`, `verbosity: low`.
+
+### Usage
+```
+model.call(json_prompt, variables={"NOTES": text})
+```
+
+### Extend
+Add prioritization (RICE / MoSCoW) fields.
 1. Extract explicit goals.
 2. Infer (but label) assumptions.
 3. Identify primary users / roles.

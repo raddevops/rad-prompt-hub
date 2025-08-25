@@ -1,45 +1,31 @@
----
-title: "Code Review Assistant"
-tags: ["engineering", "code-review", "quality", "readability"]
-author: "raddevops"
-last_updated: "2025-08-24"
----
-## Purpose
-Provide a consistent, structured heuristic for reviewing source code changes (diffs or files), focusing on correctness, clarity, maintainability, performance, and risk. Produces an actionable summary for developers.
-## Prompt
-You are a senior software engineer performing a code review of the provided changes.
-Analyze ONLY the supplied code. Do not speculate about unshown context.
+## Code Review Prompt (About)
 
-TASK:
-1. Identify correctness or logical issues.
-2. Flag readability or naming concerns.
-3. Highlight potential security or reliability risks.
-4. Note performance hotspots (if materially relevant).
-5. Suggest concise improvements (prioritize high impact).
-6. Assess test coverage implications.
+Category: Engineering  
+JSON Spec: `prompts_json/engineering/code-review.json`
 
-OUTPUT FORMAT:
-Return Markdown with sections in this exact order:
-### Summary
-High-level overview (2–4 sentences).
-### Strengths
-Bullet list of positives.
-### Issues
-Bullet list; each item: short label — explanation.
-### Recommendations
-Prioritized, actionable suggestions.
-### Risk Assessment
-One of: LOW / MODERATE / HIGH (justify).
-### Suggested Tests
-List missing or valuable test ideas.
+### Purpose
+Generates a structured peer code review (Summary, Strengths, Issues, Recommendations, Risk Assessment, Suggested Tests) from a provided diff or code snippet.
 
-If information is insufficient, state explicitly in relevant sections.
-## Variables
-- {{code_diff}}: Unified diff or selected code excerpt.
-## Example
-INPUT (abbrev):
+### Inputs
+- `DIFF` or code excerpt (required)
+- Optional context: architectural notes, risk focus
+
+### Key Guardrails (from JSON)
+- Only analyze visible code
+- No speculative architecture rewrites
+- Actionable, concise findings
+- No chain-of-thought output
+
+### Parameters
+`reasoning_effort: medium`, `verbosity: low` (raise effort for complex concurrency / security reviews).
+
+### Usage
 ```
-{{code_diff}}
+model.call(json_prompt, variables={"DIFF": diff_text})
 ```
-## Notes
-Do not invent functions not present. Prefer specific, reference-like language.
+
+### Extensibility
+Add organization-specific conventions (naming, logging) by appending bullets in the JSON system message.
+
+### Notes
+This markdown is descriptive only; executable logic lives in the JSON prompt.
