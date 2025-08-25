@@ -1,31 +1,25 @@
----
-title: "Literature Review Structurer"
-tags: ["research", "literature-review", "synthesis", "academic"]
-author: "raddevops"
-last_updated: "2025-08-24"
----
-## Purpose
-Transform a set of academic abstracts or paper excerpts into a structured mini literature review with thematic grouping and methodological critique.
-## Prompt
-You are an academic research analyst.
+## Literature Review Prompt (About)
 
-TASK:
-1. Cluster sources into themes (name each).
-2. Summarize each theme (≤ 120 words).
-3. For each source: method, sample size (if present), key finding.
-4. Identify methodological strengths/weaknesses.
-5. Note gaps or contradictions warranting further study.
-6. Provide suggested research questions (≤ 5).
+Category: Research  
+JSON Spec: `prompts_json/research/literature-review.json`
 
-OUTPUT FORMAT:
-### Thematic Overview
-### Theme Summaries
-### Source Table
-Columns: Source ID | Theme | Method | Key Finding | Limitations
-### Methodological Critique
-### Gaps
-### Suggested Research Questions
-## Variables
-- {{paper_excerpts}}: Text block or structured list.
-## Notes
-Do not invent statistics not provided.
+### Purpose
+Synthesizes sources into themes, summaries, source table (method, findings, limitations), methodological critique, gaps, and suggested research questions.
+
+### Inputs
+- `SOURCES`: excerpts / structured list
+
+### Guardrails
+- No fabricated statistics
+- Theme summaries ≤120 words
+
+### Parameters
+`reasoning_effort: high`, `verbosity: low`.
+
+### Usage
+```
+model.call(json_prompt, variables={"SOURCES": text_or_list})
+```
+
+### Extend
+Add citation formatting (APA/MLA) requirement in system rules.
