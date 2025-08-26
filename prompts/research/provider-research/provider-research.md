@@ -1,7 +1,7 @@
 ## Provider Research Prompt (About)
 
 Category: Research  
-JSON Spec: `prompts_json/research/provider-research.json`
+JSON Spec: `research/provider-research/provider-research.json`
 
 ### Purpose
 Evaluates local providers for a specified product/service; outputs shortlist, high-risk list, detailed profiles, methodology + dataset JSON for decision support.

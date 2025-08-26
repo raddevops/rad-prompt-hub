@@ -11,7 +11,7 @@ You are a product analyst.
 
 ## Requirements Draft Prompt (About)
 Category: Product  
-JSON Spec: `prompts_json/product/requirements-draft.json`
+JSON Spec: `product/requirements-draft/requirements-draft.json`
 
 ### Purpose
 Derives initial structured requirements (goals, users, functional, non-functional, assumptions, open questions, risks) from raw notes.

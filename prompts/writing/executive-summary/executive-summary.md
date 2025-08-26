@@ -1,7 +1,7 @@
 ## Executive Summary Prompt (About)
 
 Category: Writing  
-JSON Spec: `prompts_json/writing/executive-summary.json`
+JSON Spec: `writing/executive-summary/executive-summary.json`
 
 ### Purpose
 Condenses source content into Objective, Key Findings, Decisions, Risks & Mitigations, Next Steps, Word Count (≤250 words default).

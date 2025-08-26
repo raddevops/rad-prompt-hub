@@ -1,7 +1,7 @@
 ## Refactor Helper Prompt (About)
 
 Category: Engineering  
-JSON Spec: `prompts_json/engineering/refactor-helper.json`
+JSON Spec: `engineering/refactor-helper/refactor-helper.json`
 
 ### Purpose
 Generates an incremental refactor plan: pain points, strategy options (effort & risk), ordered steps, acceptance criteria—while preserving behavior.

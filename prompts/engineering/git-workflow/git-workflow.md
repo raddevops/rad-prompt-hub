@@ -1,7 +1,7 @@
 ## Git Workflow Prompt (About)
 
 Category: Engineering  
-JSON Spec: `prompts_json/engineering/git-workflow.json`
+JSON Spec: `engineering/git-workflow/git-workflow.json`
 
 ### Purpose
 Produces an evidence-based Git branching & collaboration model (branch roles, protections, commit/PR policy, automation, risks) derived from team context.

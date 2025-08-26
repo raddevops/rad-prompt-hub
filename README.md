@@ -12,7 +12,13 @@ This hub emphasizes:
 
 ```
 rad-prompt-hub/
-├── prompts/                 # Organized prompts by domain
+├── prompts/                 # Organized prompts by domain, each in its own folder
+│   ├── engineering/
+│   │   ├── code-review/     # Each prompt folder contains .md, .json, and test.sh
+│   │   └── ...
+│   ├── product/
+│   ├── research/
+│   └── writing/
 ├── templates/               # Authoring templates + metadata schema
 ├── docs/                    # Usage, style, best practices
 ├── tools/                   # Helper scripts (search, convert, index)
@@ -45,12 +51,13 @@ Return a structured report with sections: Summary, Strengths, Issues, Suggested 
 
 ## How to Use a Prompt
 
-1. Browse `prompts/<category>/`.
-2. Open a file and copy:
+1. Browse `prompts/<category>/<prompt-name>/`.
+2. Open the markdown file and copy:
    - Just the "Prompt" section (for quick use), or
    - Entire file (to preserve context + purpose).
-3. Paste into your LLM tool and adapt variables if present (e.g. `{{code_snippet}}`, `{{goal}}`).
-4. (Optional) Strip metadata if your interface doesn't need it.
+3. Alternatively, use the JSON file for programmatic access.
+4. Paste into your LLM tool and adapt variables if present (e.g. `{{code_snippet}}`, `{{goal}}`).
+5. (Optional) Strip metadata if your interface doesn't need it.
 
 ## Cross-Project Reuse Workflows
 

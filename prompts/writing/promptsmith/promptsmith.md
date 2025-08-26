@@ -1,7 +1,7 @@
 ## PromptSmith Meta Prompt (About)
 
 Category: Meta  
-JSON Spec: `prompts_json/writing/promptsmith.json`
+JSON Spec: `writing/promptsmith/promptsmith.json`
 
 ### Purpose
 Creates production-grade prompt artifacts. Either emits gating QUESTIONS YAML (when critical info missing) or final prompt JSON (system + user messages, parameters, assumptions, risks).

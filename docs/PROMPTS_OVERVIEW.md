@@ -1,6 +1,6 @@
 ## Prompts Overview
 
-All executable prompt specifications live as JSON under `prompts_json/`. Each has a human-oriented "About" markdown file under `prompts/` summarizing purpose, inputs, outputs, guardrails, parameters, and usage. The JSON file is authoritative; markdown is for quick discovery.
+Each prompt has its own folder under `prompts/<category>/<prompt-name>/` containing the JSON specification, human-oriented markdown documentation, and a test script. The JSON file is authoritative; markdown is for quick discovery and understanding.
 
 ### Categories
 - Engineering
@@ -11,8 +11,8 @@ All executable prompt specifications live as JSON under `prompts_json/`. Each ha
 
 ### Add a New Prompt
 1. Author JSON (fields: target_model, parameters, messages, assumptions, risks_or_notes).
-2. Add entry to `prompts_json/prompts_index.json`.
-3. Create `prompts/<category>/<name>.md` About file.
+2. Create folder: `prompts/<category>/<prompt-name>/` with JSON, markdown, and test script.
+3. Create `prompts/<category>/<name>/<name>.md` About file.
 4. Commit with semantic message (e.g., `feat(prompt): add <name>`).
 
 ### Conventions
