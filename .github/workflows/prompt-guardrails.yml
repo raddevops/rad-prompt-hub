@@ -1,0 +1,45 @@
+name: Prompt Guardrails
+
+on:
+  pull_request:
+    paths:
+      - 'prompts/**'
+      - 'scripts/**'
+      - '.github/workflows/prompt-guardrails.yml'
+  push:
+    branches: [ main ]
+    paths:
+      - 'prompts/**'
+      - 'scripts/**'
+      - '.github/workflows/prompt-guardrails.yml'
+
+jobs:
+  validate-prompts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install deps (none required)
+        run: python -V
+
+      - name: Run structural validation
+        run: bash scripts/validate_prompts.sh
+
+      - name: Verify index consistency
+        run: bash scripts/check_prompt_index.sh
+
+      - name: Detect stray root prompt JSON
+        run: python scripts/detect_stray_prompts.py
+
+      - name: Schema validate prompt JSON
+        run: python scripts/schema_validate_prompts.py
+
+      - name: Summary
+        if: always()
+        run: echo "Prompt guardrail workflow complete." 

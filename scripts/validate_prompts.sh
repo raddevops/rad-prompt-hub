@@ -2,6 +2,11 @@
 set -euo pipefail
 fail=0
 while IFS= read -r -d '' jf; do
+  base="$(basename "$jf")"
+  # Skip index.json (catalog)
+  if [[ "$base" == "index.json" ]]; then
+    continue
+  fi
   md="${jf%.json}.md"
   if [[ ! -f "$md" ]]; then
     echo "Missing MD doc for $jf" >&2
