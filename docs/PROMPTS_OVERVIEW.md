@@ -1,6 +1,6 @@
 ## Prompts Overview
 
-All executable prompt specifications live as JSON under `prompts_json/`. Each has a human-oriented "About" markdown file under `prompts/` summarizing purpose, inputs, outputs, guardrails, parameters, and usage. The JSON file is authoritative; markdown is for quick discovery.
+Canonical layout (authoritative): JSON + About docs live together under `prompts/<category>/<slug>.{json,md}`. The JSON file is the source of truth; the Markdown file is a concise "About" doc (purpose, inputs, outputs, guardrails, usage).
 
 ### Categories
 - Engineering
@@ -11,9 +11,9 @@ All executable prompt specifications live as JSON under `prompts_json/`. Each ha
 
 ### Add a New Prompt
 1. Author JSON (fields: target_model, parameters, messages, assumptions, risks_or_notes).
-2. Add entry to `prompts_json/prompts_index.json`.
-3. Create `prompts/<category>/<name>.md` About file.
-4. Commit with semantic message (e.g., `feat(prompt): add <name>`).
+2. Create `prompts/<category>/<slug>.md` About file.
+3. Run `python scripts/build_prompts_index.py` and commit `prompts/index.json`.
+4. Commit with semantic message (e.g., `feat(prompt): add <slug>`).
 
 ### Conventions
 - Placeholders: `{{VARIABLE}}` or with default `{{NAME:=default}}`.
@@ -24,9 +24,14 @@ All executable prompt specifications live as JSON under `prompts_json/`. Each ha
 - reasoning_effort: raise for complex synthesis/scoring.
 - verbosity: keep low; raise only when longer narrative needed.
 
-### Tooling Ideas
-- Linter to validate placeholder syntax & required keys.
-- Token size reporter to catch oversized system messages.
+### Tooling
+- `scripts/validate_prompts.sh` basic structural checks.
+- `scripts/schema_validate_prompts.py` schema + pairing checks.
+- `scripts/build_prompts_index.py` generates `prompts/index.json`.
+- CI workflow `.github/workflows/prompt-guardrails.yml` runs all of the above.
+
+### Deprecated
+- `prompts_json/` (removed). Do not reintroduce; CI will fail PRs if present.
 
 ### Versioning
 Add a `version` field in JSON if external integrations require deterministic behavior; bump on breaking changes.

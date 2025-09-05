@@ -15,10 +15,10 @@ for p in ROOT.glob('*.json'):
     if {'target_model','messages'} <= set(data):
         errors.append(f"Stray prompt spec at repo root: {p}")
 
-# Detect any nested prompts_json leftovers
+# Detect any nested prompts_json leftovers (forbid)
 legacy_dir = ROOT / 'prompts_json'
 if legacy_dir.exists():
-    errors.append("Legacy directory present: prompts_json (should be removed)")
+    errors.append("Deprecated directory present: prompts_json (must be removed)")
 
 if errors:
     for e in errors:
