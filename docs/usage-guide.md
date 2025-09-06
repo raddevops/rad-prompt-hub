@@ -398,14 +398,13 @@ Choose integration approach based on your needs:
 
 ### Files Requiring Remediation
 
-**The following MD files violate DRY principles by containing executable prompt content:**
+**The following MD files violate DRY principles by containing executable prompt content. Remediation is tracked below with priority, ownership, and target completion date:**
 
-- `prompts/product/user-story/user-story.md` - Contains "## Prompt" section with prompt instructions
-- `prompts/product/acceptance-criteria/acceptance-criteria.md` - Contains prompt logic duplicated from JSON  
-- `prompts/product/requirements-draft/requirements-draft.md` - Includes executable content
-
-**Remediation needed**: Remove executable content from these MD files, keep only documentation about purpose, usage, and integration guidance.
-
+| File | Issue | Priority | Owner | Target Completion Date |
+|------|-------|----------|-------|-----------------------|
+| `prompts/product/user-story/user-story.md` | Contains "## Prompt" section with prompt instructions | P0 | @product-team | 2024-07-01 |
+| `prompts/product/acceptance-criteria/acceptance-criteria.md` | Contains prompt logic duplicated from JSON | P1 | @product-team | 2024-07-08 |
+| `prompts/product/requirements-draft/requirements-draft.md` | Includes executable content | P2 | @product-team | 2024-07-15 |
 ### Migration Guidelines
 
 When updating legacy MD files:
