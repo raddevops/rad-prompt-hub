@@ -96,10 +96,13 @@ def scan_prompts(root: pathlib.Path) -> List[Dict[str, Any]]:
         # Always compute content-derived metadata once; use as fallback only
         content_meta = extract_metadata_from_content(content)
 
-        # Determine category consistently from directory; warn on mismatches
-        if path.parent.name != "prompts":
-            category = path.parent.name
-        else:
+        # Determine category from the first subdirectory under 'prompts'
+        # e.g., prompts/engineering/code-review/file.md -> category = 'engineering'
+        parts = list(path.parts)
+        try:
+            p_idx = parts.index("prompts")
+            category = parts[p_idx + 1] if len(parts) > p_idx + 1 else "uncategorized"
+        except ValueError:
             category = "uncategorized"
         
         # Warn if frontmatter or content category mismatches parent directory
