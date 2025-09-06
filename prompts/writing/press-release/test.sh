@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Test script for PROMPT_NAME prompt
+# Test script for $PROMPT_NAME prompt
 # This script validates that the prompt still performs its intended function
 
 set -e
