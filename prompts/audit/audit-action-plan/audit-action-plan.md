@@ -1,3 +1,10 @@
+---
+title: "Audit Action Plan Generator"
+tags: ["audit", "planning", "github", "project-management", "automation"]
+author: "raddevops"
+last_updated: "2025-09-06"
+---
+
 # Audit Action Plan Prompt (About)
 
 Slug: audit-action-plan  

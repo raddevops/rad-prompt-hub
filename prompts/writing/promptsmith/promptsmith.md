@@ -1,3 +1,10 @@
+---
+title: "PromptSmith Meta Generator"
+tags: ["writing", "meta", "prompt-engineering", "ai", "automation"]
+author: "raddevops"
+last_updated: "2025-09-06"
+---
+
 ## PromptSmith Meta Prompt (About)
 
 Category: Meta  

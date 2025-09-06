@@ -1,3 +1,10 @@
+---
+title: "Add Copilot Instructions"
+tags: ["meta", "copilot", "best-practices", "repository-improvement", "automation"]
+author: "raddevops"
+last_updated: "2025-09-06"
+---
+
 # Add Copilot Instructions Prompt (About)
 
 Slug: add-copilot-instructions  
