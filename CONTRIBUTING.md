@@ -116,6 +116,8 @@ Create a new folder structure for your prompt:
   - `<prompt-name>.json`: Executable JSON specification  
   - `test.sh`: Test script to validate functionality
 
+**JSON Format Requirements**: The JSON file must conform to [`scripts/prompt.schema.json`](scripts/prompt.schema.json). Required fields are `target_model`, `parameters` (containing `reasoning_effort` and `verbosity`), and `messages` array. See [README.md](README.md#json-schema) for full schema details.
+
 Categories:
 - `prompts/engineering/`: Code review, refactoring, architecture, testing
 - `prompts/product/`: Requirements, user stories, roadmaps, metrics
@@ -174,14 +176,37 @@ Before submitting, verify:
 
 ## Validation and Testing
 
+### JSON Schema Validation
+
+All JSON prompt files are validated against our **canonical schema** at [`scripts/prompt.schema.json`](scripts/prompt.schema.json). This schema is the **source of truth** for prompt structure and is automatically enforced in CI.
+
+Run local schema validation:
+```bash
+python scripts/schema_validate_prompts.py
+```
+
+This validates:
+- **Required fields**: `target_model`, `parameters` (with `reasoning_effort`), `messages`
+- **Message structure**: Proper `role` and `content` fields  
+- **Version format**: Semantic versioning if `version` field is present
+- **File pairing**: Every `.json` must have a corresponding `.md` file
+
+### Full Validation Suite
+
+Run all validation checks (same as CI):
+```bash
+bash scripts/validate_prompts.sh        # Structural validation
+bash scripts/check_prompt_index.sh      # Index consistency  
+python scripts/detect_stray_prompts.py  # Detect orphaned files
+python scripts/schema_validate_prompts.py # Schema validation
+```
+
 ### Metadata Validation
 
-Run our validation script:
-
+Test prompt discoverability:
 ```bash
 python tools/search.py --all --json | jq '.[] | select(.title == null)'
 ```
-
 Should return empty results.
 
 ### Search Testing
