@@ -34,6 +34,9 @@ jobs:
       - name: Verify index consistency
         run: bash scripts/check_prompt_index.sh
 
+      - name: Verify tools index consistency  
+        run: bash scripts/check_tools_index.sh
+
       - name: Detect stray root prompt JSON
         run: python scripts/detect_stray_prompts.py
 
