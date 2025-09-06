@@ -4,8 +4,12 @@ set -e
 
 echo "Testing requirements-draft prompt..."
 
+# Get the directory of this script
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROMPT_NAME="$(basename "$SCRIPT_DIR")"
+
 # Test that the file exists
-PROMPT_FILE="/Users/robertdozier/workspace/rad-prompt-hub/prompts/product/requirements-draft/requirements-draft.json"
+PROMPT_FILE="$SCRIPT_DIR/$PROMPT_NAME.json"
 if [ ! -f "$PROMPT_FILE" ]; then
     echo "❌ JSON file does not exist: $PROMPT_FILE"
     exit 1
