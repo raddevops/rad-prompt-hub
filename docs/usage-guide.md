@@ -425,8 +425,9 @@ grep -r "## Prompt" prompts/ --include="*.md"
 # Find MD files with format specifications
 grep -r "OUTPUT FORMAT\|RESPONSE FORMAT" prompts/ --include="*.md"
 
-# Check for variable documentation that might duplicate JSON
-grep -r "Variables:\|{{.*}}" prompts/ --include="*.md"
+# Check for lines that may contain executable variable syntax (may still produce false positives; review manually)
+grep -r "{{[a-zA-Z0-9_]+}}" prompts/ --include="*.md"
+# Note: This command may match legitimate documentation. Review results manually to distinguish violations from proper usage.
 ```
 
 ---
