@@ -10,9 +10,13 @@ __pycache__/
 *.so
 *.egg-info/
 *.egg
-dist/
-build/
+
+# Build & dist
+/dist/
+/build/
 pip-wheel-metadata/
+
+# Test & tooling caches
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
