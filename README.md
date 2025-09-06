@@ -18,12 +18,30 @@ rad-prompt-hub/
 │   │   └── ...
 │   ├── product/
 │   ├── research/
-│   └── writing/
+│   ├── writing/
+│   ├── meta/
+│   ├── audit/
+│   └── index.json           # Generated registry (minified, do not edit)
 ├── templates/               # Authoring templates + metadata schema
 ├── docs/                    # Usage, style, best practices
 ├── tools/                   # Helper scripts (search, convert, index)
 └── README.md
 ```
+
+## Prompt Folder Anatomy
+
+Each prompt lives in its own folder with three essential files:
+
+```
+prompts/engineering/code-review/
+├── code-review.md      # Human-readable documentation and examples
+├── code-review.json    # Minified LLM specification (programmatic use)
+└── test.sh             # Quick validation script and usage example
+```
+
+- **`.md` file**: Human-friendly documentation with purpose, examples, and variables
+- **`.json` file**: Minified, LLM-optimized prompt specification (auto-generated from `.md` file, do not edit manually)
+- **`test.sh`**: Validation script that demonstrates usage and tests functionality
 
 ## Quick Example (Prompt File)
 
@@ -51,13 +69,25 @@ Return a structured report with sections: Summary, Strengths, Issues, Suggested 
 
 ## How to Use a Prompt
 
-1. Browse `prompts/<category>/<prompt-name>/`.
-2. Open the markdown file and copy:
-   - Just the "Prompt" section (for quick use), or
-   - Entire file (to preserve context + purpose).
-3. Alternatively, use the JSON file for programmatic access.
-4. Paste into your LLM tool and adapt variables if present (e.g. `{{code_snippet}}`, `{{goal}}`).
-5. (Optional) Strip metadata if your interface doesn't need it.
+There are three ways to use prompts from this repository:
+
+### 1. Human Use (Markdown)
+Browse `prompts/<category>/<prompt-name>/` and open the `.md` file:
+- Copy just the "Prompt" section for quick use
+- Copy the entire file to preserve context and purpose
+- Adapt variables like `{{code_snippet}}`, `{{goal}}` as needed
+
+### 2. Programmatic Use (JSON)
+Use the `.json` file for programmatic integration:
+- JSON files are minified and LLM-optimized (read-only)
+- Load directly into your LLM client or API
+- All fields follow our canonical schema (see JSON Schema section)
+
+### 3. Quick Validation (test.sh)
+Run the test script to see the prompt in action:
+- `bash prompts/<category>/<name>/test.sh`
+- Validates functionality and shows usage examples
+- Useful for understanding prompt behavior before integration
 
 ## JSON Schema
 
@@ -92,6 +122,37 @@ All JSON prompt files conform to our **canonical JSON schema** defined in [`scri
 ```
 
 All prompts are automatically validated against this schema in CI. See [CONTRIBUTING.md](CONTRIBUTING.md) for validation details.
+
+## Programmatic Usage
+
+For automated workflows and integrations:
+
+### Convert to JSON
+```bash
+# Convert all prompts to a single JSON file
+./tools/convert.sh json > build/prompts.json
+```
+
+### Search and Filter
+```bash
+# Find prompts by tags
+python tools/search.py --tags code-review --json
+
+# Search by keyword
+python tools/search.py --keyword "user story" --json > build/product_prompts.json
+
+# Get all prompts
+python tools/search.py --all --json
+```
+
+### Quick Discovery
+```bash
+# List available prompts by category
+find prompts -name "*.json" -not -name "index.json" | sort
+
+# Check generated index
+cat prompts/index.json | jq '.prompts[] | {slug, category, path}'
+```
 
 ## Cross-Project Reuse Workflows
 
@@ -160,13 +221,19 @@ python tools/search.py --tags code-review --json > build/code_review.json
 See: `templates/prompt-template.md`, `templates/prompt-metadata.yaml`, `CONTRIBUTING.md`, `docs/writing-style.md`.
 
 ## Tooling
-- `tools/search.py`: Simple tag/keyword search over prompt metadata
+
+### Search and Discovery
+- `tools/search.py`: Tag/keyword search over prompt metadata from markdown frontmatter
+- `tools/index.json`: Auto-generated registry from markdown frontmatter (for tool discovery)
+
+### Conversion and Build
 - `tools/convert.sh`: Batch convert Markdown prompts to JSON/YAML objects
-- `tools/index.json`: Auto-generated registry from markdown frontmatter
 - `scripts/build_tools_index.py`: Regenerate tools/index.json from all markdown files
-- `scripts/build_prompts_index.py`: Generate prompts/index.json from JSON prompt files
+- `scripts/build_prompts_index.py`: Generate **prompts/index.json** from JSON prompt files
 - `scripts/check_tools_index.sh`: Verify tools/index.json is up to date
-- `scripts/check_prompt_index.sh`: Verify prompts/index.json is up to date
+- `scripts/check_prompt_index.sh`: Verify **prompts/index.json** is up to date
+
+**Note**: `prompts/index.json` is the generated prompt registry (minified, read-only). `tools/index.json` catalogs markdown metadata for search functionality.
 
 ## Recommended Conventions
 - Keep prompts atomic
@@ -174,8 +241,30 @@ See: `templates/prompt-template.md`, `templates/prompt-metadata.yaml`, `CONTRIBU
 - Prefer explicit variables: `{{input_text}}`
 - Tags concise & lowercase
 
-Note on formats:
-- JSON prompt files (`prompts/**/*.json`) are optimized for LLM execution and intentionally minified. Use the paired `.md` files for human-readable content and editing.
+## Note on Formats
+
+**JSON files are optimized for LLMs and must remain minified:**
+- All JSON prompt files (`prompts/**/*.json`) are intentionally minified for token efficiency and stable diffs
+- Use the paired `.md` files for human-readable content and editing
+- Generated files like `prompts/index.json` should never be manually edited
+
+## Try It
+
+Get started with a quick end-to-end example:
+
+```bash
+# List available test scripts
+find prompts -name "test.sh" | head -3
+
+# Try a prompt validation
+bash prompts/engineering/code-review/test.sh
+
+# Search for specific prompts
+python tools/search.py --tags engineering
+
+# View the generated index
+head prompts/index.json | jq .
+```
 
 ## Copilot & Coding Agent Usage
 
