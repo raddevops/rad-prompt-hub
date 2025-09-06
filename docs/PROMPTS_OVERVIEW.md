@@ -11,6 +11,7 @@ Each prompt has its own folder under `prompts/<category>/<prompt-name>/` contain
 
 ### Add a New Prompt
 1. Author JSON (fields: target_model, parameters, messages, assumptions, risks_or_notes).
+
 2. Create folder: `prompts/<category>/<prompt-name>/` with JSON, markdown, and test script.
 3. Create `prompts/<category>/<name>/<name>.md` About file.
 4. Commit with semantic message (e.g., `feat(prompt): add <name>`).
@@ -24,9 +25,14 @@ Each prompt has its own folder under `prompts/<category>/<prompt-name>/` contain
 - reasoning_effort: raise for complex synthesis/scoring.
 - verbosity: keep low; raise only when longer narrative needed.
 
-### Tooling Ideas
-- Linter to validate placeholder syntax & required keys.
-- Token size reporter to catch oversized system messages.
+### Tooling
+- `scripts/validate_prompts.sh` basic structural checks.
+- `scripts/schema_validate_prompts.py` schema + pairing checks.
+- `scripts/build_prompts_index.py` generates `prompts/index.json`.
+- CI workflow `.github/workflows/prompt-guardrails.yml` runs all of the above.
+
+### Deprecated
+- `prompts_json/` (removed). Do not reintroduce; CI will fail PRs if present.
 
 ### Versioning
 Add a `version` field in JSON if external integrations require deterministic behavior; bump on breaking changes.
