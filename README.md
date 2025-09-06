@@ -128,7 +128,11 @@ See: `templates/prompt-template.md`, `templates/prompt-metadata.yaml`, `CONTRIBU
 ## Tooling
 - `tools/search.py`: Simple tag/keyword search over prompt metadata
 - `tools/convert.sh`: Batch convert Markdown prompts to JSON/YAML objects
-- `tools/index.json`: Auto-generated registry (seed here)
+- `tools/index.json`: Auto-generated registry from markdown frontmatter
+- `scripts/build_tools_index.py`: Regenerate tools/index.json from all markdown files
+- `scripts/build_prompts_index.py`: Generate prompts/index.json from JSON prompt files
+- `scripts/check_tools_index.sh`: Verify tools/index.json is up to date
+- `scripts/check_prompt_index.sh`: Verify prompts/index.json is up to date
 
 ## Recommended Conventions
 - Keep prompts atomic

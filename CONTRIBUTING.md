@@ -174,6 +174,18 @@ Before submitting, verify:
 
 ## Validation and Testing
 
+### Index Regeneration
+
+After adding or modifying markdown files, regenerate the metadata index:
+
+```bash
+# Regenerate tools/index.json from markdown frontmatter
+python scripts/build_tools_index.py
+
+# Verify the index is current
+bash scripts/check_tools_index.sh
+```
+
 ### Metadata Validation
 
 Run our validation script:
@@ -208,6 +220,8 @@ Verify conversion works:
 ## Generated files policy
 
 - All JSON prompt files (`prompts/**/*.json`, including `prompts/index.json`) are optimized for LLM use and must remain minified/compact. These files are generated for token efficiency and small diffs—do not hand-edit or pretty-print them. Use the paired Markdown (`.md`) for human readability, and always use the provided scripts to rebuild JSON files when needed.
+- `tools/index.json` is automatically generated from markdown frontmatter. Run `python scripts/build_tools_index.py` to regenerate it after adding/modifying markdown files.
+- The CI workflow automatically checks that both index files are up to date and will fail if manual regeneration is needed.
 
 ## Anti-Patterns to Avoid
 

@@ -1,17 +1,193 @@
 {
-  "generated_at": "2025-08-24T18:16:30Z",
+  "generated_at": "2025-09-06T14:46:11Z",
   "prompts": [
-    {"path": "prompts/engineering/code-review.md", "title": "Code Review Assistant", "tags": ["engineering", "code-review", "quality", "readability"], "category": "engineering", "last_updated": "2025-08-24"},
-    {"path": "prompts/engineering/refactor-helper.md", "title": "Refactor Helper", "tags": ["engineering", "refactor", "maintainability", "design"], "category": "engineering", "last_updated": "2025-08-24"},
-    {"path": "prompts/engineering/git-workflow.md", "title": "Git Workflow Advisor", "tags": ["engineering", "git", "workflow", "process"], "category": "engineering", "last_updated": "2025-08-24"},
-    {"path": "prompts/product/requirements-draft.md", "title": "Requirements Draft Generator", "tags": ["product", "requirements", "drafting", "specification"], "category": "product", "last_updated": "2025-08-24"},
-    {"path": "prompts/product/user-story.md", "title": "User Story Generator", "tags": ["product", "user-story", "agile", "backlog"], "category": "product", "last_updated": "2025-08-24"},
-    {"path": "prompts/product/acceptance-criteria.md", "title": "Acceptance Criteria Builder", "tags": ["product", "acceptance-criteria", "quality"], "category": "product", "last_updated": "2025-08-24"},
-    {"path": "prompts/writing/blog-outline.md", "title": "Blog Post Outline Generator", "tags": ["writing", "outline", "content-strategy", "blog"], "category": "writing", "last_updated": "2025-08-24"},
-    {"path": "prompts/writing/executive-summary.md", "title": "Executive Summary Synthesizer", "tags": ["writing", "summary", "executive", "condensation"], "category": "writing", "last_updated": "2025-08-24"},
-    {"path": "prompts/writing/press-release.md", "title": "Press Release Draft Assistant", "tags": ["writing", "press-release", "marketing", "announcement"], "category": "writing", "last_updated": "2025-08-24"},
-    {"path": "prompts/research/source-digest.md", "title": "Source Digest Summarizer", "tags": ["research", "summarization", "synthesis", "evidence"], "category": "research", "last_updated": "2025-08-24"},
-    {"path": "prompts/research/literature-review.md", "title": "Literature Review Structurer", "tags": ["research", "literature-review", "synthesis", "academic"], "category": "research", "last_updated": "2025-08-24"},
-    {"path": "prompts/research/experiment-plan.md", "title": "Experiment Plan Generator", "tags": ["research", "experiment", "design", "planning"], "category": "research", "last_updated": "2025-08-24"}
+    {
+      "path": "prompts/audit/audit-action-plan.md",
+      "title": "Audit Action Plan",
+      "tags": [
+        "audit"
+      ],
+      "category": "audit",
+      "last_updated": "",
+      "author": ""
+    },
+    {
+      "path": "prompts/audit/repo-audit.md",
+      "title": "Repository Audit",
+      "tags": [
+        "audit"
+      ],
+      "category": "audit",
+      "last_updated": "",
+      "author": ""
+    },
+    {
+      "path": "prompts/engineering/code-review/code-review.md",
+      "title": "Code Review",
+      "tags": [
+        "engineering"
+      ],
+      "category": "engineering",
+      "last_updated": "",
+      "author": ""
+    },
+    {
+      "path": "prompts/engineering/git-workflow/git-workflow.md",
+      "title": "Git Workflow",
+      "tags": [
+        "engineering"
+      ],
+      "category": "engineering",
+      "last_updated": "",
+      "author": ""
+    },
+    {
+      "path": "prompts/engineering/refactor-helper/refactor-helper.md",
+      "title": "Refactor Helper",
+      "tags": [
+        "engineering"
+      ],
+      "category": "engineering",
+      "last_updated": "",
+      "author": ""
+    },
+    {
+      "path": "prompts/engineering/repository-audit.md",
+      "title": "Repository Audit",
+      "tags": [
+        "engineering"
+      ],
+      "category": "engineering",
+      "last_updated": "",
+      "author": ""
+    },
+    {
+      "path": "prompts/meta/add-copilot-instructions.md",
+      "title": "Add Copilot Instructions",
+      "tags": [
+        "meta"
+      ],
+      "category": "meta",
+      "last_updated": "",
+      "author": ""
+    },
+    {
+      "path": "prompts/product/acceptance-criteria/acceptance-criteria.md",
+      "title": "Acceptance Criteria Builder",
+      "tags": [
+        "product",
+        "acceptance-criteria",
+        "quality"
+      ],
+      "category": "acceptance-criteria",
+      "last_updated": "2025-08-24",
+      "author": "raddevops"
+    },
+    {
+      "path": "prompts/product/requirements-draft/requirements-draft.md",
+      "title": "Requirements Draft Generator",
+      "tags": [
+        "product",
+        "requirements",
+        "drafting",
+        "specification"
+      ],
+      "category": "requirements-draft",
+      "last_updated": "2025-08-24",
+      "author": "raddevops"
+    },
+    {
+      "path": "prompts/product/user-story/user-story.md",
+      "title": "User Story Generator",
+      "tags": [
+        "product",
+        "user-story",
+        "agile",
+        "backlog"
+      ],
+      "category": "user-story",
+      "last_updated": "2025-08-24",
+      "author": "raddevops"
+    },
+    {
+      "path": "prompts/research/experiment-plan/experiment-plan.md",
+      "title": "Experiment Plan",
+      "tags": [
+        "research"
+      ],
+      "category": "research",
+      "last_updated": "",
+      "author": ""
+    },
+    {
+      "path": "prompts/research/literature-review/literature-review.md",
+      "title": "Literature Review",
+      "tags": [
+        "research"
+      ],
+      "category": "research",
+      "last_updated": "",
+      "author": ""
+    },
+    {
+      "path": "prompts/research/provider-research/provider-research.md",
+      "title": "Provider Research",
+      "tags": [
+        "research"
+      ],
+      "category": "research",
+      "last_updated": "",
+      "author": ""
+    },
+    {
+      "path": "prompts/research/source-digest/source-digest.md",
+      "title": "Source Digest",
+      "tags": [
+        "research"
+      ],
+      "category": "research",
+      "last_updated": "",
+      "author": ""
+    },
+    {
+      "path": "prompts/writing/blog-outline/blog-outline.md",
+      "title": "Blog Outline",
+      "tags": [
+        "writing"
+      ],
+      "category": "writing",
+      "last_updated": "",
+      "author": ""
+    },
+    {
+      "path": "prompts/writing/executive-summary/executive-summary.md",
+      "title": "Executive Summary",
+      "tags": [
+        "writing"
+      ],
+      "category": "writing",
+      "last_updated": "",
+      "author": ""
+    },
+    {
+      "path": "prompts/writing/press-release/press-release.md",
+      "title": "Press Release",
+      "tags": [
+        "writing"
+      ],
+      "category": "writing",
+      "last_updated": "",
+      "author": ""
+    },
+    {
+      "path": "prompts/writing/promptsmith/promptsmith.md",
+      "title": "PromptSmith Meta",
+      "tags": [
+        "meta"
+      ],
+      "category": "meta",
+      "last_updated": "",
+      "author": ""
+    }
   ]
 }
