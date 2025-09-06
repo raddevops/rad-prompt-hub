@@ -99,16 +99,20 @@ def scan_prompts(root: pathlib.Path) -> List[Dict[str, Any]]:
             # No frontmatter, try to extract metadata from content structure
             content_meta = extract_metadata_from_content(content)
             
-        # Determine category from path or content
-        if meta.get("category"):
-            category = meta["category"] 
-        elif content_meta.get("category"):
-            category = content_meta["category"]
-        elif path.parent.name != "prompts":
+        # Determine category consistently from parent directory
+        if path.parent.name != "prompts":
             category = path.parent.name
         else:
             category = "uncategorized"
         
+        # Warn if frontmatter or content category mismatches parent directory
+        fm_category = meta.get("category")
+        content_category = content_meta.get("category")
+        expected_category = category
+        if fm_category and fm_category != expected_category:
+            print(f"WARN: {path} frontmatter category '{fm_category}' does not match directory '{expected_category}'", file=sys.stderr)
+        if content_category and content_category != expected_category:
+            print(f"WARN: {path} content-derived category '{content_category}' does not match directory '{expected_category}'", file=sys.stderr)
         # Get title from frontmatter or content
         title = meta.get("title", content_meta.get("title", ""))
         
