@@ -148,7 +148,7 @@ python tools/search.py --all --json
 ### Quick Discovery
 ```bash
 # List available prompts by category
-find prompts -name "*.json" ! -name "index.json" | sort
+find prompts -name "*.json" -not -name "index.json" | sort
 
 # Check generated index
 cat prompts/index.json | jq '.prompts[] | {slug, category, path}'
