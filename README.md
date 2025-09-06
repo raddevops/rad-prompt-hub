@@ -136,6 +136,9 @@ See: `templates/prompt-template.md`, `templates/prompt-metadata.yaml`, `CONTRIBU
 - Prefer explicit variables: `{{input_text}}`
 - Tags concise & lowercase
 
+Note on formats:
+- JSON prompt files (`prompts/**/*.json`) are optimized for LLM execution and intentionally minified. Use the paired `.md` files for human-readable content and editing.
+
 ## Copilot & Coding Agent Usage
 
 - Repository-specific Copilot guidance lives in `.github/copilot-instructions.md`.
