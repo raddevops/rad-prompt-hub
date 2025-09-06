@@ -34,8 +34,10 @@ Each prompt has its own folder under `prompts/<category>/<prompt-name>/` contain
 ### Deprecated
 - `prompts_json/` (removed). Do not reintroduce; CI will fail PRs if present.
 
-### Versioning
-Add a `version` field in JSON if external integrations require deterministic behavior; bump on breaking changes.
+### Versioning & Changelog
+Add a `version` field in JSON if external integrations require deterministic behavior; bump on breaking changes following [semantic versioning](VERSIONING_CHANGELOG.md).
+
+For comprehensive guidelines on when to version, how to maintain changelogs, and managing backward compatibility, see [VERSIONING_CHANGELOG.md](VERSIONING_CHANGELOG.md).
 
 ### Contact
 Open an issue for enhancements or new prompt requests.

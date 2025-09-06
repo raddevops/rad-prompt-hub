@@ -20,6 +20,16 @@ def validate_schema(data, path):
     for m in data['messages']:
         if not isinstance(m, dict) or 'role' not in m or 'content' not in m:
             return [f"{path}: message entry invalid"]
+    # Validate version field if present (semantic versioning)
+    if 'version' in data:
+        version = data['version']
+        if not isinstance(version, str):
+            return [f"{path}: version must be a string"]
+        # Basic semantic version pattern check: MAJOR.MINOR.PATCH
+        import re
+        semver_pattern = r'^([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?$'
+        if not re.match(semver_pattern, version):
+            return [f"{path}: version must follow semantic versioning (e.g., '1.0.0', '2.1.3-beta.1')"]
     return []
 
 errors = []

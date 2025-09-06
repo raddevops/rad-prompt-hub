@@ -59,6 +59,40 @@ Return a structured report with sections: Summary, Strengths, Issues, Suggested 
 4. Paste into your LLM tool and adapt variables if present (e.g. `{{code_snippet}}`, `{{goal}}`).
 5. (Optional) Strip metadata if your interface doesn't need it.
 
+## JSON Schema
+
+All JSON prompt files conform to our **canonical JSON schema** defined in [`scripts/prompt.schema.json`](scripts/prompt.schema.json). This schema is the **source of truth** for prompt validation and is automatically enforced in CI.
+
+### Required Fields
+- `target_model`: Target LLM (e.g., "gpt-4", "claude-3")  
+- `parameters`: Object containing `reasoning_effort` and `verbosity` (plus any additional parameters)
+- `messages`: Array of message objects with `role` ("system"/"user") and `content`
+
+### Optional Fields  
+- `version`: Semantic version for prompts requiring deterministic behavior (e.g., "1.2.0")
+- `assumptions`: Array of strings documenting prompt assumptions
+- `risks_or_notes`: Array of strings for risk assessment or usage notes
+
+### Example Structure
+```json
+{
+  "target_model": "gpt-4",
+  "version": "1.0.0",
+  "parameters": {
+    "reasoning_effort": "thorough",
+    "verbosity": "detailed"
+  },
+  "messages": [
+    {
+      "role": "system", 
+      "content": "You are a helpful assistant..."
+    }
+  ]
+}
+```
+
+All prompts are automatically validated against this schema in CI. See [CONTRIBUTING.md](CONTRIBUTING.md) for validation details.
+
 ## Cross-Project Reuse Workflows
 
 Pick a strategy that matches your team's update/stability requirements.
@@ -147,7 +181,6 @@ Note on formats:
 
 ## Roadmap Ideas
 - Auto index regeneration pre-commit hook
-- CI validation of metadata schema
 - Multi-language prompt variants
 - Embedding-based semantic search
 
