@@ -98,25 +98,42 @@ Return a structured report with sections: Summary, Strengths, Issues, Suggested 
 
 ## How to Use a Prompt
 
-There are three ways to use prompts from this repository:
+**For tools and automation (recommended)**, use the JSON files directly. **For human reference**, use the MD files to understand context and purpose.
 
-### 1. Human Use (Markdown)
-Browse `prompts/<category>/<prompt-name>/` and open the `.md` file:
-- Copy just the "Prompt" section for quick use
-- Copy the entire file to preserve context and purpose
-- Adapt variables like `{{code_snippet}}`, `{{goal}}` as needed
-
-### 2. Programmatic Use (JSON)
+### 1. Tool/API Integration (JSON) - Primary Use Case
 Use the `.json` file for programmatic integration:
-- JSON files are minified and LLM-optimized (read-only)
-- Load directly into your LLM client or API
+- **JSON files are the single source of truth** for executable prompts
+- Load directly into your LLM client, API, or automation tools
+- Minified and optimized for token efficiency
 - All fields follow our canonical schema (see JSON Schema section)
 
-### 3. Quick Validation (test.sh)
-Run the test script to see the prompt in action:
+**Example integrations:**
+```python
+# Python with OpenAI
+import json
+with open('prompts/engineering/code-review/code-review.json') as f:
+    prompt = json.load(f)
+response = client.chat.completions.create(**prompt)
+```
+
+```bash
+# CLI tools
+curl -X POST api.example.com/llm \
+  -d @prompts/engineering/code-review/code-review.json
+```
+
+### 2. Human Reference (Markdown)
+Browse `prompts/<category>/<prompt-name>/` and open the `.md` file for:
+- Understanding the prompt's purpose and use cases
+- Integration guidance and parameter recommendations
+- Context about assumptions, risks, and extensibility notes
+- **Note**: MD files document ABOUT prompts, they don't contain executable content
+
+### 3. Validation (test.sh)
+Run the test script to validate prompt functionality:
 - `bash prompts/<category>/<name>/test.sh`
-- Validates functionality and shows usage examples
-- Useful for understanding prompt behavior before integration
+- Validates JSON structure and prompt behavior
+- Demonstrates proper usage patterns
 
 ## JSON Schema
 
@@ -154,24 +171,53 @@ All prompts are automatically validated against this schema in CI. See [CONTRIBU
 
 ## Programmatic Usage
 
-For automated workflows and integrations:
+**JSON files are designed for direct consumption by tools**. Use them as single source of truth for executable prompts:
 
-### Convert to JSON
+### Direct JSON Consumption (Recommended)
 ```bash
-# Convert all prompts to a single JSON file
-./tools/convert.sh json > build/prompts.json
+# Load specific prompt directly
+curl -X POST https://api.openai.com/v1/chat/completions \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d @prompts/engineering/code-review/code-review.json
+
+# Use with local LLM tools
+ollama run llama3 < prompts/product/user-story/user-story.json
 ```
 
-### Search and Filter
+### Bulk Operations & Discovery
 ```bash
-# Find prompts by tags
+# Find prompts by tags  
 python tools/search.py --tags code-review --json
 
 # Search by keyword
 python tools/search.py --keyword "user story" --json > build/product_prompts.json
 
-# Get all prompts
-python tools/search.py --all --json
+# Export category-specific collections
+python tools/search.py --tags engineering --json > eng-prompts.json
+```
+
+### Integration Patterns
+```python
+# Python: Load and use JSON prompts directly
+import json
+import openai
+
+def execute_prompt(prompt_path, variables=None):
+    with open(prompt_path) as f:
+        prompt_spec = json.load(f)
+    
+    # Substitute variables in content if needed
+    if variables:
+        for msg in prompt_spec['messages']:
+            for var, val in variables.items():
+                msg['content'] = msg['content'].replace(f'{{{{{var}}}}}', val)
+    
+    return openai.ChatCompletion.create(**prompt_spec)
+
+# Usage
+result = execute_prompt('prompts/engineering/code-review/code-review.json', 
+                       {'DIFF': diff_content})
 ```
 
 ### Quick Discovery
@@ -247,7 +293,48 @@ python tools/search.py --tags code-review --json > build/code_review.json
 | Package | SemVer | High | Via PR | High |
 
 ## Adding a New Prompt
-See: `templates/prompt-template.md`, `templates/prompt-metadata.yaml`, `CONTRIBUTING.md`, `docs/writing-style.md`.
+
+**Follow the JSON-first creation workflow:**
+
+### 1. Create JSON First (Single Source of Truth)
+```bash
+# Create prompt folder
+mkdir -p prompts/<category>/<prompt-name>
+
+# Author the JSON specification (executable content)
+# Use templates/prompt-template.json as starting point
+vim prompts/<category>/<prompt-name>/<prompt-name>.json
+```
+
+### 2. Document in Markdown (Human Context)  
+```bash
+# Create documentation ABOUT the prompt
+# Use templates/prompt-template.md as reference
+vim prompts/<category>/<prompt-name>/<prompt-name>.md
+```
+
+**Key**: MD files document purpose, usage, integration - **never duplicate JSON content**
+
+### 3. Add Validation Test
+```bash
+# Create test script
+cp templates/test-template.sh prompts/<category>/<prompt-name>/test.sh
+chmod +x prompts/<category>/<prompt-name>/test.sh
+```
+
+### 4. Validate and Build
+```bash
+# Validate prompt structure
+./scripts/validate_prompts.sh
+
+# Rebuild the index
+python3 scripts/build_prompts_index.py
+
+# Test the prompt
+bash prompts/<category>/<prompt-name>/test.sh
+```
+
+See: `templates/`, `CONTRIBUTING.md`, `docs/writing-style.md` for detailed guidance.
 
 ## Tooling
 

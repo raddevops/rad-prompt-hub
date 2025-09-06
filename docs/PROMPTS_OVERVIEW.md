@@ -14,6 +14,12 @@ Each prompt follows a **three-file architecture** with strict separation of conc
 - **Maintainable**: Changes only require JSON updates
 - **Portable**: Works on any system without hardcoded paths
 
+### Separation of Concerns
+**JSON files** = Executable content (tools consume these)  
+**MD files** = Documentation about prompts (humans read these for context)
+
+This architecture enforces DRY principles: executable content lives in JSON only, never duplicated in markdown.
+
 ### Categories
 - Engineering
 - Product
@@ -28,6 +34,13 @@ Each prompt follows a **three-file architecture** with strict separation of conc
 4. **Add validation**: Create `test.sh` with functionality testing
 5. **Rebuild index**: Run `python scripts/build_prompts_index.py`
 6. **Commit**: Use semantic message (e.g., `feat(prompt): add <name>`)
+
+**4. Add validation**: Test script validates JSON structure and functionality
+
+**5. Commit**: Semantic message (e.g., `feat(prompt): add <name>`)
+
+**Key principle**: JSON contains executable content, MD documents the context and purpose.
+>>>>>>> 7bff1e1bc2ddce4ea974fe066cfacd2026ea96d2
 
 ### Conventions
 - Placeholders: `{{VARIABLE}}` or with default `{{NAME:=default}}`.
