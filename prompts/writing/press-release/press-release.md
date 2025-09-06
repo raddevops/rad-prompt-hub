@@ -1,3 +1,10 @@
+---
+title: "Press Release Generator"
+tags: ["writing", "pr", "press-release", "marketing", "communications"]
+author: "raddevops"
+last_updated: "2025-09-06"
+---
+
 ## Press Release Prompt (About)
 
 Category: Writing  

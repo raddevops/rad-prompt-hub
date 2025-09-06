@@ -1,3 +1,10 @@
+---
+title: "Experiment Plan Generator"
+tags: ["research", "experiment-design", "scientific-method", "hypothesis-testing"]
+author: "raddevops"
+last_updated: "2025-09-06"
+---
+
 ## Experiment Plan Prompt (About)
 
 Category: Research  

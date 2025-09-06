@@ -1,3 +1,10 @@
+---
+title: "Source Digest & Analysis"
+tags: ["research", "source-analysis", "synthesis", "evidence"]
+author: "raddevops"
+last_updated: "2025-09-06"
+---
+
 ## Source Digest Prompt (About)
 
 Category: Research  

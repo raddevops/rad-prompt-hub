@@ -1,3 +1,10 @@
+---
+title: "Literature Review Synthesizer"
+tags: ["research", "literature-review", "academic", "synthesis"]
+author: "raddevops"
+last_updated: "2025-09-06"
+---
+
 ## Literature Review Prompt (About)
 
 Category: Research  

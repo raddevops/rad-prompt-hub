@@ -1,3 +1,10 @@
+---
+title: "Repository Audit Engine"
+tags: ["audit", "repository-assessment", "governance", "compliance", "evidence-based"]
+author: "raddevops"
+last_updated: "2025-09-06"
+---
+
 # Repository Audit Prompt (About)
 
 Slug: repo-audit  

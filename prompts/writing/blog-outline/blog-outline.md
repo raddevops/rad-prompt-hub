@@ -1,3 +1,10 @@
+---
+title: "Blog Outline Generator"
+tags: ["writing", "blog", "content-strategy", "seo", "outline"]
+author: "raddevops"
+last_updated: "2025-09-06"
+---
+
 ## Blog Outline Prompt (About)
 
 Category: Writing  

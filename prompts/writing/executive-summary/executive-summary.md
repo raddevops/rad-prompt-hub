@@ -1,3 +1,10 @@
+---
+title: "Executive Summary Builder"
+tags: ["writing", "business", "executive-summary", "decision-making"]
+author: "raddevops"
+last_updated: "2025-09-06"
+---
+
 ## Executive Summary Prompt (About)
 
 Category: Writing  
