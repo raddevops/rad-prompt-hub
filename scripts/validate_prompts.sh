@@ -12,22 +12,7 @@ while IFS= read -r -d '' jf; do
     echo "Missing MD doc for $jf" >&2
     fail=1
   fi
-  python - "$jf" <<'PY' || fail=1
-import json,sys
-path=sys.argv[1]
-with open(path) as f:
-    data=json.load(f)
-required={'target_model','parameters','messages'}
-missing=required-set(data)
-if missing:
-    print(f"{path}: missing top-level keys: {missing}"); sys.exit(1)
-params=data.get('parameters',{})
-if 'reasoning_effort' not in params:
-    print(f"{path}: parameters.reasoning_effort missing"); sys.exit(1)
-msgs=data.get('messages')
-if not isinstance(msgs,list) or not msgs:
-    print(f"{path}: messages invalid"); sys.exit(1)
-PY
+  python scripts/schema_validate_prompts.py "$jf" || fail=1
 done < <(find prompts -type f -name '*.json' -print0)
 if [[ $fail -eq 0 ]]; then
   echo "All prompts valid."
