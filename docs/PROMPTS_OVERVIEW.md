@@ -40,7 +40,6 @@ This architecture enforces DRY principles: executable content lives in JSON only
 **5. Commit**: Semantic message (e.g., `feat(prompt): add <name>`)
 
 **Key principle**: JSON contains executable content, MD documents the context and purpose.
->>>>>>> 7bff1e1bc2ddce4ea974fe066cfacd2026ea96d2
 
 ### Conventions
 - Placeholders: `{{VARIABLE}}` or with default `{{NAME:=default}}`.
