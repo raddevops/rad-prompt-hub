@@ -59,4 +59,7 @@ pnpm-debug.log*
 Thumbs.db
 ehthumbs.db
 
+# Temporary workspace (not tracked)
+tmp/
+
 # (Keep prompts/index.json tracked; CI checks index drift)
