@@ -1,6 +1,18 @@
 ## Prompts Overview
 
-Each prompt has its own folder under `prompts/<category>/<prompt-name>/` containing the JSON specification, human-oriented markdown documentation, and a test script. The JSON file is authoritative; markdown is for quick discovery and understanding.
+**Architecture**: This repository follows a **tool-first, JSON-centric design** with strict separation of concerns.
+
+Each prompt has its own folder under `prompts/<category>/<prompt-name>/` containing:
+- **JSON specification** (single source of truth for executable prompts) 
+- **Markdown documentation** (human context ABOUT the prompt)
+- **Test script** (validation and usage examples)
+
+### Separation of Concerns
+
+**JSON files** = Executable content (tools consume these)
+**MD files** = Documentation about prompts (humans read these for context)
+
+This architecture enforces DRY principles: executable content lives in JSON only, never duplicated in markdown.
 
 ### Categories
 - Engineering
@@ -9,12 +21,25 @@ Each prompt has its own folder under `prompts/<category>/<prompt-name>/` contain
 - Writing
 - Meta
 
-### Add a New Prompt
-1. Author JSON (fields: target_model, parameters, messages, assumptions, risks_or_notes).
+### Add a New Prompt (JSON-First Workflow)
 
-2. Create folder: `prompts/<category>/<prompt-name>/` with JSON, markdown, and test script.
-3. Create `prompts/<category>/<name>/<name>.md` About file.
-4. Commit with semantic message (e.g., `feat(prompt): add <name>`).
+**1. Create JSON specification first** (single source of truth):
+   - Fields: target_model, parameters, messages, assumptions, risks_or_notes
+   - Contains all executable prompt logic and content
+
+**2. Create folder structure**: `prompts/<category>/<prompt-name>/` with JSON, markdown, and test script
+
+**3. Document in markdown** (about the prompt, never duplicating JSON content):
+   - Purpose and use cases
+   - Integration guidance  
+   - Parameter recommendations
+   - Usage examples and context
+
+**4. Add validation**: Test script validates JSON structure and functionality
+
+**5. Commit**: Semantic message (e.g., `feat(prompt): add <name>`)
+
+**Key principle**: JSON contains executable content, MD documents the context and purpose.
 
 ### Conventions
 - Placeholders: `{{VARIABLE}}` or with default `{{NAME:=default}}`.

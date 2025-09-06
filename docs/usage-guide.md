@@ -2,6 +2,25 @@
 
 This guide explains how to effectively locate, use, and adapt prompts from rad-prompt-hub in your workflows.
 
+## Architecture: Tool-First Design
+
+**rad-prompt-hub follows a tool-first, JSON-centric architecture:**
+
+- **JSON files** = Single source of truth for executable prompts (what tools consume)
+- **MD files** = Documentation ABOUT prompts (what humans read for context)  
+- **Workflow** = JSON creation → MD documentation → test validation
+
+### File Purposes
+```
+prompts/<category>/<name>/
+├── <name>.json    # ✅ EXECUTABLE: Tools load this directly
+├── <name>.md      # 📖 REFERENCE: Humans read for context/usage
+└── test.sh        # 🧪 VALIDATION: Tests JSON functionality
+```
+
+**For tools/automation**: Use `.json` files directly  
+**For understanding**: Read `.md` files for context and integration guidance
+
 ## Finding the Right Prompt
 
 ### By Category
@@ -73,21 +92,39 @@ last_updated: "2025-08-24"
 **Example**: Input/output demonstration (optional)
 **Notes**: Additional guidance or caveats
 
-## Copy Strategies
+## Integration Strategies
 
-### Quick Use (Just the Prompt)
+### Recommended: Direct JSON Integration
 
-1. Open the `.md` file
-2. Copy only the "## Prompt" section content
+**For tools and automation (primary use case):**
+
+1. Load the `.json` file directly into your LLM client/API
+2. Implement variable substitution programmatically
+3. Use the structured format for consistent integration
+
+```python
+import json
+with open('prompts/engineering/code-review/code-review.json') as f:
+    prompt_spec = json.load(f)
+
+# Substitute variables
+for message in prompt_spec['messages']:
+    message['content'] = message['content'].replace('{{DIFF}}', actual_diff)
+
+# Execute with your LLM client
+response = llm_client.chat.completions.create(**prompt_spec)
+```
+
+### Alternative: Human Copy-Paste (for ad-hoc use)
+
+**When using LLM interfaces manually:**
+
+1. Read the `.md` file to understand the prompt's purpose and context
+2. Open the `.json` file and copy the `content` from the `messages` array
 3. Paste into your LLM interface
 4. Replace any `{{variables}}` with actual values
 
-### Full Context (Preserve Metadata)
-
-1. Copy the entire file content
-2. Paste into your tool/workflow
-3. Strip frontmatter if your interface doesn't support it
-4. Keep Purpose/Notes sections for reference
+**Important**: Always reference the JSON file as the authoritative source, even for manual copying.
 
 ### Variable Substitution
 
@@ -146,15 +183,34 @@ response = openai.ChatCompletion.create(
 
 ### Workflow Integration
 
-Create reusable prompt templates:
+**Create reusable JSON-based prompt templates:**
 
 ```bash
-# Create project-specific prompt directory
+# Create project-specific prompt library
 mkdir my-project/prompts
-cp rad-prompt-hub/prompts/engineering/code-review.md my-project/prompts/
+cp rad-prompt-hub/prompts/engineering/code-review/code-review.json my-project/prompts/
 
-# Customize for your stack
-sed -i 's/{{code_snippet}}/{{python_code}}/' my-project/prompts/code-review.md
+# Customize JSON for your stack programmatically
+python3 -c "
+import json
+with open('my-project/prompts/code-review.json', 'r+') as f:
+    prompt = json.load(f)
+    for msg in prompt['messages']:
+        msg['content'] = msg['content'].replace('{{DIFF}}', '{{PYTHON_DIFF}}')
+    f.seek(0)
+    json.dump(prompt, f, indent=2)
+    f.truncate()
+"
+
+# Or use symlinks for live updates
+ln -s ../../rad-prompt-hub/prompts/engineering/code-review/code-review.json my-project/prompts/
+```
+
+**Submodule approach for production:**
+```bash
+# Add as git submodule for version control
+git submodule add https://github.com/raddevops/rad-prompt-hub.git prompts-hub
+# Reference JSON files directly: prompts-hub/prompts/category/name/name.json
 ```
 
 ## Composition and Chaining
@@ -267,6 +323,42 @@ Choose integration approach based on your needs:
 | Development | Git submodule | Git, IDE |
 | CI/CD | Artifact package | Build tools |
 | Automation | API integration | Scripts, workflows |
+
+## DRY Compliance & Legacy Files
+
+### Files Requiring Remediation
+
+**The following MD files violate DRY principles by containing executable prompt content:**
+
+- `prompts/product/user-story/user-story.md` - Contains "## Prompt" section with prompt instructions
+- `prompts/product/acceptance-criteria/acceptance-criteria.md` - Contains prompt logic duplicated from JSON  
+- `prompts/product/requirements-draft/requirements-draft.md` - Includes executable content
+
+**Remediation needed**: Remove executable content from these MD files, keep only documentation about purpose, usage, and integration guidance.
+
+### Migration Guidelines
+
+When updating legacy MD files:
+
+1. **Verify JSON is complete** - Ensure the JSON file contains all executable content
+2. **Remove duplicate content** - Delete prompt instructions, logic, and format specifications from MD
+3. **Keep documentation** - Retain purpose, usage examples, parameter guidance, and integration notes
+4. **Update references** - Point users to JSON file as authoritative source
+
+### Validation
+
+Use these commands to identify potential DRY violations:
+
+```bash
+# Find MD files with prompt sections (potential violations)
+grep -r "## Prompt" prompts/ --include="*.md"
+
+# Find MD files with format specifications
+grep -r "OUTPUT FORMAT\|RESPONSE FORMAT" prompts/ --include="*.md"
+
+# Check for variable documentation that might duplicate JSON
+grep -r "Variables:\|{{.*}}" prompts/ --include="*.md"
+```
 
 ---
 
