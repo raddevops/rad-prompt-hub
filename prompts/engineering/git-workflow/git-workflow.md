@@ -1,3 +1,10 @@
+---
+title: "Git Workflow Designer"
+tags: ["engineering", "git", "workflow", "collaboration", "branching"]
+author: "raddevops"
+last_updated: "2025-09-06"
+---
+
 ## Git Workflow Prompt (About)
 
 Category: Engineering  
