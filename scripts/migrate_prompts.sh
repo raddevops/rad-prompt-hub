@@ -10,9 +10,14 @@ find "$SRC_ROOT" -type f -name '*.json' | while read -r file; do
   category="${rel%%/*}"    # part before first slash
   mkdir -p "$DEST_ROOT/$category"
   dest="$DEST_ROOT/$rel"
+  # Ensure the full destination directory exists (including subdirectories)
+  mkdir -p "$(dirname "$dest")"
   if [[ -f "$dest" ]]; then
     echo "Skipping existing $dest"; continue; fi
-  git mv "$file" "$dest"
+  if ! git mv "$file" "$dest"; then
+    echo "Error: Failed to move $file to $dest" >&2
+    exit 1
+  fi
   echo "Moved $file -> $dest"
 done
 echo "Migration complete. Run scripts/build_prompts_index.py next, then remove empty prompts_json directory when satisfied."
