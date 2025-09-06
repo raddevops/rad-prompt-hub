@@ -3,6 +3,9 @@ import json, pathlib, hashlib, sys
 root = pathlib.Path('prompts')
 index = []
 for jf in root.rglob('*.json'):
+    # Skip index.json (catalog) to avoid circular dependency
+    if jf.name == 'index.json':
+        continue
     try:
         data = json.loads(jf.read_text())
     except Exception as e:
