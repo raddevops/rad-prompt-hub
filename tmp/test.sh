@@ -59,12 +59,14 @@ for placeholder in "${REQUIRED_PLACEHOLDERS[@]}"; do
 done
 
 # Test output structure requirements
-if echo "$USER_CONTENT" | grep -q -i "### 1\. executive summary\|### 2\. consistency analysis\|### 3\. parameter validation"; then
-    echo "✅ Comprehensive output structure specified"
-else
-    echo "❌ Missing comprehensive output structure"
-    exit 1
-fi
+REQUIRED_SECTIONS=("executive summary" "consistency analysis" "parameter validation")
+for section in "${REQUIRED_SECTIONS[@]}"; do
+    if ! echo "$USER_CONTENT" | grep -qi "$section"; then
+        echo "❌ Missing required section: $section"
+        exit 1
+    fi
+done
+echo "✅ Comprehensive output structure specified"
 
 echo ""
 echo "✅ Documentation-validator prompt validation complete!"
