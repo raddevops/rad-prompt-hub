@@ -1,0 +1,6 @@
+Pattern: <type>/<slug>-YYYYMMDD
+Types: feat|fix|chore|docs|refactor|test|perf|ci
+Examples:
+- feat/new-search-api-20250906
+- fix/guardrail-npe-20250906
+- chore/gitignore-hardening-20250906

@@ -43,3 +43,14 @@ jobs:
       - name: Summary
         if: always()
         run: echo "Prompt guardrail workflow complete." 
+
+  branch-name-policy:
+    name: Branch name policy
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Check branch naming convention
+        run: |
+          bash scripts/check_branch_name.sh "${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}" 

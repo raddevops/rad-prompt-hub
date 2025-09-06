@@ -5,10 +5,29 @@ We welcome contributions to rad-prompt-hub! This guide outlines the process for 
 ## Quick Start
 
 1. Fork the repository
-2. Create a feature branch: `git checkout -b add-prompt-name`
+2. Create a feature branch: `git checkout -b feat/your-feature-slug-YYYYMMDD`
 3. **Set up pre-commit hooks** (recommended): `./tools/setup-pre-commit.sh`
 4. Add your prompt using the template: `templates/prompt-template.md`
 5. Follow our naming conventions and style guide
+
+## Branch naming convention
+
+We use structured, date-stamped branch names. Pattern:
+
+`<type>/<slug>-YYYYMMDD`
+
+- type: one of `feat`, `fix`, `chore`, `docs`, `refactor`, `test`, `perf`, `ci`
+- slug: short, kebab-case summary (starts with a letter, a–z, 0–9 and '-')
+- date: UTC date in `YYYYMMDD`
+
+Examples:
+- `feat/new-search-api-20250906`
+- `fix/guardrail-npe-20250906`
+- `chore/gitignore-hardening-20250906` (this repo’s first well-named branch)
+
+Exceptions allowed: `main`, `release/x.y.z`
+
+CI enforces this on pull requests.
 6. Test with our validation tools
 7. Submit a pull request
 
