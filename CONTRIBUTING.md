@@ -183,6 +183,10 @@ Verify conversion works:
 
 ```bash
 ./tools/convert.sh json | jq '.[0]'
+
+## Generated files policy
+
+- `prompts/index.json` is generated and intentionally minified for token efficiency and small diffs. Do not hand-edit or pretty-print it. Use the provided scripts to rebuild when needed.
 ```
 
 ## Anti-Patterns to Avoid
