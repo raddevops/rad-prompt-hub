@@ -75,16 +75,22 @@ fi
 # Check user message template
 USER_CONTENT=$(jq -r '.messages[] | select(.role == "user") | .content' "$JSON_FILE")
 
-# Validate required output sections
-REQUIRED_SECTIONS=("Objective" "Hypotheses" "Variables" "Groups" "Metrics" "Procedure" "Risks" "Sample Size" "Analysis Plan")
-SECTION_COUNT=0
-
-for section in "${REQUIRED_SECTIONS[@]}"; do
-    if echo "$USER_CONTENT" | grep -q -i "$section"; then
-        echo "✅ Output section specified: $section"
-        ((SECTION_COUNT++))
-    fi
-done
+# Validate required output sections - check for the actual content in constraints
+if echo "$USER_CONTENT" | grep -q -i "Sections:.*Objective.*Hypotheses.*Variables.*Groups.*Metrics.*Thresholds.*Procedure.*Risks.*Mitigations.*Sample Size.*Analysis Plan"; then
+    echo "✅ All required sections found in constraints format"
+    SECTION_COUNT=9
+else
+    # Fallback to individual section checks
+    REQUIRED_SECTIONS=("Objective" "Hypotheses" "Variables" "Groups" "Metrics" "Procedure" "Risks" "Sample Size" "Analysis Plan")
+    SECTION_COUNT=0
+    
+    for section in "${REQUIRED_SECTIONS[@]}"; do
+        if echo "$USER_CONTENT" | grep -q -i "$section"; then
+            echo "✅ Output section specified: $section"
+            ((SECTION_COUNT++))
+        fi
+    done
+fi
 
 if [[ $SECTION_COUNT -lt 7 ]]; then
     echo "❌ Missing critical output sections (found $SECTION_COUNT, need at least 7)"

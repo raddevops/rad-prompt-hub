@@ -1,3 +1,10 @@
+---
+title: "Repository Audit Engine"
+tags: ["engineering", "audit", "repository-assessment", "maturity-evaluation"]
+author: "raddevops"
+last_updated: "2025-09-06"
+---
+
 # Repository Audit Prompt (About)
 
 Slug: repository-audit  
