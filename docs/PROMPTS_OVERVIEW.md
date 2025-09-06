@@ -35,10 +35,6 @@ This architecture enforces DRY principles: executable content lives in JSON only
 5. **Rebuild index**: Run `python scripts/build_prompts_index.py`
 6. **Commit**: Use semantic message (e.g., `feat(prompt): add <name>`)
 
-**4. Add validation**: Test script validates JSON structure and functionality
-
-**5. Commit**: Semantic message (e.g., `feat(prompt): add <name>`)
-
 **Key principle**: JSON contains executable content, MD documents the context and purpose.
 
 ### Conventions
