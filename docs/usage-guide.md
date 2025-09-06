@@ -1,22 +1,34 @@
 # Usage Guide
 
-This guide explains how to effectively locate, use, and adapt prompts from rad-prompt-hub in your workflows.
+This guide explains how to integrate rad-prompt-hub prompts into tools, applications, and workflows. The repository is designed for **programmatic consumption** of JSON prompt specifications.
+
+## Tool-First Design Philosophy
+
+**JSON files** are the single source of truth for executable prompts. Tools and applications should consume these directly. **MD files** provide human context and integration guidance but never contain prompt content.
 
 ## Finding the Right Prompt
 
 ### By Category
 
-Browse organized directories:
+Browse organized directories for JSON specifications:
 
 ```
 prompts/
 ├── engineering/    # Code, architecture, dev workflows
-│   ├── code-review/     # Each folder contains .md, .json, and test.sh
+│   ├── code-review/     # Each folder: .json (executable), .md (docs), test.sh
 │   ├── git-workflow/
 │   └── refactor-helper/
 ├── product/        # Requirements, planning, roadmaps  
 ├── writing/        # Content, documentation, communication
 └── research/       # Analysis, synthesis, experimentation
+```
+
+**Integration Pattern**: Load the `.json` file directly into your application:
+```python
+import json
+with open('prompts/engineering/code-review/code-review.json') as f:
+    prompt_spec = json.load(f)
+# prompt_spec now contains the complete LLM specification
 ```
 
 ### By Tags
@@ -49,6 +61,64 @@ Browse `tools/index.json` for a complete registry:
 
 ```bash
 cat tools/index.json | jq '.prompts[] | select(.category == "product")'
+```
+
+## Creating New Prompts (Developer Workflow)
+
+Follow the **JSON-first creation process** to maintain DRY compliance:
+
+### 1. Create JSON Specification (Source of Truth)
+```bash
+mkdir prompts/category/prompt-name/
+# Create the executable JSON specification
+cat > prompts/category/prompt-name/prompt-name.json << 'EOF'
+{
+  "target_model": "gpt-5-thinking",
+  "parameters": {"reasoning_effort": "medium", "verbosity": "low"},
+  "messages": [
+    {"role": "system", "content": "Your system prompt here"},
+    {"role": "user", "content": "User template with {{PLACEHOLDERS}}"}
+  ],
+  "assumptions": ["Any assumptions made"],
+  "risks_or_notes": ["Important considerations"]
+}
+EOF
+```
+
+### 2. Document in MD (About the Prompt)
+Create `prompt-name.md` with context and integration guidance (NOT prompt content):
+```markdown
+# Prompt Name
+
+## Purpose
+What this prompt accomplishes and when to use it.
+
+## Integration Examples
+How to consume the JSON in different tools/languages.
+
+## Variables
+Explanation of {{PLACEHOLDER}} values in the JSON.
+
+## Notes
+Additional guidance for effective use.
+```
+
+### 3. Add Validation Script
+```bash
+# Create test.sh to validate the prompt works
+cat > prompts/category/prompt-name/test.sh << 'EOF'
+#!/bin/bash
+# Test script that validates JSON structure and functionality
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Add your validation logic here
+EOF
+chmod +x prompts/category/prompt-name/test.sh
+```
+
+### 4. Rebuild Index and Validate
+```bash
+python scripts/build_prompts_index.py
+scripts/validate_prompts.sh
 ```
 
 ## Understanding Prompt Structure

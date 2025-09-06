@@ -1,47 +1,76 @@
 # rad-prompt-hub
 
-Reusable, well‑structured prompts for Large Language Models (LLMs) that you can copy, adapt, and compose across engineering, product, writing, and research workflows.
+Production-ready LLM prompts designed for **tool consumption** with comprehensive JSON specifications that tools and applications can consume directly.
 
-This hub emphasizes:
-- Consistent metadata (title, tags, author, last_updated)
-- Clear intent and modular prompt sections
-- Reusability across tools (CLI, API, chat interfaces)
-- Ease of discovery (tag search and an index)
+This hub prioritizes:
+- **JSON-first design**: Executable prompts optimized for programmatic consumption
+- **Tool integration**: Direct consumption by LLMs, APIs, and automation tools  
+- **DRY compliance**: Single source of truth for prompt specifications
+- **Human documentation**: Separate MD files for context and integration guidance
+- **Comprehensive validation**: Automated testing and schema compliance
 
 ## Repository Layout
 
 ```
 rad-prompt-hub/
-├── prompts/                 # Organized prompts by domain, each in its own folder
+├── prompts/                 # Organized by domain - JSON is source of truth
 │   ├── engineering/
-│   │   ├── code-review/     # Each prompt folder contains .md, .json, and test.sh
+│   │   ├── code-review/     # Three-file structure per prompt
 │   │   └── ...
 │   ├── product/
 │   ├── research/
 │   ├── writing/
 │   ├── meta/
 │   ├── audit/
-│   └── index.json           # Generated registry (minified, do not edit)
+│   └── index.json           # Generated registry (tools consume this)
 ├── templates/               # Authoring templates + metadata schema
-├── docs/                    # Usage, style, best practices
-├── tools/                   # Helper scripts (search, convert, index)
+├── docs/                    # Usage, integration guides
+├── tools/                   # Search, convert, validation utilities
 └── README.md
 ```
 
-## Prompt Folder Anatomy
+## Prompt Folder Architecture
 
-Each prompt lives in its own folder with three essential files:
+Each prompt follows a three-file structure with clear separation of concerns:
 
 ```
 prompts/engineering/code-review/
-├── code-review.md      # Human-readable documentation and examples
-├── code-review.json    # Minified LLM specification (programmatic use)
-└── test.sh             # Quick validation script and usage example
+├── code-review.json    # EXECUTABLE: LLM specification (tools consume this)
+├── code-review.md      # DOCUMENTATION: Human context and usage guidance  
+└── test.sh             # VALIDATION: Automated testing and examples
 ```
 
-- **`.md` file**: Human-friendly documentation with purpose, examples, and variables
-- **`.json` file**: Minified, LLM-optimized prompt specification (auto-generated from `.md` file, do not edit manually)
-- **`test.sh`**: Validation script that demonstrates usage and tests functionality
+### File Purposes (DRY Principle)
+- **`.json` file**: **Single source of truth** for executable prompt content
+  - Optimized for tool/LLM consumption
+  - Token-efficient, validated structure
+  - Never duplicated elsewhere
+- **`.md` file**: **Documentation about the prompt**
+  - Purpose, integration examples, usage context
+  - Human-readable guidance for developers
+  - Does NOT contain prompt content (prevents duplication)
+- **`test.sh`**: Validation script demonstrating integration patterns
+
+## Tool Integration Examples
+
+### Direct JSON Consumption
+```python
+# Python example
+import json
+import requests
+
+with open('prompts/engineering/code-review/code-review.json') as f:
+    prompt = json.load(f)
+    
+# Send to LLM API
+response = requests.post('https://api.example.com/v1/chat', json=prompt)
+```
+
+### CLI Integration
+```bash
+# Direct consumption by LLM tools
+llm-tool --prompt-file prompts/engineering/code-review/code-review.json --input "$(cat myfile.py)"
+```
 
 ## Quick Example (Prompt File)
 
