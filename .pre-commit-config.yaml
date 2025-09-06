@@ -1,0 +1,11 @@
+repos:
+  - repo: local
+    hooks:
+      - id: check-last-updated
+        name: Check last_updated field on prompt changes
+        entry: python3 tools/check-last-updated.py
+        language: python
+        files: ^prompts/.*\.md$
+        pass_filenames: false
+        always_run: false
+        description: Ensures last_updated field is current when prompt body content changes

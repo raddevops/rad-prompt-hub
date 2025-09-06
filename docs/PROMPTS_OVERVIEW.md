@@ -1,6 +1,6 @@
 ## Prompts Overview
 
-Canonical layout (authoritative): JSON + About docs live together under `prompts/<category>/<slug>.{json,md}`. The JSON file is the source of truth; the Markdown file is a concise "About" doc (purpose, inputs, outputs, guardrails, usage).
+Each prompt has its own folder under `prompts/<category>/<prompt-name>/` containing the JSON specification, human-oriented markdown documentation, and a test script. The JSON file is authoritative; markdown is for quick discovery and understanding.
 
 ### Categories
 - Engineering
@@ -11,9 +11,10 @@ Canonical layout (authoritative): JSON + About docs live together under `prompts
 
 ### Add a New Prompt
 1. Author JSON (fields: target_model, parameters, messages, assumptions, risks_or_notes).
-2. Create `prompts/<category>/<slug>.md` About file.
-3. Run `python scripts/build_prompts_index.py` and commit `prompts/index.json`.
-4. Commit with semantic message (e.g., `feat(prompt): add <slug>`).
+
+2. Create folder: `prompts/<category>/<prompt-name>/` with JSON, markdown, and test script.
+3. Create `prompts/<category>/<name>/<name>.md` About file.
+4. Commit with semantic message (e.g., `feat(prompt): add <name>`).
 
 ### Conventions
 - Placeholders: `{{VARIABLE}}` or with default `{{NAME:=default}}`.

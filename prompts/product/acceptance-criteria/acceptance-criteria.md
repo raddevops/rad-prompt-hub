@@ -11,7 +11,7 @@ You are a product quality analyst.
 
 ## Acceptance Criteria Prompt (About)
 Category: Product  
-JSON Spec: `prompts_json/product/acceptance-criteria.json`
+JSON Spec: `product/acceptance-criteria/acceptance-criteria.json`
 
 ### Purpose
 Converts a story/feature into mandatory & optional Gherkin scenarios, edge cases, and a traceability table.

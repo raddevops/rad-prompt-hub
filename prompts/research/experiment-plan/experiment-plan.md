@@ -1,7 +1,7 @@
 ## Experiment Plan Prompt (About)
 
 Category: Research  
-JSON Spec: `prompts_json/research/experiment-plan.json`
+JSON Spec: `research/experiment-plan/experiment-plan.json`
 
 ### Purpose
 Produces a structured experiment plan: objective, hypotheses (null & alternative), variables, groups, metrics & thresholds, procedure, risks & mitigations, sample size notes, analysis plan.

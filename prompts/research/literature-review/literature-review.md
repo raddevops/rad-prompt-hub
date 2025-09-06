@@ -1,7 +1,7 @@
 ## Literature Review Prompt (About)
 
 Category: Research  
-JSON Spec: `prompts_json/research/literature-review.json`
+JSON Spec: `research/literature-review/literature-review.json`
 
 ### Purpose
 Synthesizes sources into themes, summaries, source table (method, findings, limitations), methodological critique, gaps, and suggested research questions.

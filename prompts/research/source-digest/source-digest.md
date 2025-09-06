@@ -1,7 +1,7 @@
 ## Source Digest Prompt (About)
 
 Category: Research  
-JSON Spec: `prompts_json/research/source-digest.json`
+JSON Spec: `research/source-digest/source-digest.json`
 
 ### Purpose
 Extracts structured claims & evidence from a source set, then synthesizes convergence, conflicts, gaps, and next research steps.

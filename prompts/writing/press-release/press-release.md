@@ -1,7 +1,7 @@
 ## Press Release Prompt (About)
 
 Category: Writing  
-JSON Spec: `prompts_json/writing/press-release.json`
+JSON Spec: `writing/press-release/press-release.json`
 
 ### Purpose
 Produces headline, subheadline, structured release body, quotes (with placeholders if none), boilerplate, media contact, optional CTA.

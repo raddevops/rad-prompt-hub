@@ -1,7 +1,7 @@
 ## Code Review Prompt (About)
 
 Category: Engineering  
-JSON Spec: `prompts_json/engineering/code-review.json`
+JSON Spec: `engineering/code-review/code-review.json`
 
 ### Purpose
 Generates a structured peer code review (Summary, Strengths, Issues, Recommendations, Risk Assessment, Suggested Tests) from a provided diff or code snippet.
