@@ -5,7 +5,8 @@ set -e
 echo "Testing press-release prompt..."
 
 # Test that the file exists
-PROMPT_FILE="/Users/robertdozier/workspace/rad-prompt-hub/prompts/writing/press-release/press-release.json"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROMPT_FILE="$SCRIPT_DIR/press-release.json"
 if [ ! -f "$PROMPT_FILE" ]; then
     echo "❌ JSON file does not exist: $PROMPT_FILE"
     exit 1
