@@ -1,7 +1,7 @@
 ## Blog Outline Prompt (About)
 
 Category: Writing  
-JSON Spec: `prompts_json/writing/blog-outline.json`
+JSON Spec: `writing/blog-outline/blog-outline.json`
 
 ### Purpose
 Generates title options, audience & angle clarification, hierarchical outline with section intent, CTA ideas, SEO keyword sets (primary vs long-tail).

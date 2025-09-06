@@ -87,10 +87,17 @@ Start with `templates/prompt-template.md` and fill in all sections:
 - **Variables**: Document any `{{placeholder}}` variables
 - **Example**: Show input/output structure if helpful
 
-### 2. Choose the Right Category
+### 2. Create the Prompt Folder
 
-Place your prompt in the appropriate domain directory:
+Create a new folder structure for your prompt:
 
+- Create folder: `prompts/<category>/<prompt-name>/`
+- Place your prompt files in this folder:
+  - `<prompt-name>.md`: Human-readable documentation
+  - `<prompt-name>.json`: Executable JSON specification  
+  - `test.sh`: Test script to validate functionality
+
+Categories:
 - `prompts/engineering/`: Code review, refactoring, architecture, testing
 - `prompts/product/`: Requirements, user stories, roadmaps, metrics
 - `prompts/writing/`: Documentation, communication, content creation
@@ -98,10 +105,11 @@ Place your prompt in the appropriate domain directory:
 
 ### 3. Follow Naming Conventions
 
-- Filename: `kebab-case-descriptive-name.md`
-- Max 50 characters
+- Folder name: `kebab-case-descriptive-name`
+- Filenames match folder name: `prompt-name.md`, `prompt-name.json`
+- Max 50 characters for folder/file names
 - Avoid abbreviations
-- Examples: `code-review.md`, `user-story-generator.md`, `blog-outline.md`
+- Examples: `code-review/`, `user-story-generator/`, `blog-outline/`
 
 ### 4. Metadata Requirements
 

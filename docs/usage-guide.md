@@ -11,6 +11,9 @@ Browse organized directories:
 ```
 prompts/
 ├── engineering/    # Code, architecture, dev workflows
+│   ├── code-review/     # Each folder contains .md, .json, and test.sh
+│   ├── git-workflow/
+│   └── refactor-helper/
 ├── product/        # Requirements, planning, roadmaps  
 ├── writing/        # Content, documentation, communication
 └── research/       # Analysis, synthesis, experimentation
@@ -128,7 +131,7 @@ openai api chat_completions.create -m gpt-4 --messages '[{"role": "user", "conte
 import requests
 
 # Load prompt
-with open('prompts/product/user-story.md') as f:
+with open('prompts/product/user-story/user-story.md') as f:
     prompt_content = f.read()
 
 # Extract just the prompt section
@@ -161,7 +164,7 @@ sed -i 's/{{code_snippet}}/{{python_code}}/' my-project/prompts/code-review.md
 Chain related prompts for complex workflows:
 
 1. Use `requirements-draft.md` to structure initial ideas
-2. Feed output to `user-story.md` for breakdown
+2. Feed output to `user-story/` prompts for breakdown
 3. Use `acceptance-criteria.md` for detailed specifications
 
 ### Prompt Layering

@@ -11,7 +11,7 @@ You are an agile product facilitator.
 
 ## User Story Bundle Prompt (About)
 Category: Product  
-JSON Spec: `prompts_json/product/user-story.json`
+JSON Spec: `product/user-story/user-story.json`
 
 ### Purpose
 Produces user story, rationale, acceptance criteria, non-functional notes, dependencies, estimation factors.
