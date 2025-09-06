@@ -28,7 +28,7 @@ fi
 # Use a bash-compatible regex and disallow consecutive hyphens in slug
 # Slug part: starts with a letter, then zero or more of (alphanumerics or hyphen+alphanumerics)
 # This enforces hyphens must be followed by one or more [a-z0-9], preventing "--"
-re='^(feat|fix|chore|docs|refactor|test|perf|ci)/([a-z](?:[a-z0-9]*(-[a-z0-9]+))*)-([0-9]{8})$'
+re='^(feat|fix|chore|docs|refactor|test|perf|ci)/([a-z][a-z0-9]*(-[a-z0-9]+)*)-([0-9]{8})$'
 if [[ ! "$BRANCH" =~ $re ]]; then
   cat >&2 <<'EOF'
 Branch name does not follow convention.
