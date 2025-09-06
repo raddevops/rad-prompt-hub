@@ -203,10 +203,11 @@ Verify conversion works:
 ```bash
 ./tools/convert.sh json | jq '.[0]'
 
+```
+
 ## Generated files policy
 
-- `prompts/index.json` is generated and intentionally minified for token efficiency and small diffs. Do not hand-edit or pretty-print it. Use the provided scripts to rebuild when needed.
-```
+- All JSON prompt files (`prompts/**/*.json`, including `prompts/index.json`) are optimized for LLM use and must remain minified/compact. These files are generated for token efficiency and small diffs—do not hand-edit or pretty-print them. Use the paired Markdown (`.md`) for human readability, and always use the provided scripts to rebuild JSON files when needed.
 
 ## Anti-Patterns to Avoid
 
