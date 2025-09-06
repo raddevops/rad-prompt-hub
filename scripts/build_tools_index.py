@@ -91,15 +91,12 @@ def scan_prompts(root: pathlib.Path) -> List[Dict[str, Any]]:
         except Exception as e:
             print(f"WARN: Could not read {path}: {e}", file=sys.stderr)
             continue
-            
+        # Extract frontmatter once
         meta = extract_frontmatter(content)
-        content_meta = {}
-        
-        if not meta:
-            # No frontmatter, try to extract metadata from content structure
-            content_meta = extract_metadata_from_content(content)
-            
-        # Determine category consistently from parent directory
+        # Always compute content-derived metadata once; use as fallback only
+        content_meta = extract_metadata_from_content(content)
+
+        # Determine category consistently from directory; warn on mismatches
         if path.parent.name != "prompts":
             category = path.parent.name
         else:
@@ -110,9 +107,16 @@ def scan_prompts(root: pathlib.Path) -> List[Dict[str, Any]]:
         content_category = content_meta.get("category")
         expected_category = category
         if fm_category and fm_category != expected_category:
-            print(f"WARN: {path} frontmatter category '{fm_category}' does not match directory '{expected_category}'", file=sys.stderr)
+            print(
+                f"WARN: {path} frontmatter category '{fm_category}' does not match directory '{expected_category}'",
+                file=sys.stderr,
+            )
         if content_category and content_category != expected_category:
-            print(f"WARN: {path} content-derived category '{content_category}' does not match directory '{expected_category}'", file=sys.stderr)
+            print(
+                f"WARN: {path} content-derived category '{content_category}' does not match directory '{expected_category}'",
+                file=sys.stderr,
+            )
+
         # Get title from frontmatter or content
         title = meta.get("title", content_meta.get("title", ""))
         
@@ -127,7 +131,7 @@ def scan_prompts(root: pathlib.Path) -> List[Dict[str, Any]]:
             "tags": tags,
             "category": category,
             "last_updated": meta.get("last_updated", ""),
-            "author": meta.get("author", "")
+            "author": meta.get("author", ""),
         })
     
     return results
@@ -154,8 +158,8 @@ def main():
     index_path = tools_dir / "index.json"
     
     with open(index_path, 'w', encoding='utf-8') as f:
-        json.dump(index_data, f, indent=2, ensure_ascii=False)
-        f.write('\n')
+        # Minified JSON output (no pretty-printing, no trailing newline)
+        json.dump(index_data, f, ensure_ascii=False, separators=(",", ":"))
     
     print(f"Wrote {index_path} with {len(prompts)} entries")
 
