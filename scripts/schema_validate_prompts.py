@@ -12,7 +12,7 @@ def validate_schema(data, path):
     if missing:
         return [f"{path}: missing keys {missing}"]
     params = data.get('parameters', {})
-    for k in ('reasoning_effort','verbosity'):
+    for k in ('reasoning_effort',):
         if k not in params:
             return [f"{path}: parameters.{k} missing"]
     if not isinstance(data['messages'], list) or not data['messages']:
