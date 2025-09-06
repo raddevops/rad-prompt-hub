@@ -5,7 +5,8 @@ set -e
 echo "Testing documentation-validator prompt..."
 
 # Test that the file exists
-PROMPT_FILE="/Users/robertdozier/workspace/rad-prompt-hub/tmp/documentation-validator.json"
+# Allow override via environment variable or first argument, default to relative path
+PROMPT_FILE="${PROMPT_FILE:-${1:-./tmp/documentation-validator.json}}"
 if [ ! -f "$PROMPT_FILE" ]; then
     echo "❌ JSON file does not exist: $PROMPT_FILE"
     exit 1
