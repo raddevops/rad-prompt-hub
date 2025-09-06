@@ -40,7 +40,7 @@ prompts/engineering/code-review/
 ```
 
 - **`.md` file**: Human-friendly documentation with purpose, examples, and variables
-- **`.json` file**: Minified, LLM-optimized prompt specification (read-only)
+- **`.json` file**: Minified, LLM-optimized prompt specification (auto-generated from `.md` file, do not edit manually)
 - **`test.sh`**: Validation script that demonstrates usage and tests functionality
 
 ## Quick Example (Prompt File)
