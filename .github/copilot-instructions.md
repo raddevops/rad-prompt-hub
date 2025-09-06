@@ -3,7 +3,7 @@
 This repository intentionally keeps certain JSON artifacts minified and machine-generated. Please follow these guidelines during reviews:
 
 - Do not suggest pretty-printing or reformatting `prompts/index.json`. It is minified by design for token efficiency and diff stability. Changes to this file should only come from `scripts/build_prompts_index.py`.
-- Treat `prompts/index.json` as generated output (prompt registry). Focus on whether it was rebuilt (hashes/paths updated) rather than human readability. This is distinct from `tools/index.json` (markdown metadata catalog).
+- Treat `prompts/index.json` as generated output (generated registry). Focus on whether it was rebuilt (hashes/paths updated) rather than human readability. This is distinct from `tools/index.json` (markdown metadata catalog).
 - All JSON prompt files (`prompts/**/*.json`) must be optimized for LLM execution, not human readability. Keep them minified/compact (no superfluous whitespace) and token-optimized. Use the paired `.md` files for human-readable content.
 - Each prompt folder follows a 3-file structure: `.md` (human docs), `.json` (minified LLM spec), `test.sh` (validation script). All three files are essential.
 - Validation is enforced via `scripts/schema_validate_prompts.py` against `scripts/prompt.schema.json`. Do not bypass schema validation.
