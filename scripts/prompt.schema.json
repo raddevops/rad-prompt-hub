@@ -27,6 +27,11 @@
         "additionalProperties": true
       }
     },
+    "version": {
+      "type": "string",
+      "pattern": "^([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+      "description": "Semantic version for prompts requiring deterministic behavior. Format: MAJOR.MINOR.PATCH"
+    },
     "assumptions": {"type": "array", "items": {"type": "string"}},
     "risks_or_notes": {"type": "array", "items": {"type": "string"}}
   },

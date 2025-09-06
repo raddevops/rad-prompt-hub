@@ -2,9 +2,10 @@
 title: "REPLACE WITH TITLE"
 tags: ["domain", "function", "additional-tag"]
 author: "your-handle"
-last_updated: "2025-08-24"
-# Optional future fields:
+last_updated: "2025-09-06"
+# Optional: Add version when external integrations require stable behavior
 # version: "1.0.0"
+# Optional future fields:
 # inputs:
 #   - name: variable_name
 #     type: string

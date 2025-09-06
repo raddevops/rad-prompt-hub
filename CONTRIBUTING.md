@@ -116,6 +116,8 @@ Create a new folder structure for your prompt:
   - `<prompt-name>.json`: Executable JSON specification  
   - `test.sh`: Test script to validate functionality
 
+**JSON Format Requirements**: The JSON file must conform to [`scripts/prompt.schema.json`](scripts/prompt.schema.json). Required fields are `target_model`, `parameters` (containing `reasoning_effort` and `verbosity`), and `messages` array. See [README.md](README.md#json-schema) for full schema details.
+
 Categories:
 - `prompts/engineering/`: Code review, refactoring, architecture, testing
 - `prompts/product/`: Requirements, user stories, roadmaps, metrics
@@ -174,6 +176,7 @@ Before submitting, verify:
 
 ## Validation and Testing
 
+
 ### Index Regeneration
 
 After adding or modifying markdown files, regenerate the metadata index:
@@ -186,14 +189,39 @@ python scripts/build_tools_index.py
 bash scripts/check_tools_index.sh
 ```
 
+
+### JSON Schema Validation
+
+
+All JSON prompt files are validated against our **canonical schema** at [`scripts/prompt.schema.json`](scripts/prompt.schema.json). This schema is the **source of truth** for prompt structure and is automatically enforced in CI.
+
+Run local schema validation:
+```bash
+python scripts/schema_validate_prompts.py
+```
+
+This validates:
+- **Required fields**: `target_model`, `parameters` (with `reasoning_effort`), `messages`
+- **Message structure**: Proper `role` and `content` fields  
+- **Version format**: Semantic versioning if `version` field is present
+- **File pairing**: Every `.json` must have a corresponding `.md` file
+
+### Full Validation Suite
+
+Run all validation checks (same as CI):
+```bash
+bash scripts/validate_prompts.sh        # Structural validation
+bash scripts/check_prompt_index.sh      # Index consistency  
+python scripts/detect_stray_prompts.py  # Detect orphaned files
+python scripts/schema_validate_prompts.py # Schema validation
+```
+
 ### Metadata Validation
 
-Run our validation script:
-
+Test prompt discoverability:
 ```bash
 python tools/search.py --all --json | jq '.[] | select(.title == null)'
 ```
-
 Should return empty results.
 
 ### Search Testing
@@ -278,6 +306,91 @@ vim prompts/engineering/code-review.md
 git add prompts/engineering/code-review.md
 git commit -m "Improve code review security criteria"
 ```
+
+## Versioning and Changelog Management
+
+For prompts requiring stable behavior for external integrations, follow our semantic versioning conventions.
+
+### When to Add Versions
+
+**Add semantic versioning when:**
+- External APIs or automated systems depend on your prompt
+- Breaking changes would impact downstream consumers  
+- Deterministic behavior is required across deployments
+- Formal release process is needed
+
+**Use `last_updated` field only when:**
+- Prompt is used manually/informally
+- Changes are non-breaking improvements
+- Quick iteration is preferred
+
+### Semantic Versioning Process
+
+Follow [Semantic Versioning 2.0.0](https://semver.org/): `MAJOR.MINOR.PATCH`
+
+#### Version Bump Rules
+
+- **MAJOR** (breaking changes): Output format changes, removed parameters, behavioral changes
+- **MINOR** (new features): New optional parameters, enhanced capabilities
+- **PATCH** (bug fixes): Typos, clarifications, documentation updates
+
+#### Example Workflow
+
+```bash
+# 1. Update JSON file with version
+vim prompts/engineering/code-review/code-review.json
+# Add: "version": "1.3.0"
+
+# 2. Update markdown frontmatter  
+vim prompts/engineering/code-review/code-review.md
+# Update: last_updated: "2025-09-06"
+# Optionally: version: "1.3.0"
+
+# 3. Add changelog entry
+## Changelog
+
+### [1.3.0] - 2025-09-06
+#### Added
+- Enhanced error handling for edge cases
+- Optional security focus parameter
+
+#### Changed
+- Improved recommendation prioritization  
+
+#### Fixed
+- Typo in system prompt
+
+# 4. Commit with semantic message
+git add prompts/engineering/code-review/
+git commit -m "feat(code-review): enhance error handling (v1.3.0)"
+
+# 5. Optional: Tag release
+git tag v1.3.0-code-review
+```
+
+### Breaking Changes
+
+For **major version bumps** with breaking changes:
+
+1. **Document impact**: Clearly explain what breaks
+2. **Provide migration path**: Show how to update usage
+3. **Use clear prefix**: Mark with **BREAKING** in changelog
+4. **Consider deprecation**: Give users time to migrate
+
+Example:
+```markdown
+### [2.0.0] - 2025-09-06
+#### Breaking Changes
+- **BREAKING**: Output format changed from text to JSON schema
+  - Migration: Update your parsing logic to handle JSON structure
+  - See [Schema Documentation](schema.md) for new format
+- **BREAKING**: Removed deprecated `{{style}}` parameter
+  - Migration: Use `{{format}}` parameter instead
+```
+
+### Comprehensive Documentation
+
+For detailed versioning guidelines, see [docs/VERSIONING_CHANGELOG.md](docs/VERSIONING_CHANGELOG.md).
 
 ## Documentation Contributions
 
