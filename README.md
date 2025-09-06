@@ -136,6 +136,12 @@ See: `templates/prompt-template.md`, `templates/prompt-metadata.yaml`, `CONTRIBU
 - Prefer explicit variables: `{{input_text}}`
 - Tags concise & lowercase
 
+## Copilot & Coding Agent Usage
+
+- Repository-specific Copilot guidance lives in `.github/copilot-instructions.md`.
+- The meta prompt for applying Copilot best practices is at `prompts/meta/add-copilot-instructions.json` and `prompts/meta/add-copilot-instructions.md`.
+- When requesting repo-wide improvements, ask the agent to produce: a repo snapshot, extracted best practices, a mapping table, prioritized changes, a tailored prompts library, a verification plan, and a PR plan.
+
 ## Roadmap Ideas
 - Auto index regeneration pre-commit hook
 - CI validation of metadata schema
