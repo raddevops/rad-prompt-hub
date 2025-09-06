@@ -60,11 +60,26 @@ last_updated: "2025-12-15"
 ## Optional Fields (Future Extensions)
 
 ### version (string)
-Semantic version number for significant changes.
+Semantic version number for prompts requiring stable behavior.
+
+**When to use:**
+- External integrations depend on your prompt
+- Breaking changes would impact downstream consumers
+- Deterministic behavior required across deployments
+
+**Format:** Follow [Semantic Versioning 2.0.0](https://semver.org/)
 ```yaml
-version: "1.0.0"
-version: "2.1.3"
+version: "1.0.0"    # First stable release
+version: "2.1.3"    # Major.Minor.Patch
+version: "1.0.0-beta.1"  # Pre-release
 ```
+
+**Version bumping:**
+- **MAJOR**: Breaking changes (output format, removed parameters)
+- **MINOR**: New features (optional parameters, enhanced capabilities)  
+- **PATCH**: Bug fixes (typos, clarifications, documentation)
+
+**Note:** Use `last_updated` field only for informal prompts without external dependencies.
 
 ### inputs (array of objects)
 Structured description of expected variables.
