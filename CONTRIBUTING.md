@@ -7,8 +7,7 @@ We welcome contributions to rad-prompt-hub! This guide outlines the process for 
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feat/your-feature-slug-YYYYMMDD`
 3. **Set up pre-commit hooks** (recommended): `./tools/setup-pre-commit.sh`
-4. Add your prompt using the template: `templates/prompt-template.md`
-5. Follow our naming conventions and style guide
+4. Follow our naming conventions and style guide
 
 ## Branch naming convention
 
@@ -94,9 +93,9 @@ git commit --no-verify
 
 ## Adding a New Prompt
 
-### 1. Use the Template
+### 1. Author the Markdown (Docs)
 
-Start with `templates/prompt-template.md` and fill in all sections:
+Create a new `.md` file and include the required frontmatter and sections below:
 
 - **Title**: Clear, specific description (≤ 8 words)
 - **Tags**: 2-5 lowercase tags (include domain + function)
@@ -408,7 +407,7 @@ To propose new metadata fields:
 1. Open an issue describing the use case
 2. Show examples of how it would be used
 3. Ensure backward compatibility
-4. Update `templates/prompt-metadata.yaml` documentation
+4. Update documentation to describe the new field (e.g., in docs/ or README)
 
 ## Infrastructure Contributions
 

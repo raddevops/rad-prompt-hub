@@ -1,6 +1,14 @@
 # rad-prompt-hub
 
-Production-ready LLM prompts designed for **tool consumption** with comprehensive JSON specifications that tools and applications can consume directly.
+Sample LLM prompts designed for **tool consumption** with JSON specifications that tools and applications can consume directly.
+
+## What's the Problem?
+
+I'm getting great results from using meta-propmting to create reusable prompts for various tasks, but I find myself doing a good bit of manual copy/paste work across different tools and interfaces.  
+
+Gathering all my 'golden' prompts, and a few draft ones, into one place lets me standardize more easily, keep up with versions, and reference across different code projects.
+
+In case this is helpful to anyone to see what's working for me right now, or to collaborate on improving the catalog, this is posted so moare people than myself can see and experiment with it.
 
 This hub prioritizes:
 - **JSON-first design**: Executable prompts optimized for programmatic consumption
@@ -23,7 +31,6 @@ rad-prompt-hub/
 │   ├── meta/
 │   ├── audit/
 │   └── index.json           # Generated registry (tools consume this)
-├── templates/               # Authoring templates + metadata schema
 ├── docs/                    # Usage, integration guides
 ├── tools/                   # Search, convert, validation utilities
 └── README.md
@@ -72,28 +79,45 @@ response = requests.post('https://api.example.com/v1/chat', json=prompt)
 llm-tool --prompt-file prompts/engineering/code-review/code-review.json --input "$(cat myfile.py)"
 ```
 
-## Quick Example (Prompt File)
+## Quick Example (Prompt Files)
 
-A prompt file uses YAML frontmatter followed by structured sections:
+This repo separates executable prompt specs (.json) from human docs (.md).
+
+1) Executable spec (.json) — single source of truth (minified):
+
+```json
+{"target_model":"gpt-4","parameters":{"reasoning_effort":"standard","verbosity":"concise"},"messages":[{"role":"system","content":"You are a senior engineer. Review the code diff and return a clear, actionable report."},{"role":"user","content":"{DIFF}"}]}
+```
+
+2) Documentation (.md) — human-readable context only (no prompt content):
 
 ```markdown
 ---
 title: "Code Review Assistant"
-tags: ["engineering", "code-review", "quality"]
+tags: ["engineering","code-review","quality"]
 author: "raddevops"
 last_updated: "2025-08-24"
 ---
 
 ## Purpose
-Provide a structured, repeatable code review heuristic emphasizing clarity, safety, performance, and maintainability.
+Summarizes the intent and scope of the prompt.
 
-## Prompt
-You are an experienced software engineer performing a code review.
-Evaluate the submission using the following criteria:
-1. Correctness ...
-2. Readability ...
-(etc.)
-Return a structured report with sections: Summary, Strengths, Issues, Suggested Improvements, Risk Assessment.
+## Usage notes
+- Inputs: DIFF (string)
+- Output: Structured report: Summary, Strengths, Issues, Improvements, Risk
+
+## Integration
+See paired JSON at prompts/engineering/code-review/code-review.json
+```
+
+3) Validation (test.sh) — schema check and usage demo:
+
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
+repo_root="$(git rev-parse --show-toplevel)"
+python3 "$repo_root/scripts/schema_validate_prompts.py" "prompts/engineering/code-review/code-review.json"
+# Optionally: add a smoke call to your LLM tool using the JSON above
 ```
 
 ## How to Use a Prompt
@@ -302,14 +326,14 @@ python tools/search.py --tags code-review --json > build/code_review.json
 mkdir -p prompts/<category>/<prompt-name>
 
 # Author the JSON specification (executable content)
-# Use templates/prompt-template.json as starting point
+# Start from an existing prompt's JSON as a reference (see prompts/*/*/*.json)
 vim prompts/<category>/<prompt-name>/<prompt-name>.json
 ```
 
 ### 2. Document in Markdown (Human Context)  
 ```bash
 # Create documentation ABOUT the prompt
-# Use templates/prompt-template.md as reference
+# Create the Markdown doc alongside the JSON (see examples in prompts/*/*/*.md)
 vim prompts/<category>/<prompt-name>/<prompt-name>.md
 ```
 
@@ -318,7 +342,7 @@ vim prompts/<category>/<prompt-name>/<prompt-name>.md
 ### 3. Add Validation Test
 ```bash
 # Create test script
-cp templates/test-template.sh prompts/<category>/<prompt-name>/test.sh
+# Copy a minimal test from a similar prompt and adapt it
 chmod +x prompts/<category>/<prompt-name>/test.sh
 ```
 
@@ -334,7 +358,7 @@ python3 scripts/build_prompts_index.py
 bash prompts/<category>/<prompt-name>/test.sh
 ```
 
-See: `templates/`, `CONTRIBUTING.md`, `docs/writing-style.md` for detailed guidance.
+See: `CONTRIBUTING.md`, `docs/writing-style.md` for detailed guidance.
 
 ## Tooling
 

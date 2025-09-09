@@ -1,22 +1,8 @@
 {
-  "terminal.integrated.defaultProfile.osx": "Zsh (normal)",
-  "terminal.integrated.profiles.osx": {
-    "Zsh (normal)": {
-      "path": "/bin/zsh",
-      "args": []
-    },
-    "Zsh (safe)": {
-      "path": "/bin/zsh",
-      "args": ["-f"],
-      "env": {"ZDOTDIR": "/var/empty"}
-    }
+  "[json]": {
+    "editor.formatOnSave": false
   },
-  "terminal.integrated.shellIntegration.enabled": true,
-  "terminal.integrated.env.osx": {
-    "ZDOTDIR": null
-  },
-  "terminal.integrated.persistentSessionReviveProcess": "never",
-  "terminal.integrated.enablePersistentSessions": false,
-  "terminal.integrated.inheritEnv": true,
-  "terminal.integrated.scrollback": 10000
+  "[jsonc]": {
+    "editor.formatOnSave": false
+  }
 }
