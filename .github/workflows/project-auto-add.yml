@@ -2,8 +2,6 @@ name: OSS readiness
 on:
   issues:
     types: [opened, reopened, edited, labeled]
-  pull_request:
-    types: [opened, reopened, edited, synchronize, ready_for_review]
 permissions:
   contents: read
   issues: write
