@@ -1,28 +1,28 @@
 ---
 title: "PromptSmith Meta Generator"
-version: "2.0.0"
-tags: ["writing", "meta", "prompt-engineering", "ai", "automation", "production"]
+version: "3.0.0"
+tags: ["meta", "prompt-engineering", "ai", "automation", "production"]
 author: "raddevops"
-last_updated: "2025-09-06"
+last_updated: "2025-09-09"
 ---
 
 ## PromptSmith Meta Prompt (About)
 
 **Category:** Meta  
-**JSON Spec:** `writing/promptsmith/promptsmith.json`  
-**Version:** 2.0.0  
+**JSON Spec:** `meta/promptsmith/promptsmith.json`  
+**Version:** 3.0.0  
 **Target Model:** gpt-5-thinking  
 
 ### Purpose
-Advanced meta-prompt engineering system for creating production-grade GPT-5 prompt packages with comprehensive validation, self-improvement capabilities, and enterprise deployment readiness. Either emits gating QUESTIONS YAML (when critical info missing) or final prompt JSON (system + user messages, parameters, assumptions, risks).
+Advanced meta-prompt engineering system for creating production-grade GPT-5 prompt packages with comprehensive validation, self-improvement capabilities, and enterprise deployment readiness. Emits either a gating QUESTIONS JSON (minified) when critical info is missing, or a final prompt JSON (system + user messages, parameters, assumptions, risks) — always minified and JSON-only.
 
 ### Input Variables
 
 | Variable | Type | Required | Description | Examples |
 |----------|------|----------|-------------|----------|
-| `REQUEST` | String | ✅ Yes | Core prompt requirement specification including domain, functionality, and desired capabilities | `"Create a code review prompt for Python"` or `"Need a research synthesis prompt for academic papers"` |
-| `CONSTRAINTS` | String | ❓ Optional | Technical limitations, format requirements, length restrictions, compliance needs, or workflow integration requirements | `"Must integrate with CI/CD pipeline"` or `"Maximum 500 tokens, enterprise compliance required"` |
-| `AUDIENCE_TONE` | String | ❓ Optional | Target user profile and communication style preferences | `"Technical leads, concise and actionable"` or `"Researchers, comprehensive and analytical"` |
+| `REQUEST` | String | ✅ Yes | Core prompt requirement specification including domain, functionality, and desired capabilities | "Create a code review prompt for Python" or "Need a research synthesis prompt for academic papers" |
+| `CONSTRAINTS` | String | ❓ Optional | Technical limitations, format requirements, length restrictions, compliance needs, or workflow integration requirements | "Must integrate with CI/CD pipeline" or "Maximum 500 tokens, enterprise compliance required" |
+| `AUDIENCE_TONE` | String | ❓ Optional | Target user profile and communication style preferences | "Technical leads, concise and actionable" or "Researchers, comprehensive and analytical" |
 | `ENVIRONMENT` | String | ❓ Optional | Deployment context, tool integrations, infrastructure considerations, or platform-specific requirements | Context-specific deployment information |
 | `EXAMPLES` | String | ❓ Optional | Reference implementations, similar prompts, or desired output samples to guide prompt generation | Concrete illustrations for requirement clarity |
 | `OUTPUT_CONTRACT` | String | ❓ Optional | Specific deliverable format, structure requirements, validation criteria, or success metrics | Format specifications ensuring downstream compatibility |
@@ -31,14 +31,14 @@ Advanced meta-prompt engineering system for creating production-grade GPT-5 prom
 
 | Parameter | Value | Reasoning |
 |-----------|--------|-----------|
-| `reasoning_effort` | `"high"` | High reasoning effort is essential for meta-prompt generation requiring deep analysis of requirements, contradiction detection, workflow optimization, and comprehensive prompt engineering domain knowledge synthesis |
-| `verbosity` | `"low"` | Low verbosity ensures concise, actionable prompt artifacts optimized for production deployment while maintaining comprehensive technical accuracy without verbose explanations that reduce clarity |
+| `reasoning_effort` | "high" | High reasoning effort is essential for meta-prompt generation requiring deep analysis of requirements, contradiction detection, workflow optimization, and comprehensive prompt engineering domain knowledge synthesis |
+| `verbosity` | "low" | Low verbosity ensures concise, actionable prompt artifacts optimized for production deployment while maintaining comprehensive technical accuracy without verbose explanations that reduce clarity |
 
 ### Workflow Summary
 **5-Step Process:** Triage → Focused Questions → Design → Parameter Recommendation → Self-Check & Emit
 
 1. **Restate & Triage**: Analyze and categorize incoming prompt requirements
-2. **Ask Focused Questions**: Generate QUESTIONS YAML if critical information missing
+2. **Ask Focused Questions**: Generate QUESTIONS JSON (minified) if critical information missing
 3. **Design Prompt**: Create system + user message structure with appropriate placeholders
 4. **Recommend Parameters**: Configure reasoning_effort and verbosity for optimal performance
 5. **Self-Check & Emit**: Validate for contradictions and vagueness before final JSON output
@@ -48,7 +48,7 @@ Advanced meta-prompt engineering system for creating production-grade GPT-5 prom
 - **Placeholder Format**: Use `{{LIKE_THIS}}` convention with optional defaults via `:=`
 - **Contradiction Prevention**: Comprehensive audit before emission to ensure logical consistency
 - **Vagueness Elimination**: Specific, actionable directives only
-- **Gating Mechanism**: QUESTIONS YAML output when insufficient information provided
+- **Gating Mechanism**: QUESTIONS JSON output when insufficient information provided
 
 ### Assumptions & Limitations
 
@@ -134,12 +134,13 @@ Optional advanced configurations:
 
 **Schema Validation:** ✅ Passes `scripts/schema_validate_prompts.py`  
 **JSON Structure:** ✅ Valid minified format for LLM optimization  
-**Backward Compatibility:** ✅ Preserves existing functionality and usage patterns  
+**Backward Compatibility:** ❗ Breaking change in 3.0.0 (JSON-only output; QUESTIONS in JSON)  
 **Test Coverage:** ✅ Comprehensive validation via `test.sh`
 
 ### Version History
 
-**v2.0.0 (Current)** - Major enhancement with comprehensive metadata, input variables documentation, expanded assumptions and risks, parameter reasoning, and production-grade enterprise readiness
+**v3.0.0 (Current)** - Enforce JSON-only/minified output, QUESTIONS in JSON, behavior is breaking  
+**v2.0.0** - Major enhancement with comprehensive metadata, input variables documentation, expanded assumptions and risks, parameter reasoning, and production-grade enterprise readiness
 
 ### Implementation Notes
 

@@ -101,6 +101,6 @@ except Exception:
 
 export -f process_file
 
-find "$PROMPT_DIR" -type f -name "*.md" ! -path "*/templates/*" -print0 | while IFS= read -r -d '' f; do
+find "$PROMPT_DIR" -type f -name "*.md" -print0 | while IFS= read -r -d '' f; do
   process_file "$f"
 done

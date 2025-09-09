@@ -9,7 +9,7 @@ last_updated: "2025-09-06"
 
 Slug: add-copilot-instructions  
 Category: meta  
-Version: 1.0.0  
+Version: 2.0.0  
 Model: gpt-5-thinking
 
 ## Purpose
@@ -20,18 +20,19 @@ Analyze a repository and the Copilot Coding Agent best-practices page, then prod
 - Best practices source URL (or pasted content if no network)
 - Optional tool capability list
 
-## Outputs
-1. Repo Snapshot  
-2. Best-Practices Extraction  
-3. Practice→Project Mapping Table  
-4. Prioritized Actionable Changes (P0/P1/P2)  
-5. Prompts & Patterns Library  
-6. Review & Verification Plan  
-7. PR Plan  
-8. Open Questions & Assumptions
+## Output Contract (JSON)
+Return a single minified JSON object with keys:
+- repo_snapshot (object)
+- best_practices (array)
+- mapping (array of objects: practice, where, evidence, gap_risk, recommendation)
+- prioritized_changes (object with arrays P0, P1, P2)
+- prompts_library (array of objects with name, snippet, placeholders, constraints, success_criteria)
+- verification_plan (object)
+- pr_plan (object)
+- open_questions (array)
 
 ## Guardrails
-Evidence-based; explicit file paths; no secrets; deterministic tables & checklists.
+JSON-only response; no prose/markdown/code fences; single-line minified output. Evidence-based; explicit file paths; no secrets; deterministic tables & checklists.
 
 ## Assumptions
 Read-only scan; may sample large repos; network access may be disabled.
@@ -43,4 +44,5 @@ Practice source may change; sampling can miss edge cases.
 Provide project summary, stack, constraints, and set network_access true; request full plan + prompts library.
 
 ## Change Log
+- 2.0.0 (BREAKING): Switched output from Markdown to minified JSON-only contract; tightened guardrails; lowered verbosity.
 - 1.0.0: Initial migration into structured meta category.

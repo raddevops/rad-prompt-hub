@@ -65,29 +65,29 @@ else
 fi
 
 echo ""
-echo "📋 Testing deliverable structure validation..."
+echo "📋 Testing deliverable structure validation (JSON contract)..."
 
-# Validate comprehensive deliverables list
-REQUIRED_DELIVERABLES=("Repo Snapshot" "Best-Practices Extraction" "Practice-to-Project Mapping" "Actionable Changes" "Prompts.*Patterns Library" "Review.*Verification Plan" "PR Plan" "Open Questions.*Assumptions")
-MISSING_DELIVERABLES=()
-for deliverable in "${REQUIRED_DELIVERABLES[@]}"; do
-    if echo "$SYSTEM_CONTENT" | grep -q -i "$deliverable"; then
-        echo "✅ Deliverable specified: $deliverable"
+# Validate JSON output contract keys in user content
+REQUIRED_KEYS=("repo_snapshot" "best_practices" "mapping" "prioritized_changes" "prompts_library" "verification_plan" "pr_plan" "open_questions")
+MISSING_KEYS=()
+for key in "${REQUIRED_KEYS[@]}"; do
+    if echo "$USER_CONTENT" | grep -q "$key"; then
+        echo "✅ Output key specified: $key"
     else
-        MISSING_DELIVERABLES+=("$deliverable")
+        MISSING_KEYS+=("$key")
     fi
 done
 
-if [ ${#MISSING_DELIVERABLES[@]} -gt 0 ]; then
-    echo "❌ Missing required deliverables: ${MISSING_DELIVERABLES[*]}"
+if [ ${#MISSING_KEYS[@]} -gt 0 ]; then
+    echo "❌ Missing required output keys in JSON contract: ${MISSING_KEYS[*]}"
     exit 1
 fi
 
-# Validate prioritization framework
-if echo "$SYSTEM_CONTENT" | grep -q -i "P0.*P1.*P2\|this week.*this sprint.*later"; then
-    echo "✅ Prioritization framework (P0/P1/P2) specified"
+# Validate prioritization framework reference
+if echo "$USER_CONTENT" | grep -q -i "P0\|P1\|P2\|prioritized_changes"; then
+    echo "✅ Prioritization framework (P0/P1/P2) referenced"
 else
-    echo "❌ Missing prioritization framework"
+    echo "❌ Missing prioritization framework reference"
     exit 1
 fi
 
@@ -210,14 +210,34 @@ else
     exit 1
 fi
 
-# Validate output format specifications
-if echo "$USER_CONTENT" | grep -q -i "markdown.*code fences\|copy.*pasteable.*prompt"; then
-    echo "✅ Output format specifications provided"
+echo ""
+echo "🧱 Output format guardrails (JSON-only/minified)..."
+
+# Validate system enforces JSON-only, no markdown, no code fences, minified
+if echo "$SYSTEM_CONTENT" | grep -qi "JSON only" && echo "$SYSTEM_CONTENT" | grep -qi "no markdown" && echo "$SYSTEM_CONTENT" | grep -qi "no code fences" && echo "$SYSTEM_CONTENT" | grep -qi "single minified line"; then
+    echo "✅ System enforces JSON-only, no markdown/code fences, minified output"
 else
-    echo "❌ Missing output format specifications"
+    echo "❌ Missing JSON-only/minified guardrails in system message"
+    exit 1
+fi
+
+# Validate user content mentions single minified JSON object
+if echo "$USER_CONTENT" | grep -qi "single minified JSON object"; then
+    echo "✅ User contract specifies single minified JSON object"
+else
+    echo "❌ User contract missing minified JSON object specification"
+    exit 1
+fi
+
+# Validate prompt file is minified (1 physical line)
+LINE_COUNT=$(wc -l < "$PROMPT_FILE" | tr -d ' ')
+if [ "$LINE_COUNT" -le 2 ]; then
+    echo "✅ Prompt JSON is minified (lines: $LINE_COUNT)"
+else
+    echo "❌ Prompt JSON not minified (lines: $LINE_COUNT)"
     exit 1
 fi
 
 echo ""
 echo "✅ Add-copilot-instructions prompt validation complete!"
-echo "📊 Validated: JSON schema, codebase audit methodology, security guardrails, comprehensive deliverables, quality assurance"
+echo "📊 Validated: JSON schema, codebase audit methodology, security guardrails, JSON-only output contract, minification, quality assurance"
