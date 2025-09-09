@@ -19,7 +19,7 @@ This hub prioritizes:
 - **Tool integration**: Direct consumption by LLMs, APIs, and automation tools  
 - **DRY compliance**: Single source of truth for prompt specifications
 - **Human documentation**: Separate MD files for context and integration guidance
-- **Comprehensive validation**: Automated testing and schema compliance
+- **Validation**: Automated testing and schema compliance
 
 ## Repository Layout
 

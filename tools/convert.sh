@@ -8,7 +8,7 @@
 #   ./tools/convert.sh yaml   # Extracts just frontmatter YAML for each file
 #
 # Notes:
-# - Lightweight implementation using awk / sed; not robust for complex YAML.
+# - Lightweight implementation using awk/sed; not suitable for complex YAML.
 # - Future enhancement: replace with a Python script + strict schema validation.
 
 set -euo pipefail

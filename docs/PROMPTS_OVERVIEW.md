@@ -58,7 +58,7 @@ This architecture enforces DRY principles: executable content lives in JSON only
 ### Versioning & Changelog
 Add a `version` field in JSON if external integrations require deterministic behavior; bump on breaking changes following [semantic versioning](VERSIONING_CHANGELOG.md).
 
-For comprehensive guidelines on when to version, how to maintain changelogs, and managing backward compatibility, see [VERSIONING_CHANGELOG.md](VERSIONING_CHANGELOG.md).
+For detailed guidelines on when to version, how to maintain changelogs, and managing backward compatibility, see [VERSIONING_CHANGELOG.md](VERSIONING_CHANGELOG.md).
 
 ### Remediation Required: DRY Violations
 

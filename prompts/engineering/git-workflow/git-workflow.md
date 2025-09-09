@@ -14,7 +14,7 @@ last_updated: "2025-09-06"
 **Target Model:** gpt-5-thinking  
 
 ### Purpose
-A release engineering advisor optimizing Git collaboration models with evidence-based branching strategies and workflow recommendations. Produces comprehensive Git branching & collaboration models including branch roles, protections, commit/PR policy, automation, and risk assessment derived from team context analysis.
+A release engineering advisor optimizing Git collaboration models with evidence-based branching strategies and workflow recommendations. Produces Git branching & collaboration guidance including branch roles, protections, commit/PR policy, automation, and risk assessment derived from team context analysis.
 
 ### Input Variables
 
@@ -152,10 +152,10 @@ Test with various team contexts to verify output structure and workflow appropri
 ### Implementation Notes
 
 - **Conversation Format**: Uses system/user message structure for optimal model interaction
-- **Token Optimization**: JSON is minified for efficient LLM processing while maintaining comprehensive documentation
+- **Token Optimization**: JSON is minified for efficient LLM processing while maintaining clear documentation
 - **Context Sensitivity**: Designed to handle partial information and request clarification
 - **Engineering Focus**: Optimized for technical leadership decision-making and team implementation
 
 ---
 
-**Note:** This markdown provides comprehensive documentation and usage guidance. The executable prompt logic resides in `git-workflow.json`.
+**Note:** This markdown provides documentation and usage guidance. The executable prompt logic resides in `git-workflow.json`.

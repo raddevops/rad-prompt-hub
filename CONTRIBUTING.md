@@ -388,7 +388,7 @@ Example:
   - Migration: Use `{{format}}` parameter instead
 ```
 
-### Comprehensive Documentation
+### Documentation
 
 For detailed versioning guidelines, see [docs/VERSIONING_CHANGELOG.md](docs/VERSIONING_CHANGELOG.md).
 

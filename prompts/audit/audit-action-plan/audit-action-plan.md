@@ -23,7 +23,7 @@ Transform an existing repository audit into structured, deduplicated GitHub issu
 
 | Variable | Required | Description | Example |
 |----------|----------|-------------|---------|
-| `{{AUDIT_REPORT}}` | ✅ Required | Comprehensive markdown audit with findings, priorities, evidence citations | Repository security assessment report |
+| `{{AUDIT_REPORT}}` | ✅ Required | Markdown audit with findings, priorities, evidence citations | Repository security assessment report |
 | `{{BACKLOG_YAML}}` | Optional | Structured task list with title, priority, estimate, owner, description | Existing action items in YAML format |
 | `{{GH_OWNER}}` | ✅ Required | GitHub username or organization | raddevops |
 | `{{GH_REPO}}` | ✅ Required | Repository name | rad-prompt-hub |
@@ -107,6 +107,6 @@ export MAX_ISSUES="50"
 - **Sensitive data** - Manual review required for any secrets/PII in outputs
 
 ## Change Log
-- **1.0.1** Enhanced parameter documentation, comprehensive placeholder explanations, improved assumptions and risk documentation
+- **1.0.1** Enhanced parameter documentation, expanded placeholder explanations, improved assumptions and risk documentation
 - **1.0.0** Initial migration from workspace action plan JSON
 

@@ -14,7 +14,7 @@ last_updated: "2025-09-06"
 **Target Model:** gpt-5-thinking  
 
 ### Purpose
-Advanced meta-prompt that analyzes GitHub repository issues to identify repetitive workflow patterns, creates comprehensive prompt-based automation systems using repository infrastructure, and updates issues to leverage new workflow automation. Orchestrates end-to-end automation system creation and deployment.
+Advanced meta-prompt that analyzes GitHub repository issues to identify repetitive workflow patterns, creates prompt-based automation systems using repository infrastructure, and updates issues to leverage new workflow automation. Orchestrates end-to-end automation system creation and deployment.
 
 ### Input Variables
 
@@ -32,7 +32,7 @@ Advanced meta-prompt that analyzes GitHub repository issues to identify repetiti
 
 | Parameter | Value | Reasoning |
 |-----------|--------|-----------|
-| `reasoning_effort` | `"high"` | High reasoning effort essential for comprehensive issue pattern analysis, multi-component system architecture design, workflow orchestration planning, and systematic issue automation requiring deep structural reasoning and planning |
+| `reasoning_effort` | `"high"` | High reasoning effort essential for issue pattern analysis, multi-component system architecture design, workflow orchestration planning, and systematic issue automation requiring deep structural reasoning and planning |
 | `verbosity` | `"low"` | Low verbosity ensures concise, actionable implementation artifacts optimized for execution and deployment while maintaining technical precision without verbose explanations that reduce clarity |
 
 ### Implementation Strategy
@@ -47,7 +47,7 @@ Advanced meta-prompt that analyzes GitHub repository issues to identify repetiti
 - Design automation system leveraging existing repository infrastructure
 - Plan workflow orchestration connecting validation, improvement, and documentation
 - Ensure CI/CD pipeline and GitHub Actions compatibility
-- Create comprehensive system documentation and usage guidelines
+- Create system documentation and usage guidelines
 
 **Phase 3: Component Implementation**  
 - Create missing prompts using PromptSmith methodology
@@ -59,7 +59,7 @@ Advanced meta-prompt that analyzes GitHub repository issues to identify repetiti
 - Connect all system components into cohesive workflow automation
 - Test end-to-end functionality with sample issue workflows
 - Validate schema compliance and repository standards adherence
-- Create comprehensive system documentation and user guides
+- Create system documentation and user guides
 
 **Phase 5: Issue Workflow Updates**
 - Update GitHub issue templates to reference new automation system
@@ -69,7 +69,7 @@ Advanced meta-prompt that analyzes GitHub repository issues to identify repetiti
 
 **Phase 6: Deployment & Validation**
 - Deploy system components following repository contribution guidelines
-- Run comprehensive validation ensuring quality standards
+- Run full validation ensuring quality standards
 - Create deployment documentation and maintenance guidelines
 - Provide training materials and adoption guidance
 
@@ -134,7 +134,7 @@ result = model.call(automation_system_json, variables={
 - Categorizes issues by workflow complexity and automation potential
 
 **System Architecture Design:**
-- Creates comprehensive automation systems using existing infrastructure
+- Creates automation systems using existing infrastructure
 - Designs workflow orchestration connecting multiple prompt components
 - Ensures seamless integration with CI/CD and validation systems
 - Plans scalable architecture for long-term maintenance and extension
@@ -143,7 +143,7 @@ result = model.call(automation_system_json, variables={
 - Uses PromptSmith methodology for creating new automation prompts
 - Follows repository's 3-file structure and validation requirements
 - Builds integration scripts and workflow orchestration tools
-- Creates comprehensive testing and validation frameworks
+- Creates testing and validation frameworks
 
 **Issue Workflow Integration:**
 - Updates GitHub issues to reference automated workflow systems
@@ -156,7 +156,7 @@ result = model.call(automation_system_json, variables={
 **Standards Compliance:**
 - Follow repository's established 3-file structure (JSON + MD + test.sh)
 - Use existing tools: PromptSmith, schema validation, build scripts
-- Maintain DRY principles and comprehensive documentation standards
+- Maintain DRY principles and documentation standards
 - Ensure schema compliance and quality assurance throughout
 
 **Infrastructure Integration:**
@@ -166,7 +166,7 @@ result = model.call(automation_system_json, variables={
 - Make minimal surgical changes following repository patterns
 
 **Quality Assurance:**
-- All new components must pass comprehensive validation testing
+- All new components must pass full validation testing
 - Maintain documentation completeness and accuracy standards
 - Ensure system reliability and maintainability for long-term use
 - Preserve human oversight while improving workflow efficiency
@@ -195,14 +195,14 @@ result = model.call(automation_system_json, variables={
 - **Scope Management**: Complex systems may need phased delivery with stakeholder coordination
 - **API Limitations**: GitHub rate limits may affect automation requiring error handling
 - **Human Oversight**: Automation should enhance rather than replace critical decision processes
-- **Maintenance Burden**: System interdependencies require comprehensive documentation and knowledge transfer
+- **Maintenance Burden**: System interdependencies require clear documentation and knowledge transfer
 
 ### Quality Assurance
 
 **Schema Validation:** ✅ Passes `scripts/schema_validate_prompts.py`  
 **JSON Structure:** ✅ Valid minified format for LLM optimization  
 **System Integration:** ✅ Compatible with existing repository infrastructure  
-**Test Coverage:** ✅ Comprehensive validation via `test.sh`
+**Test Coverage:** ✅ Full validation via `test.sh`
 
 ### Testing & Validation
 
@@ -215,4 +215,4 @@ Test with sample GitHub issue data to verify pattern analysis and system creatio
 
 ---
 
-**Note:** This markdown provides comprehensive documentation. The executable prompt logic resides in `github-issue-automation-system.json`.
+**Note:** This markdown documents usage. The executable prompt logic resides in `github-issue-automation-system.json`.

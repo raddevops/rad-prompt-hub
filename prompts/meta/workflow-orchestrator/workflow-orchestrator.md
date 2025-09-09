@@ -30,7 +30,7 @@ Orchestrates multi-phase documentation validation and improvement workflows by c
 
 | Parameter | Value | Reasoning |
 |-----------|--------|-----------|
-| `reasoning_effort` | `"high"` | High reasoning effort required for complex workflow coordination, multi-prompt orchestration, phase management, and comprehensive quality assurance requiring sophisticated planning and execution oversight |
+| `reasoning_effort` | `"high"` | High reasoning effort required for complex workflow coordination, multi-prompt orchestration, phase management, and end-to-end quality assurance requiring sophisticated planning and execution oversight |
 | `verbosity` | `"medium"` | Medium verbosity needed for clear workflow progress reporting, phase completion status, and actionable next steps while maintaining operational clarity for users |
 
 ### Workflow Phases
@@ -100,7 +100,7 @@ result = model.call(orchestrator_json, variables={
 **Progress Tracking:**
 - Provides clear status reporting at each workflow phase
 - Includes validation scores and metrics for improvement tracking
-- Generates comprehensive summary reports for implementation planning
+- Generates summary reports for implementation planning
 
 **Quality Assurance:**
 - Maintains repository standards and schema compliance throughout
@@ -138,8 +138,8 @@ result = model.call(orchestrator_json, variables={
 **Schema Validation:** ✅ Passes `scripts/schema_validate_prompts.py`  
 **JSON Structure:** ✅ Valid minified format for LLM optimization  
 **Workflow Integration:** ✅ Compatible with existing prompt ecosystem  
-**Test Coverage:** ✅ Comprehensive validation via `test.sh`
+**Test Coverage:** ✅ Full validation via `test.sh`
 
 ---
 
-**Note:** This markdown provides comprehensive documentation. The executable prompt logic resides in `workflow-orchestrator.json`.
+**Note:** This markdown documents usage. The executable prompt logic resides in `workflow-orchestrator.json`.

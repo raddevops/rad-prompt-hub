@@ -13,11 +13,11 @@ Version: 1.0.1
 Model: gpt-5-thinking
 
 ## Purpose
-Comprehensive, evidence-based repository maturity audit plus prioritized remediation and guardrail artifacts. Operates in read-only mode to assess architecture, code quality, testing strategy, CI/CD, security posture, and documentation completeness.
+Evidence-based repository maturity audit plus prioritized remediation and guardrail artifacts. Operates in read-only mode to assess architecture, code quality, testing strategy, CI/CD, security posture, and documentation completeness.
 
 ## Parameters
 - **reasoning_effort: high** - Complex cross-cutting analysis across architecture, security, compliance, traceability requires substantial reasoning to synthesize findings and provide evidence-based prioritized recommendations
-- **verbosity: medium** - Balanced approach providing comprehensive coverage while maintaining executive-ready, actionable format for both technical teams and management
+- **verbosity: medium** - Balanced approach providing broad coverage while maintaining an executive-ready, actionable format for both technical teams and management
 
 ## Input Variables
 
@@ -32,7 +32,7 @@ Comprehensive, evidence-based repository maturity audit plus prioritized remedia
 | `{{KNOWN_ISSUES}}` | Optional | Existing identified pain points | `slow-tests`, `deployment-issues`, `technical-debt` |
 | `{{SUCCESS_CRITERIA}}` | Optional | Audit success measures | `security-compliance`, `technical-debt-reduction` |
 | `{{DEPTH}}` | Optional | Analysis depth level (default: standard) | `light`, `standard`, `deep` |
-| `{{MAX_TOKENS_OR_PAGES}}` | Optional | Output size constraints | `5000-tokens`, `10-pages`, `comprehensive` |
+| `{{MAX_TOKENS_OR_PAGES}}` | Optional | Output size constraints | `5000-tokens`, `10-pages` |
 
 ### Deliverable Flags
 - `audit_plan` - Include structured action plan
@@ -45,7 +45,7 @@ Comprehensive, evidence-based repository maturity audit plus prioritized remedia
 
 ## Analysis Depth Guide
 - **light** - Surface analysis, structure review, major gaps identification
-- **standard** - Comprehensive analysis with prioritized recommendations (recommended)
+- **standard** - Full analysis with prioritized recommendations (recommended)
 - **deep** - Detailed examination with specific implementation suggestions
 
 ## Outputs
@@ -92,7 +92,7 @@ export APP_TYPE="web-app"
 export DEPTH="standard"
 
 # Run audit through LLM interface
-# Output: Comprehensive audit report with action plan
+# Output: Audit report with action plan
 ```
 
 ### Compliance-Focused Audit  
@@ -131,7 +131,7 @@ export NFRS="maintainability,scalability"
 
 ## Risks & Limitations
 - **Static analysis scope** - Runtime issues and dynamic behavior not detected
-- **Dependency scanning** - External vulnerability scanners needed for comprehensive assessment
+- **Dependency scanning** - External vulnerability scanners are needed for a complete assessment
 - **Compliance accuracy** - Domain expert validation required for regulatory requirements
 - **Architecture context** - Team knowledge and business constraints may override recommendations
 - **Test coverage estimates** - Actual coverage metrics require test execution
@@ -145,5 +145,5 @@ export NFRS="maintainability,scalability"
 - **Architecture review** - Cross-cutting analysis of design decisions and patterns
 
 ## Change Log
-- **1.0.1** Enhanced parameter documentation, comprehensive placeholder explanations, expanded risk assessment, improved methodology documentation
+- **1.0.1** Enhanced parameter documentation, expanded placeholder explanations, expanded risk assessment, improved methodology documentation
 - **1.0.0** Initial migration from workspace audit report JSON

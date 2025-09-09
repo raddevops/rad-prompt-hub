@@ -1,6 +1,6 @@
 # Prompt Versioning and Changelog Conventions
 
-This document establishes comprehensive guidelines for versioning stable prompts and maintaining changelogs in rad-prompt-hub.
+This document defines guidelines for versioning stable prompts and maintaining changelogs in rad-prompt-hub.
 
 ## When to Use Versioning
 

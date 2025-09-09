@@ -14,7 +14,7 @@ last_updated: "2025-09-06"
 **Target Model:** gpt-5-thinking  
 
 ### Purpose
-A senior software engineer performing structured, comprehensive code reviews with systematic analysis methodology. Generates structured peer code reviews with six standardized sections: Summary, Strengths, Issues, Recommendations, Risk Assessment, and Suggested Tests.
+A senior software engineer performing structured code reviews with a systematic analysis methodology. Generates reviews with six standardized sections: Summary, Strengths, Issues, Recommendations, Risk Assessment, and Suggested Tests.
 
 ### Input Variables
 
@@ -44,7 +44,7 @@ The prompt operates under these key assumptions:
 3. **Standard Practices**: Assumes familiarity with standard software engineering practices for target language
 4. **Complete Diffs**: Review effectiveness depends on completeness and clarity of provided changes
 5. **Implementation Capability**: Developer can implement suggestions without additional guidance
-6. **Context Dependency**: Testing recommendations require additional context for comprehensive coverage
+6. **Context Dependency**: Testing recommendations may require additional context for full coverage
 
 ### Output Structure
 
@@ -102,7 +102,7 @@ result = model.call(json_prompt, variables={
 **Analysis Constraints:**
 - **Scope**: Limited to provided diff, lacks full system context for architectural assessment
 - **Performance**: Cannot assess system-wide performance implications beyond visible patterns
-- **Security**: Restricted to observable vulnerabilities without comprehensive threat modeling
+- **Security**: Restricted to observable vulnerabilities without full threat modeling
 - **Dependencies**: Review quality depends on diff completeness - may miss integration issues
 - **Validation**: Recommendations may require additional validation against broader system requirements
 
@@ -147,4 +147,4 @@ Test with sample diffs to verify output structure and quality.
 
 ---
 
-**Note:** This markdown provides comprehensive documentation. The executable prompt logic resides in `code-review.json`.
+**Note:** This markdown documents usage. The executable prompt logic resides in `code-review.json`.
