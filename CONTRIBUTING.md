@@ -398,6 +398,14 @@ Help improve our guides:
 - `docs/usage-guide.md`: How to use prompts effectively
 - `docs/writing-style.md`: Style and tone guidelines
 - `docs/best-practices.md`: Prompt engineering best practices
+
+## Governance and Merge Policy
+
+This repository uses CODEOWNERS for required reviews. See `CODEOWNERS` at the repo root and `docs/oss-public/GOVERNANCE.md` for roles and SLAs.
+
+## Automation
+
+New issues and pull requests are automatically added to the OSS Readiness project for tracking. See `.github/workflows/project-auto-add.yml`.
 - `README.md`: Main project documentation
 
 ## Schema Extensions

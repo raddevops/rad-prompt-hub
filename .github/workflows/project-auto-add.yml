@@ -1,0 +1,19 @@
+name: OSS readiness
+on:
+  issues:
+    types: [opened, reopened, edited, labeled]
+  pull_request:
+    types: [opened, reopened, edited, synchronize, ready_for_review]
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+jobs:
+  add_to_project:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add issue/PR to project #2
+        uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: https://github.com/users/raddevops/projects/2
+          github-token: ${{ secrets.GITHUB_TOKEN }}

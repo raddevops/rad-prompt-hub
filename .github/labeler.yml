@@ -1,0 +1,20 @@
+bug:
+  - '**/*.md'
+  - '**/*.json'
+  - '!prompts/**/*.json'
+  - '!prompts/index.json'
+documentation:
+  - 'docs/**'
+  - '**/*.md'
+audit:
+  - 'prompts/audit/**'
+engineering:
+  - 'prompts/engineering/**'
+product:
+  - 'prompts/product/**'
+research:
+  - 'prompts/research/**'
+writing:
+  - 'prompts/writing/**'
+meta:
+  - 'prompts/meta/**'
