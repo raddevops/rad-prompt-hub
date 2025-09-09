@@ -391,6 +391,38 @@ Example:
 
 For detailed versioning guidelines, see [docs/VERSIONING_CHANGELOG.md](docs/VERSIONING_CHANGELOG.md).
 
+## Release & Tagging (Repository)
+
+Use this process for repository releases that cover docs/CI/policies and broad prompt-pack updates.
+
+- Tag format: `vMAJOR.MINOR.PATCH` (example: `v0.1.0`)
+- Release branch (preferred): `release/x.y.z` (example: `release/0.1.0`)
+  - The branch should include:
+    - README badges/notes (if needed)
+    - An entry in `docs/VERSIONING_CHANGELOG.md` under “Release History”
+    - No pretty-printing of generated JSON; keep JSON artifacts minified
+- Required check: `validate` must pass on the PR
+
+Standard flow:
+1) Create the release branch and open a PR to `main`
+2) Ensure CI passes and resolve any review comments
+3) Merge the PR
+4) Tag the merge commit as `vX.Y.Z` and push the tag
+5) (Optional) Create a GitHub Release from the tag using the changelog entry
+
+Notes:
+- Branch protections require the `validate` check to pass before merge
+- Conversation resolution may be enforced; resolve any open PR threads
+- After a public flip, badges and links should render without auth
+
+## Prompt-specific Tags (Optional)
+
+Only use prompt-scoped tags when a prompt is versioned independently for external consumers.
+
+- Tag format: `vX.Y.Z-<prompt-folder>` (example: `v1.3.0-code-review`)
+- Follow the semantic versioning rules in this guide
+- Ensure the Markdown frontmatter optionally reflects `version` and `last_updated`
+
 ## Documentation Contributions
 
 Help improve our guides:

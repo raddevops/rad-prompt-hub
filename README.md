@@ -1,5 +1,9 @@
 # rad-prompt-hub
 
+![CI](https://img.shields.io/github/actions/workflow/status/raddevops/rad-prompt-hub/validate-prompts.yml?branch=main&label=validate)
+![License](https://img.shields.io/github/license/raddevops/rad-prompt-hub)
+![Version](https://img.shields.io/badge/version-v0.1.0-blue)
+
 Sample LLM prompts designed for **tool consumption** with JSON specifications that tools and applications can consume directly.
 
 ## What's the Problem?
@@ -423,6 +427,16 @@ MIT — see `LICENSE`.
 ## AI-generated content notice
 
 Portions of this repository were created or assisted by AI systems. Review outputs critically and validate for accuracy, safety, licensing, and fitness for your use case before relying on them. See `docs/oss-public/AI_CONTENT_NOTICE.md`.
+
+## Repository protections
+
+Basic protections are configured in CI. To update repository security settings (alerts, automated fixes, branch protections, required checks) you can use `tools/enable-security.sh`. Example:
+
+```bash
+# Require validate-prompts to pass on main
+OWNER=raddevops REPO=rad-prompt-hub DEFAULT_BRANCH=main \
+  REQUIRED_CHECKS=validate-prompts ./tools/enable-security.sh
+```
 
 ---
 Happy prompting!
