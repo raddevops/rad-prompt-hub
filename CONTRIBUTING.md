@@ -433,7 +433,7 @@ Help improve our guides:
 
 ## Governance and Merge Policy
 
-This repository uses CODEOWNERS for required reviews. See `CODEOWNERS` at the repo root and `docs/oss-public/GOVERNANCE.md` for roles and SLAs.
+This repository uses CODEOWNERS for required reviews. See `CODEOWNERS` at the repo root and `docs/GOVERNANCE.md` for roles and SLAs.
 
 ## Automation
 
