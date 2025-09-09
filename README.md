@@ -8,11 +8,11 @@ Sample LLM prompts designed for **tool consumption** with JSON specifications th
 
 ## What's the Problem?
 
-I'm getting great results from using meta-propmting to create reusable prompts for various tasks, but I find myself doing a good bit of manual copy/paste work across different tools and interfaces.  
+I'm getting great results from using meta-prompting to create reusable prompts for various tasks, but I find myself doing a good bit of manual copy/paste work across different tools and interfaces.  
 
 Gathering all my 'golden' prompts, and a few draft ones, into one place lets me standardize more easily, keep up with versions, and reference across different code projects.
 
-In case this is helpful to anyone to see what's working for me right now, or to collaborate on improving the catalog, this is posted so moare people than myself can see and experiment with it.
+In case this is helpful to anyone to see what's working for me right now, or to collaborate on improving the catalog, this is posted so more people than myself can see and experiment with it.
 
 This hub prioritizes:
 - **JSON-first design**: Executable prompts optimized for programmatic consumption
@@ -199,7 +199,7 @@ All prompts are automatically validated against this schema in CI. See [CONTRIBU
 
 ## Programmatic Usage
 
-**JSON files are designed for direct consumption by tools**. Use them as single source of truth for executable prompts:
+**JSON files are designed for direct consumption by tools**. Use them as the single source of truth for executable prompts:
 
 ### Direct JSON Consumption (Recommended)
 ```bash
@@ -367,12 +367,12 @@ See: `CONTRIBUTING.md`, `docs/writing-style.md` for detailed guidance.
 ## Tooling
 
 ### Search and Discovery
-- `tools/search.py`: Tag/keyword search over prompt metadata from markdown frontmatter
-- `tools/index.json`: Auto-generated registry from markdown frontmatter (for tool discovery)
+- `tools/search.py`: Tag/keyword search over prompt metadata from Markdown front matter
+- `tools/index.json`: Auto-generated registry from Markdown front matter (for tool discovery)
 
 ### Conversion and Build
 - `tools/convert.sh`: Batch convert Markdown prompts to JSON/YAML objects
-- `scripts/build_tools_index.py`: Regenerate tools/index.json from all markdown files
+- `scripts/build_tools_index.py`: Regenerate tools/index.json from all Markdown files
 - `scripts/build_prompts_index.py`: Generate **prompts/index.json** from JSON prompt files
 - `scripts/check_tools_index.sh`: Verify tools/index.json is up to date
 - `scripts/check_prompt_index.sh`: Verify **prompts/index.json** is up to date
