@@ -1,0 +1,20 @@
+name: validate-prompts
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Validate prompts
+        run: |
+          bash scripts/validate_prompts.sh
+          python3 scripts/schema_validate_prompts.py
+          bash scripts/check_prompt_index.sh
+          python3 scripts/detect_stray_prompts.py
