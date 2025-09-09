@@ -1,5 +1,9 @@
 # rad-prompt-hub
 
+![CI](https://img.shields.io/github/actions/workflow/status/raddevops/rad-prompt-hub/validate-prompts.yml?branch=main&label=validate)
+![License](https://img.shields.io/github/license/raddevops/rad-prompt-hub)
+![Version](https://img.shields.io/badge/version-v0.1.0-blue)
+
 Sample LLM prompts designed for **tool consumption** with JSON specifications that tools and applications can consume directly.
 
 ## What's the Problem?
