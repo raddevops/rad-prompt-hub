@@ -114,7 +114,6 @@ See [Changelog](#changelog) section below.
 #### Security
 - Dependabot: Actions + pip updates enabled
 - CodeQL: Analysis workflow on push to `main`
-- Risk assessment scoring in output format
 
 #### Changed  
 - Enhanced error handling for malformed code inputs
