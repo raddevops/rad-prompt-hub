@@ -27,10 +27,10 @@ ensure_milestone() {
     -H "Accept: application/vnd.github+json" \
     "/repos/${ORG_OR_USER}/${REPO}/milestones?state=all&per_page=100")
   local existing
-  existing=$(jq -r --arg t "$title" '.[] | select(.title == $t) | @base64' <<<"$ms_json" || true)
+  existing=$(jq -r --arg t "$title" 'first(.[] | select(.title == $t)) | @base64' <<<"$ms_json" || true)
   if [[ -n "$existing" ]]; then
     local obj state number
-    obj=$(echo "$existing" | head -n1 | base64 --decode)
+    obj=$(echo "$existing" | base64 --decode)
     state=$(jq -r '.state' <<<"$obj")
     number=$(jq -r '.number' <<<"$obj")
     if [[ "$state" != "open" ]]; then
