@@ -1,0 +1,22 @@
+name: nightly-health
+on:
+  schedule:
+    - cron: '15 3 * * *'
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Link check (docs)
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: --verbose --no-progress './**/*.md' --exclude-files '**/prompts/**/*.md' --exclude-mail --max-concurrency 5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Validate prompts schema
+        run: |
+          python3 -m pip install -U pip
+          python3 -m pip install jsonschema
+          python3 scripts/schema_validate_prompts.py
