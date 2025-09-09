@@ -38,19 +38,22 @@ Increment when making **incompatible changes** that break existing usage:
 - `1.5.0 → 2.0.0`: Removed required `{{context}}` parameter
 - `3.1.2 → 4.0.0`: Changed from code review to security audit focus
 
-#### MINOR Version (x.Y.z)  
+#### MINOR Version (x.Y.z)
 Increment when adding **backward-compatible functionality**:
-
 
 **Examples:**
 - `1.2.1 → 1.3.0`: Added optional `{{language}}` parameter
 - `2.0.0 → 2.1.0`: Added risk assessment section to output
 
-- **Typo corrections**: Fixed spelling, grammar, formatting
-**Examples:**
+#### PATCH Version (x.y.Z)
+Increment for **backward-compatible bug fixes and documentation corrections**:
+
+Examples:
 - `1.2.1 → 1.2.2`: Fixed typos in system prompt
+- `2.3.4 → 2.3.5`: Corrected parameter description in documentation
 
 #### Pre-release Versions
+```
 1.3.0-beta.2     # Feature complete, testing
 1.3.0-rc.1       # Release candidate
 ```
@@ -59,7 +62,7 @@ Increment when adding **backward-compatible functionality**:
 Use for tracking build information (ignored in version precedence):
 
 ```
-1.2.1+20231205    # Build date
+1.2.1+20231205       # Build date
 1.2.1+commit.abc123  # Git commit
 ```
 
@@ -80,7 +83,7 @@ Add version field to prompt JSON when needed:
 }
 ```
 
-### Markdown Files  
+### Markdown Files
 Include version in frontmatter and document in About section:
 
 ```markdown
@@ -97,8 +100,10 @@ See [Changelog](#changelog) section below.
 
 ### Changelog Format
 
+```
 #### Added
 - Optional `{{security_focus}}` parameter for targeted security reviews
+```
 ---
 
 ## Release History
@@ -115,7 +120,7 @@ See [Changelog](#changelog) section below.
 - Dependabot: Actions + pip updates enabled
 - CodeQL: Analysis workflow on push to `main`
 
-#### Changed  
+#### Changed
 - Enhanced error handling for malformed code inputs
 - Improved clarity of recommendation prioritization
 

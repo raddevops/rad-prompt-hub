@@ -8,6 +8,9 @@ We welcome contributions to rad-prompt-hub! This guide outlines the process for 
 2. Create a feature branch: `git checkout -b feat/your-feature-slug-YYYYMMDD`
 3. **Set up pre-commit hooks** (recommended): `./tools/setup-pre-commit.sh`
 4. Follow our naming conventions and style guide
+5. Run validation locally (e.g., `scripts/validate_prompts.sh`)
+6. Commit and push your branch
+7. Open a pull request
 
 ## Branch naming convention
 
@@ -27,8 +30,6 @@ Examples:
 Exceptions allowed: `main`, `release/x.y.z`
 
 CI enforces this on pull requests.
-6. Test with our validation tools
-7. Submit a pull request
 
 ## Pre-commit Hooks Setup
 
@@ -438,7 +439,6 @@ This repository uses CODEOWNERS for required reviews. See `CODEOWNERS` at the re
 ## Automation
 
 New issues and pull requests are automatically added to the OSS Readiness project for tracking. See `.github/workflows/project-auto-add.yml`.
-- `README.md`: Main project documentation
 
 ## Schema Extensions
 

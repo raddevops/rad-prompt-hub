@@ -6,7 +6,7 @@ Each prompt follows a **three-file architecture** with strict separation of conc
 - **`prompt-name.md`**: **DOCUMENTATION** - Human context about the prompt (never contains prompt content)  
 - **`test.sh`**: **VALIDATION** - Automated testing and integration examples
 
-**Key Principle**: JSON files are authoritative; markdown is for developer understanding only.
+**Key Principle**: JSON files are authoritative; Markdown is for developer understanding only.
 
 ### Architecture Benefits
 - **No Duplication**: Prompt content exists in exactly one place
@@ -16,9 +16,9 @@ Each prompt follows a **three-file architecture** with strict separation of conc
 
 ### Separation of Concerns
 **JSON files** = Executable content (tools consume these)  
-**MD files** = Documentation about prompts (humans read these for context)
+**Markdown files** = Documentation about prompts (humans read these for context)
 
-This architecture enforces DRY principles: executable content lives in JSON only, never duplicated in markdown.
+This architecture enforces DRY principles: executable content lives in JSON only—never duplicated in Markdown.
 
 ### Categories
 - Engineering
