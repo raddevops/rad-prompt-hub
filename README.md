@@ -424,5 +424,15 @@ MIT — see `LICENSE`.
 
 Portions of this repository were created or assisted by AI systems. Review outputs critically and validate for accuracy, safety, licensing, and fitness for your use case before relying on them. See `docs/oss-public/AI_CONTENT_NOTICE.md`.
 
+## Repository protections
+
+Basic protections are configured in CI. To update repository security settings (alerts, automated fixes, branch protections, required checks) you can use `tools/enable-security.sh`. Example:
+
+```bash
+# Require validate-prompts to pass on main
+OWNER=raddevops REPO=rad-prompt-hub DEFAULT_BRANCH=main \
+  REQUIRED_CHECKS=validate-prompts ./tools/enable-security.sh
+```
+
 ---
 Happy prompting!
