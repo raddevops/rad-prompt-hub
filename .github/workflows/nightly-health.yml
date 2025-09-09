@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Link check (docs)
-        uses: lycheeverse/lychee-action@v1
+        uses: lycheeverse/lychee-action@v2
         with:
           args: --verbose --no-progress './**/*.md' --exclude-files '**/prompts/**/*.md' --exclude-mail --max-concurrency 5
         env:
