@@ -15,7 +15,7 @@ REQUIRED_CHECKS="${REQUIRED_CHECKS:-}"  # CSV, e.g. validate-prompts,codeql
 if [[ -z "$OWNER" || -z "$REPO" ]]; then
   if git remote get-url origin >/dev/null 2>&1; then
     url=$(git remote get-url origin)
-    if [[ "$url" =~ github.com[:/]{1}([^/]+)/([^/.]+) ]]; then
+    if [[ "$url" =~ github.com[:/]([^/]+)/([^/.]+) ]]; then
       OWNER="${OWNER:-${BASH_REMATCH[1]}}"
       REPO="${REPO:-${BASH_REMATCH[2]}}"
     fi
