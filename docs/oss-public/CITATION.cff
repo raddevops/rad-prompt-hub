@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+title: "{{REPO}}"
+message: "Please cite this work if you use it."
+authors:
+  - name: "{{ORG_OR_USER}}"
+version: "0.1.0"
+doi: ""
+date-released: "{{YYYY-MM-DD}}"
+repository-code: "{{REPO_URL}}"
