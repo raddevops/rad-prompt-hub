@@ -1,0 +1,19 @@
+[
+  {"name":"stage/preflight","color":"4B7BEC","description":"Pre-flight & history"},
+  {"name":"stage/hardening","color":"3867D6","description":"Hardening & policies"},
+  {"name":"stage/community","color":"20BF6B","description":"Community health"},
+  {"name":"stage/launch","color":"8854D0","description":"Public launch"},
+  {"name":"stage/postlaunch","color":"A5B1C2","description":"Post-launch polish"},
+  {"name":"type/policy","color":"0A84FF","description":"Policies & governance"},
+  {"name":"type/docs","color":"34C759","description":"Documentation"},
+  {"name":"type/infra","color":"FF9F0A","description":"Infra/repo config"},
+  {"name":"type/ci","color":"FF3B30","description":"CI/automation"},
+  {"name":"type/security","color":"8E8E93","description":"Security"},
+  {"name":"type/license","color":"FFD60A","description":"Licensing"},
+  {"name":"type/cleanup","color":"B2B2B2","description":"Cleanup/refactor"},
+  {"name":"type/prompt-quality","color":"5AC8FA","description":"Prompt/package quality"},
+  {"name":"priority/P0","color":"D0021B","description":"Must-do now"},
+  {"name":"priority/P1","color":"F5A623","description":"High priority"},
+  {"name":"priority/P2","color":"F8E71C","description":"Normal priority"},
+  {"name":"good first issue","color":"66BB6A","description":"Starter-friendly"}
+]
