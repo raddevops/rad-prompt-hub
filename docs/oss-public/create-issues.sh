@@ -21,8 +21,31 @@ ensure_label() {
 
 ensure_milestone() {
   local title="$1"
-  if ! gh milestone list -R "$REPO_SLUG" --state open | awk -F'\t' '{print $1}' | grep -qx "$title"; then
-    gh milestone create "$title" -R "$REPO_SLUG" >/dev/null
+  # Query all milestones (open+closed) and check if title exists
+  local ms_json
+  ms_json=$(gh api \
+    -H "Accept: application/vnd.github+json" \
+    "/repos/${ORG_OR_USER}/${REPO}/milestones?state=all&per_page=100")
+  local existing
+  existing=$(jq -r --arg t "$title" '.[] | select(.title == $t) | @base64' <<<"$ms_json" || true)
+  if [[ -n "$existing" ]]; then
+    local obj state number
+    obj=$(echo "$existing" | head -n1 | base64 --decode)
+    state=$(jq -r '.state' <<<"$obj")
+    number=$(jq -r '.number' <<<"$obj")
+    if [[ "$state" != "open" ]]; then
+      # Reopen closed milestone
+      gh api -X PATCH \
+        -H "Accept: application/vnd.github+json" \
+        "/repos/${ORG_OR_USER}/${REPO}/milestones/${number}" \
+        -f state=open >/dev/null
+    fi
+  else
+    # Create new milestone
+    gh api -X POST \
+      -H "Accept: application/vnd.github+json" \
+      "/repos/${ORG_OR_USER}/${REPO}/milestones" \
+      -f title="$title" >/dev/null
   fi
 }
 
@@ -41,8 +64,8 @@ while IFS= read -r ms || [[ -n "$ms" ]]; do
 done < "$here/milestones.txt"
 
 echo "== Creating issues =="
-# Map title->number to support dependency comments
-declare -A TITLE_TO_NUM
+# Portable title->number map via JSONL temp file
+MAP_FILE="$(mktemp)"
 i=0
 while IFS= read -r line || [[ -n "$line" ]]; do
   [[ -z "$line" ]] && continue
@@ -58,7 +81,7 @@ while IFS= read -r line || [[ -n "$line" ]]; do
   issue_url=$(gh "${args[@]}")
   rm -f "$tmpbody"
   num=$(sed -E 's#.*/issues/([0-9]+).*#\1#' <<<"$issue_url")
-  TITLE_TO_NUM["$title"]="$num"
+  printf '{"title":%s,"number":%s}\n' "$(jq -Rs . <<<"$title")" "$(jq -n --arg n "$num" '$n|tonumber')" >> "$MAP_FILE"
   echo "Created #$num: $title"
   ((i++))
 done < "$here/issues.jsonl"
@@ -70,13 +93,16 @@ while IFS= read -r line || [[ -n "$line" ]]; do
   title=$(jq -r '.title' <<<"$line")
   depends=$(jq -c '.depends_on_titles' <<<"$line")
   [[ "$depends" == "[]" ]] && continue
-  num="${TITLE_TO_NUM[$title]}"
-  for dep_title in $(jq -r '.[]' <<<"$depends"); do
-    dep_num="${TITLE_TO_NUM[$dep_title]:-}"
+  num=$(jq -r --arg t "$title" 'select(.title==$t) | .number' "$MAP_FILE" | head -n1)
+  [[ -z "$num" ]] && continue
+  while IFS= read -r dep_title; do
+    dep_num=$(jq -r --arg t "$dep_title" 'select(.title==$t) | .number' "$MAP_FILE" | head -n1)
     [[ -z "$dep_num" ]] && continue
     gh issue comment -R "$REPO_SLUG" "$num" --body "Depends on #$dep_num — $dep_title"
-  done
+  done < <(jq -r '.[]' <<<"$depends")
 done < "$here/issues.jsonl"
+
+rm -f "$MAP_FILE"
 
 if [[ -n "$PROJECT_BOARD" ]]; then
   echo "== Project board integration (manual example) =="
