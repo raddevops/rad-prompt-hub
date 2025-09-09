@@ -35,43 +35,22 @@ Increment when making **incompatible changes** that break existing usage:
 - **Breaking constraint changes**: New restrictions that invalidate existing inputs
 
 **Examples:**
-- `1.2.1 → 2.0.0`: Changed output from text to structured JSON
 - `1.5.0 → 2.0.0`: Removed required `{{context}}` parameter
 - `3.1.2 → 4.0.0`: Changed from code review to security audit focus
 
 #### MINOR Version (x.Y.z)  
 Increment when adding **backward-compatible functionality**:
 
-- **New optional parameters**: Additional `{{variables}}` with defaults
-- **Enhanced output**: Additional optional fields in responses
-- **Improved capabilities**: Better handling of edge cases, expanded scope
-- **Non-breaking constraint relaxation**: Accepting more input types
 
 **Examples:**
 - `1.2.1 → 1.3.0`: Added optional `{{language}}` parameter
 - `2.0.0 → 2.1.0`: Added risk assessment section to output
-- `1.4.2 → 1.5.0`: Expanded to handle multiple code files
-
-#### PATCH Version (x.y.Z)
-Increment for **backward-compatible bug fixes**:
 
 - **Typo corrections**: Fixed spelling, grammar, formatting
-- **Clarification improvements**: Better wording without semantic changes  
-- **Documentation updates**: Updated examples, usage notes
-- **Minor prompt refinements**: Improved clarity without changing behavior
-
 **Examples:**
 - `1.2.1 → 1.2.2`: Fixed typos in system prompt
-- `2.1.0 → 2.1.1`: Clarified variable placeholder descriptions
-- `1.5.4 → 1.5.5`: Updated example in documentation
-
-### Pre-release and Build Metadata
 
 #### Pre-release Versions
-Use for testing unstable changes before release:
-
-```
-1.3.0-alpha.1    # Early development
 1.3.0-beta.2     # Feature complete, testing
 1.3.0-rc.1       # Release candidate
 ```
@@ -115,20 +94,26 @@ version: "1.2.0"
 
 ## Version History
 See [Changelog](#changelog) section below.
-```
-
-## Changelog Conventions
 
 ### Changelog Format
-Use consistent format in markdown files:
 
-```markdown
-## Changelog
-
-### [2.1.0] - 2025-09-06
 #### Added
 - Optional `{{security_focus}}` parameter for targeted security reviews
-- Risk assessment scoring in output format
+---
+
+## Release History
+
+### [v0.1.0] - 2025-09-09
+#### Added
+- README: Repository protections section and usage of `tools/enable-security.sh`
+- Badges: CI validate status, license, version
+
+#### Changed
+- Protections: Require `validate` status check on `main`; conversation resolution enabled; admins enforced; solo-maintainer friendly (no required approvals)
+
+#### Security
+- Dependabot: Actions + pip updates enabled
+- CodeQL: Analysis workflow on push to `main`
 
 #### Changed  
 - Enhanced error handling for malformed code inputs
