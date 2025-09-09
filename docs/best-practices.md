@@ -1,6 +1,6 @@
 # Best Practices for Reusable Prompts
 
-This guide outlines proven strategies for creating effective, maintainable, and widely applicable LLM prompts.
+This guide outlines strategies for creating effective, maintainable, and reusable LLM prompts.
 
 ## Design Principles
 

@@ -4,11 +4,11 @@ This guide explains how to integrate rad-prompt-hub prompts into tools, applicat
 
 ## Tool-First Design Philosophy
 
-**JSON files** are the single source of truth for executable prompts. Tools and applications should consume these directly. **MD files** provide human context and integration guidance but never contain prompt content.
+**JSON files** are the single source of truth for executable prompts. Tools and applications should consume these directly. **Markdown (.md) files** provide human context and integration guidance and must not duplicate executable prompt content.
 
 ## Architecture: Tool-First Design
 
-**rad-prompt-hub follows a tool-first, JSON-centric architecture:**
+rad-prompt-hub follows a tool-first, JSON-centric architecture:
 
 - **JSON files** = Single source of truth for executable prompts (what tools consume)
 - **MD files** = Documentation ABOUT prompts (what humans read for context)  
@@ -22,8 +22,8 @@ prompts/<category>/<name>/
 └── test.sh        # 🧪 VALIDATION: Tests JSON functionality
 ```
 
-**For tools/automation**: Use `.json` files directly  
-**For understanding**: Read `.md` files for context and integration guidance
+• For tools/automation: Use `.json` files directly  
+• For understanding: Read `.md` files for context and integration guidance
 
 ## Finding the Right Prompt
 
@@ -104,7 +104,7 @@ cat > prompts/category/prompt-name/prompt-name.json << 'EOF'
 EOF
 ```
 
-### 2. Document in MD (About the Prompt)
+### 2. Document in Markdown (About the Prompt)
 Create `prompt-name.md` with context and integration guidance (NOT prompt content):
 ```markdown
 # Prompt Name
@@ -185,7 +185,7 @@ for message in prompt_spec['messages']:
 response = llm_client.chat.completions.create(**prompt_spec)
 ```
 
-### Alternative: Human Copy-Paste (for ad-hoc use)
+### Alternative: Human copy-paste (for ad‑hoc use)
 
 **When using LLM interfaces manually:**
 
@@ -194,7 +194,7 @@ response = llm_client.chat.completions.create(**prompt_spec)
 3. Paste into your LLM interface
 4. Replace any `{{variables}}` with actual values
 
-**Important**: Always reference the JSON file as the authoritative source, even for manual copying.
+Important: Always reference the JSON file as the authoritative source, even for manual copying.
 
 ### Variable Substitution
 

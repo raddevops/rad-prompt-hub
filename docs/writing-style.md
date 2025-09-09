@@ -5,7 +5,7 @@ This guide establishes consistent tone, structure, and formatting conventions fo
 ## Core Principles
 
 ### Clarity Over Cleverness
-Write prompts that are immediately understandable to both humans and LLMs. Avoid jargon, metaphors, or cultural references that might confuse AI models.
+Write prompts that are immediately understandable to both humans and LLMs. Avoid jargon, metaphors, or cultural references that can confuse models.
 
 ### Deterministic Language
 Use precise, unambiguous instructions that produce consistent results across different LLM implementations.
@@ -43,7 +43,7 @@ When assigning roles, be specific and professional:
 ## Structure Standards
 
 ### Section Order
-All prompts must follow this exact structure:
+All prompts should follow this structure:
 
 1. **YAML Frontmatter** (metadata)
 2. **Purpose** (2-5 sentences)
@@ -55,7 +55,7 @@ All prompts must follow this exact structure:
 ### Section Formatting
 
 #### Purpose Section
-- Start with active voice: "Provide...", "Generate...", "Analyze..."
+- Start with active voice: "Provide…", "Generate…", "Analyze…"
 - Include context: when and why to use this prompt
 - Mention key constraints or scope limitations
 - Keep to 2-5 sentences maximum

@@ -1,5 +1,0 @@
-M1: Pre-flight & History
-M2: Hardening & Policies
-M3: Community Health
-M4: Public Launch
-M5: Post-launch Polish

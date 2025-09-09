@@ -31,7 +31,7 @@ Analyzes GitHub issues patterns to identify repetitive workflows, creates automa
 
 | Parameter | Value | Reasoning |
 |-----------|--------|-----------|
-| `reasoning_effort` | `"high"` | High reasoning effort essential for complex system architecture analysis, multi-phase workflow design, prompt orchestration planning, and comprehensive issue pattern recognition requiring deep structural reasoning |
+| `reasoning_effort` | `"high"` | High reasoning effort essential for complex system architecture analysis, multi-phase workflow design, prompt orchestration planning, and thorough issue pattern recognition requiring deep structural reasoning |
 | `verbosity` | `"low"` | Low verbosity ensures concise, actionable system implementation artifacts optimized for execution while maintaining technical precision without verbose explanations |
 
 ### Workflow Phases
@@ -42,7 +42,7 @@ Analyzes GitHub issues patterns to identify repetitive workflows, creates automa
 - Identify automation opportunities and missing components
 
 **2. System Design**  
-- Create comprehensive automation architecture
+- Create a complete automation architecture
 - Plan workflow orchestration and component integration
 - Design system following repository patterns and standards
 
@@ -166,14 +166,14 @@ result = model.call(system_builder_json, variables={
 - **Integration Challenges**: Multi-repository systems may require phased implementation and testing
 - **API Limitations**: GitHub rate limits and permissions may constrain automation capabilities
 - **Human Oversight**: Automation should enhance rather than replace critical decision points and review processes
-- **Maintenance Burden**: System complexity requires comprehensive documentation and sustainable maintenance approaches
+- **Maintenance Burden**: System complexity requires clear documentation and sustainable maintenance approaches
 
 ### Quality Assurance
 
 **Schema Validation:** ✅ Passes `scripts/schema_validate_prompts.py`  
 **JSON Structure:** ✅ Valid minified format for LLM optimization  
 **Backward Compatibility:** ✅ Preserves existing workflow patterns  
-**Test Coverage:** ✅ Comprehensive validation via `test.sh`
+**Test Coverage:** ✅ Full validation via `test.sh`
 
 ### Testing & Validation
 
@@ -186,4 +186,4 @@ Test with sample issue data to verify system analysis and component creation cap
 
 ---
 
-**Note:** This markdown provides comprehensive documentation. The executable prompt logic resides in `issue-workflow-system-builder.json`.
+**Note:** This markdown documents usage. The executable prompt logic resides in `issue-workflow-system-builder.json`.

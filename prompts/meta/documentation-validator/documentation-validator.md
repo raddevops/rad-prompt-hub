@@ -14,7 +14,7 @@ last_updated: "2025-09-06"
 **Target Model:** gpt-5-thinking  
 
 ### Purpose
-Validates consistency between JSON prompt specifications and their corresponding markdown documentation in the repository's 3-file structure. Generates comprehensive validation reports with specific remediation steps to ensure production-ready documentation quality and JSON ↔ markdown alignment.
+Validates consistency between JSON prompt specifications and their corresponding markdown documentation in the repository's 3-file structure. Generates detailed validation reports with specific remediation steps to ensure production-ready documentation quality and JSON ↔ markdown alignment.
 
 ### Input Variables
 
@@ -30,7 +30,7 @@ Validates consistency between JSON prompt specifications and their corresponding
 
 | Parameter | Value | Reasoning |
 |-----------|--------|-----------|
-| `reasoning_effort` | `"high"` | High reasoning effort required for comprehensive JSON vs markdown consistency analysis, placeholder validation, parameter alignment, and capability verification requiring deep structural analysis |
+| `reasoning_effort` | `"high"` | High reasoning effort required for JSON vs markdown consistency analysis, placeholder validation, parameter alignment, and capability verification requiring deep structural analysis |
 | `verbosity` | `"medium"` | Medium verbosity needed for detailed validation reports with specific findings, gaps, and actionable remediation guidance while maintaining report clarity and usability |
 
 ### Key Validation Areas
@@ -137,7 +137,7 @@ result = model.call(validator_json, variables={
 - **Subjective Assessment**: Documentation clarity ratings depend on intended audience context and expertise levels
 - **Incomplete Input**: Missing or partial files result in limited validation requiring additional analysis cycles
 - **Context Dependency**: Version validation requires organizational versioning practices and historical context understanding
-- **Quality Variance**: Automated assessments should supplement human review for comprehensive quality assurance
+- **Quality Variance**: Automated assessments should supplement human review for complete quality assurance
 
 ### Integration Examples
 
@@ -161,7 +161,7 @@ done
 **Schema Validation:** ✅ Passes `scripts/schema_validate_prompts.py`  
 **JSON Structure:** ✅ Valid minified format for LLM optimization  
 **Backward Compatibility:** ✅ Preserves existing validation patterns  
-**Test Coverage:** ✅ Comprehensive validation via `test.sh`
+**Test Coverage:** ✅ Full validation via `test.sh`
 
 ### Testing & Validation
 
@@ -174,4 +174,4 @@ Test with sample prompt folders to verify validation accuracy and report quality
 
 ---
 
-**Note:** This markdown provides comprehensive documentation. The executable prompt logic resides in `documentation-validator.json`.
+**Note:** This markdown documents usage. The executable prompt logic resides in `documentation-validator.json`.
