@@ -136,4 +136,4 @@ gh api /repos/actions/checkout/commits/v4 | jq -r '.sha[:40]'
 - Zero-day vulnerabilities in dependencies
 
 ### Next Review Date
-Schedule next comprehensive security review for: **2024-12-10**
+Schedule next comprehensive security review for: **<REVIEW_DATE>**  <!-- Update this during each review -->
