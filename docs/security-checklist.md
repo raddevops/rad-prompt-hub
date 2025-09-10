@@ -91,7 +91,7 @@ OWNER=raddevops REPO=rad-prompt-hub ./enable-security.sh
 ### Manual Checks
 ```bash
 # Check workflow syntax
-python3 -c "import yaml; [yaml.safe_load(open(f)) for f in ['.github/workflows/*.yml']]"
+python3 -c "import glob, yaml; [yaml.safe_load(open(f)) for f in glob.glob('.github/workflows/*.yml')]"
 
 # Validate prompt schemas
 python3 scripts/schema_validate_prompts.py
