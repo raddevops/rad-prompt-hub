@@ -35,6 +35,26 @@ All other security controls remain in place:
 - ✅ **Vulnerability Alerts**: Notifications for security issues
 - ✅ **Dependency Review**: Automated scanning of new dependencies
 
+## Quick Fix Instructions
+
+To resolve PR approval blocking issues immediately:
+
+```bash
+# Navigate to your repository
+cd /path/to/rad-prompt-hub
+
+# Apply the updated security configuration
+OWNER=raddevops REPO=rad-prompt-hub ./tools/enable-security.sh
+
+# Verify the configuration
+./tools/test-security-config.sh
+```
+
+After running these commands, you should be able to:
+1. Approve your own PRs as the code owner
+2. Merge PRs after approval (subject to passing status checks)
+3. Maintain all existing security protections
+
 ## Security Risk Assessment
 
 ### Risk Mitigation Achieved
