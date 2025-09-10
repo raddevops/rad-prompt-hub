@@ -19,13 +19,15 @@ DEFAULT_BRANCH="${DEFAULT_BRANCH:-main}"
 # Each name should match a workflow defined in .github/workflows/ (see workflow 'name' field).
 # If you add, remove, or rename workflows, update this list accordingly.
 # Checks:
-#   - validate: Runs basic validation (see .github/workflows/validate.yml)
-#   - Analyze: Runs code analysis (see .github/workflows/Analyze.yml)
-#   - gitleaks: Scans for secrets (see .github/workflows/gitleaks.yml)
-#   - validate-prompts: Validates prompt files (see .github/workflows/validate-prompts.yml)
-#   - branch-name-policy: Enforces branch naming (see .github/workflows/branch-name-policy.yml)
-#   - dependency-review: Reviews dependencies for vulnerabilities (see .github/workflows/dependency-review.yml)
-REQUIRED_CHECKS="${REQUIRED_CHECKS:-validate,Analyze,gitleaks,validate-prompts,branch-name-policy,dependency-review}"
+#   - validate-prompts: Validates prompt files (workflow name: validate-prompts)
+#   - Prompt Guardrails: Extended prompt guardrails (workflow name: Prompt Guardrails)
+#   - Analyze: CodeQL analysis job (workflow name: codeql, job: Analyze)
+#   - gitleaks: Secret scanning job (workflow name: secrets-scan, job: gitleaks)
+#   - Dependency Review: Dependency review (workflow name: Dependency Review)
+# NOTE: Branch protection contexts must match the exact check names reported by GitHub.
+# For matrix jobs or named jobs, GitHub reports the check as "<workflow name> / <job name>".
+# Here we use the human-friendly names as they appear in the Checks tab.
+REQUIRED_CHECKS="${REQUIRED_CHECKS:-validate-prompts,Prompt Guardrails,Analyze,gitleaks,Dependency Review}"
 
 # Infer owner/repo from origin if not provided
 if [[ -z "$OWNER" || -z "$REPO" ]]; then
