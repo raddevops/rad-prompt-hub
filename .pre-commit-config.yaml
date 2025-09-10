@@ -9,3 +9,27 @@ repos:
         pass_filenames: false
         always_run: false
         description: Ensures last_updated field is current when prompt body content changes
+        
+      - id: check-workflow-security
+        name: Check GitHub Actions security
+        entry: bash
+        args: ['-c', 'if git diff --cached --name-only | grep -q "\.github/workflows/.*\.yml$"; then echo "⚠️  Workflow files changed. Review security: actions pinned to SHAs, minimal permissions, no pull_request_target with write access"; fi']
+        language: system
+        pass_filenames: false
+        always_run: false
+        files: ^\.github/workflows/.*\.yml$
+        description: Security reminder for workflow changes
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-yaml
+        args: ['--unsafe']
+        files: ^\.github/workflows/.*\.yml$
+        description: Validate GitHub Actions workflow syntax
+        
+      - id: detect-private-key
+        description: Detect private keys in commits
+        
+      - id: check-merge-conflict
+        description: Check for merge conflict markers

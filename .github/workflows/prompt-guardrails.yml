@@ -13,15 +13,18 @@ on:
       - 'scripts/**'
       - '.github/workflows/prompt-guardrails.yml'
 
+permissions:
+  contents: read
+
 jobs:
   validate-prompts:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3 # v5.2.0
         with:
           python-version: '3.11'
 
@@ -53,7 +56,7 @@ jobs:
     if: github.event_name == 'pull_request'
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - name: Check branch naming convention
         run: |
           bash scripts/check_branch_name.sh "${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}" 

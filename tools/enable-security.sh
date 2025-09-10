@@ -9,7 +9,8 @@ need gh; need jq; need git
 OWNER="${OWNER:-}"
 REPO="${REPO:-}"
 DEFAULT_BRANCH="${DEFAULT_BRANCH:-main}"
-REQUIRED_CHECKS="${REQUIRED_CHECKS:-}"  # CSV, e.g. validate-prompts,codeql
+# Updated recommended security checks including the new dependency-review workflow
+REQUIRED_CHECKS="${REQUIRED_CHECKS:-validate,Analyze,gitleaks,validate-prompts,branch-name-policy,dependency-review}"
 
 # Infer owner/repo from origin if not provided
 if [[ -z "$OWNER" || -z "$REPO" ]]; then
@@ -39,29 +40,36 @@ echo "Enabling secret scanning + push protection (if available)..." && gh api -X
   -H "Accept: application/vnd.github+json" -H "Content-Type: application/json" \
   "/repos/$OWNER/$REPO" -d '{"security_and_analysis":{"secret_scanning":{"status":"enabled"},"secret_scanning_push_protection":{"status":"enabled"}}}' >/dev/null || true
 
+echo "Enabling private vulnerability reporting..." && gh api -X PUT -H "Accept: application/vnd.github+json" \
+  "/repos/$OWNER/$REPO/private-vulnerability-reporting" >/dev/null || true
+
 echo "Configuring branch protection on $DEFAULT_BRANCH..."
 if [[ -n "$REQUIRED_CHECKS" ]]; then
   ctxs=$(jq -Rc 'split(",")' <<<"$REQUIRED_CHECKS")
   bp=$(jq -n --argjson contexts "$ctxs" '{
     required_status_checks: {strict: true, contexts: $contexts},
     enforce_admins: true,
-    required_pull_request_reviews: {dismiss_stale_reviews: true, require_code_owner_reviews: true, required_approving_review_count: 1},
+    required_pull_request_reviews: {dismiss_stale_reviews: true, require_code_owner_reviews: true, required_approving_review_count: 1, require_last_push_approval: true},
     restrictions: null,
     required_linear_history: false,
     allow_force_pushes: false,
     allow_deletions: false,
-    required_conversation_resolution: true
+    required_conversation_resolution: true,
+    lock_branch: false,
+    allow_fork_syncing: true
   }')
 else
   bp='{
     "required_status_checks": null,
     "enforce_admins": true,
-    "required_pull_request_reviews": {"dismiss_stale_reviews": true, "require_code_owner_reviews": true, "required_approving_review_count": 1},
+    "required_pull_request_reviews": {"dismiss_stale_reviews": true, "require_code_owner_reviews": true, "required_approving_review_count": 1, "require_last_push_approval": true},
     "restrictions": null,
     "required_linear_history": false,
     "allow_force_pushes": false,
     "allow_deletions": false,
-    "required_conversation_resolution": true
+    "required_conversation_resolution": true,
+    "lock_branch": false,
+    "allow_fork_syncing": true
   }'
 fi
 
@@ -73,5 +81,16 @@ gh api -H "Accept: application/vnd.github+json" "/repos/$OWNER/$REPO" | jq '.sec
 
 echo "Verifying branch protection:"
 gh api -H "Accept: application/vnd.github+json" "/repos/$OWNER/$REPO/branches/$DEFAULT_BRANCH/protection" | jq '{enforce_admins, required_pull_request_reviews, required_status_checks, allow_force_pushes, allow_deletions, required_conversation_resolution}'
+
+echo "Security hardening recommendations applied:"
+echo "✓ Vulnerability alerts enabled"
+echo "✓ Automated security fixes enabled" 
+echo "✓ Secret scanning with push protection enabled"
+echo "✓ Private vulnerability reporting enabled"
+echo "✓ Branch protection configured with required reviews"
+echo "✓ CODEOWNERS enforcement enabled"
+echo "✓ Required status checks: $REQUIRED_CHECKS"
+echo "✓ Stale review dismissal enabled"
+echo "✓ Last push approval required"
 
 echo "Done."

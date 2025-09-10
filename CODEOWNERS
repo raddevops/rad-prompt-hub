@@ -1,1 +1,22 @@
+# Global ownership - all files require review from raddevops
 * @raddevops
+
+# Security-critical files require additional review
+/.github/ @raddevops
+/tools/enable-security.sh @raddevops
+/scripts/ @raddevops
+
+# Configuration files
+/.pre-commit-config.yaml @raddevops
+/.gitignore @raddevops
+/CODEOWNERS @raddevops
+
+# Documentation that affects security or governance
+/CONTRIBUTING.md @raddevops
+/.github/SECURITY.md @raddevops
+/docs/GOVERNANCE.md @raddevops
+
+# Core prompt infrastructure
+/prompts/index.json @raddevops
+/scripts/build_prompts_index.py @raddevops
+/scripts/schema_validate_prompts.py @raddevops
