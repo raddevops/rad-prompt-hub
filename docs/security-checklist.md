@@ -42,15 +42,15 @@ Review and update SHA pins quarterly:
 
 | Action | Current SHA | Purpose | Last Updated |
 |--------|-------------|---------|--------------|
-| actions/checkout | 692973e3d937129bcbf40652eb9f2f61becf3332 | Repository checkout | 2024-09-10 |
-| actions/setup-python | f677139bbe7f9c59b41e40162b753c062f5d49a3 | Python setup | 2024-09-10 |
-| actions/labeler | 8558fd74291d67161a8a78ce36a881fa63b766a9 | PR labeling | 2024-09-10 |
-| github/codeql-action/init | 8214744c546c1e5c8f03dde8fab3a7353211988d | CodeQL analysis | 2024-09-10 |
-| github/codeql-action/analyze | 8214744c546c1e5c8f03dde8fab3a7353211988d | CodeQL analysis | 2024-09-10 |
-| gitleaks/gitleaks-action | cb7149b9db0aeca090dc68d348861ad4b72d0e67 | Secret scanning | 2024-09-10 |
-| lycheeverse/lychee-action | 2b973e86fc7b1f6b36a93795fe2c9c6ae1118621 | Link checking | 2024-09-10 |
-| actions/add-to-project | 244f685bbc3b7adfa8466e08b698b5577571133e | Project management | 2024-09-10 |
-| actions/dependency-review-action | 5a2ce3f5b92ee19cbb1541a4984c76d921601d7c | Dependency review | 2024-09-10 |
+| actions/checkout | 692973e3d937129bcbf40652eb9f2f61becf3332 | Repository checkout | 2024-06-01 |
+| actions/setup-python | f677139bbe7f9c59b41e40162b753c062f5d49a3 | Python setup | 2024-06-01 |
+| actions/labeler | 8558fd74291d67161a8a78ce36a881fa63b766a9 | PR labeling | 2024-06-01 |
+| github/codeql-action/init | 8214744c546c1e5c8f03dde8fab3a7353211988d | CodeQL analysis | 2024-06-01 |
+| github/codeql-action/analyze | 8214744c546c1e5c8f03dde8fab3a7353211988d | CodeQL analysis | 2024-06-01 |
+| gitleaks/gitleaks-action | cb7149b9db0aeca090dc68d348861ad4b72d0e67 | Secret scanning | 2024-06-01 |
+| lycheeverse/lychee-action | 2b973e86fc7b1f6b36a93795fe2c9c6ae1118621 | Link checking | 2024-06-01 |
+| actions/add-to-project | 244f685bbc3b7adfa8466e08b698b5577571133e | Project management | 2024-06-01 |
+| actions/dependency-review-action | 5a2ce3f5b92ee19cbb1541a4984c76d921601d7c | Dependency review | 2024-06-01 |
 
 ## Security Monitoring
 
