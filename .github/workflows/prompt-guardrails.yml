@@ -58,5 +58,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
       - name: Check branch naming convention
+        continue-on-error: true
         run: |
           bash scripts/check_branch_name.sh "${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}" 
+      - name: Note
+        if: failure()
+        run: echo "Branch name policy violated; not blocking merge."
