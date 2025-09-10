@@ -53,9 +53,10 @@ echo "Enabling vulnerability alerts..." && gh api -X PUT -H "Accept: application
 echo "Enabling automated security fixes..." && gh api -X PUT -H "Accept: application/vnd.github+json" \
   "/repos/$OWNER/$REPO/automated-security-fixes" >/dev/null || true
 
-echo "Enabling secret scanning + push protection (if available)..." && gh api -X PATCH \
-  -H "Accept: application/vnd.github+json" -H "Content-Type: application/json" \
-  "/repos/$OWNER/$REPO" -d '{"security_and_analysis":{"secret_scanning":{"status":"enabled"},"secret_scanning_push_protection":{"status":"enabled"}}}' >/dev/null || true
+echo "Enabling secret scanning + push protection (if available)..." && \
+  printf '%s' '{"security_and_analysis":{"secret_scanning":{"status":"enabled"},"secret_scanning_push_protection":{"status":"enabled"}}}' | \
+  gh api -X PATCH -H "Accept: application/vnd.github+json" \
+    "/repos/$OWNER/$REPO" --input - >/dev/null || true
 
 echo "Enabling private vulnerability reporting..." && gh api -X PUT -H "Accept: application/vnd.github+json" \
   "/repos/$OWNER/$REPO/private-vulnerability-reporting" >/dev/null || true
@@ -90,8 +91,8 @@ else
   }'
 fi
 
-gh api -X PUT -H "Accept: application/vnd.github+json" -H "Content-Type: application/json" \
-  "/repos/$OWNER/$REPO/branches/$DEFAULT_BRANCH/protection" -d "$bp" >/dev/null || true
+printf '%s' "$bp" | gh api -X PUT -H "Accept: application/vnd.github+json" \
+  "/repos/$OWNER/$REPO/branches/$DEFAULT_BRANCH/protection" --input - >/dev/null || true
 
 echo "Verifying security settings:"
 gh api -H "Accept: application/vnd.github+json" "/repos/$OWNER/$REPO" | jq '.security_and_analysis'
