@@ -430,12 +430,21 @@ Portions of this repository were created or assisted by AI systems. Review outpu
 
 ## Repository protections
 
-Basic protections are configured in CI. To update repository security settings (alerts, automated fixes, branch protections, required checks) you can use `tools/enable-security.sh`. Example:
+Basic protections are configured in CI. To update repository security settings (alerts, automated fixes, branch protections, required checks) you can use `tools/enable-security.sh`. 
+
+**Note**: The security configuration is optimized for single code owner repositories to prevent approval deadlocks while maintaining strong protection. See `docs/SECURITY-SINGLE-OWNER.md` for details.
+
+Example:
 
 ```bash
-# Require validate-prompts to pass on main
+# Apply security settings with required status checks
 OWNER=raddevops REPO=rad-prompt-hub DEFAULT_BRANCH=main \
   REQUIRED_CHECKS=validate-prompts ./tools/enable-security.sh
+```
+
+Test the configuration:
+```bash
+./tools/test-security-config.sh
 ```
 
 ---
