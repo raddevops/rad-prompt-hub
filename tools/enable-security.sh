@@ -9,7 +9,16 @@ need gh; need jq; need git
 OWNER="${OWNER:-}"
 REPO="${REPO:-}"
 DEFAULT_BRANCH="${DEFAULT_BRANCH:-main}"
-# Updated recommended security checks including the new dependency-review workflow
+# List of required status checks for branch protection.
+# Each name should match a workflow defined in .github/workflows/ (see workflow 'name' field).
+# If you add, remove, or rename workflows, update this list accordingly.
+# Checks:
+#   - validate: Runs basic validation (see .github/workflows/validate.yml)
+#   - Analyze: Runs code analysis (see .github/workflows/Analyze.yml)
+#   - gitleaks: Scans for secrets (see .github/workflows/gitleaks.yml)
+#   - validate-prompts: Validates prompt files (see .github/workflows/validate-prompts.yml)
+#   - branch-name-policy: Enforces branch naming (see .github/workflows/branch-name-policy.yml)
+#   - dependency-review: Reviews dependencies for vulnerabilities (see .github/workflows/dependency-review.yml)
 REQUIRED_CHECKS="${REQUIRED_CHECKS:-validate,Analyze,gitleaks,validate-prompts,branch-name-policy,dependency-review}"
 
 # Infer owner/repo from origin if not provided
