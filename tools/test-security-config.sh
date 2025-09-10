@@ -5,7 +5,7 @@ set -euo pipefail
 echo "Testing branch protection configuration JSON..."
 
 # Test the JSON structure without making API calls
-REQUIRED_CHECKS="validate,Analyze,gitleaks,validate-prompts,branch-name-policy,dependency-review"
+REQUIRED_CHECKS="validate,analyze,gitleaks,validate-prompts,branch-name-policy,dependency-review"
 
 ctxs=$(jq -Rc 'split(",")' <<<"$REQUIRED_CHECKS")
 bp=$(jq -n --argjson contexts "$ctxs" '{
