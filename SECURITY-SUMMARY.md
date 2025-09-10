@@ -78,5 +78,5 @@ Verify at: `https://github.com/raddevops/rad-prompt-hub/settings/security`
 
 ---
 **Security Review Date**: 2024-09-10  
-**Next Review**: 2024-12-10  
+**Next Review**: _Quarterly, update to next date after each review (e.g., [last review date + 3 months])_  
 **Risk Level**: LOW ✅
