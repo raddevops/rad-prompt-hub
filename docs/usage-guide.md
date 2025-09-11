@@ -304,6 +304,10 @@ Base: "You are a senior software engineer"
 + Constraints: "focusing on authentication and data validation"
 ```
 
+### End-to-End Orchestrated Workflow Example
+
+For a concrete multi-prompt, phase-based orchestration (issue triage → gap detection → improvement planning → documentation updates), see the dedicated doc: [Multi-Prompt Workflow Example](multi-prompt-workflow-example.md). It demonstrates how multiple JSON prompt specifications (e.g., workflow orchestrator + documentation validator + promptsmith) can be chained with clear hand-offs, guarded variable substitution, and validation checkpoints.
+
 ## Version Management
 
 ### Tracking Changes
@@ -393,42 +397,6 @@ Choose integration approach based on your needs:
 | Development | Git submodule | Git, IDE |
 | CI/CD | Artifact package | Build tools |
 | Automation | API integration | Scripts, workflows |
-
-## DRY Compliance & Legacy Files
-
-### Files Requiring Remediation
-
-**The following MD files violate DRY principles by containing executable prompt content. Remediation is tracked below with priority, ownership, and target completion date:**
-
-| File | Issue | Priority | Owner | Target Completion Date |
-|------|-------|----------|-------|-----------------------|
-| `prompts/product/user-story/user-story.md` | Contains "## Prompt" section with prompt instructions | P0 | @product-team | 2024-07-01 |
-| `prompts/product/acceptance-criteria/acceptance-criteria.md` | Contains prompt logic duplicated from JSON | P1 | @product-team | 2024-07-08 |
-| `prompts/product/requirements-draft/requirements-draft.md` | Includes executable content | P2 | @product-team | 2024-07-15 |
-### Migration Guidelines
-
-When updating legacy MD files:
-
-1. **Verify JSON is complete** - Ensure the JSON file contains all executable content
-2. **Remove duplicate content** - Delete prompt instructions, logic, and format specifications from MD
-3. **Keep documentation** - Retain purpose, usage examples, parameter guidance, and integration notes
-4. **Update references** - Point users to JSON file as authoritative source
-
-### Validation
-
-Use these commands to identify potential DRY violations:
-
-```bash
-# Find MD files with prompt sections (potential violations)
-grep -r "## Prompt" prompts/ --include="*.md"
-
-# Find MD files with format specifications
-grep -r "OUTPUT FORMAT\|RESPONSE FORMAT" prompts/ --include="*.md"
-
-# Check for lines that may contain executable variable syntax (may still produce false positives; review manually)
-grep -r "{{[a-zA-Z0-9_]+}}" prompts/ --include="*.md"
-# Note: This command may match legitimate documentation. Review results manually to distinguish violations from proper usage.
-```
 
 ---
 
