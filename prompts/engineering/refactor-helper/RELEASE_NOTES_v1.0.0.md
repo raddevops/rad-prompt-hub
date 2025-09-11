@@ -1,3 +1,11 @@
+---
+title: "Refactor Helper v1.0.0 Release Notes"
+tags: ["engineering", "refactoring", "release-notes", "documentation"]
+author: "raddevops"
+version: "1.0.0"
+last_updated: "2025-09-11"
+---
+
 # Refactor Helper v1.0.0 Release Notes
 
 ## Overview
