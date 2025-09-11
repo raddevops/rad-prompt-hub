@@ -192,7 +192,6 @@ To keep this README lean, detailed usage, integration patterns, variable substit
 
 - `docs/usage-guide.md` (primary end‑to‑end guide: discovery, integration, creation, chaining, troubleshooting, security, performance)
 - `docs/PROMPTS_OVERVIEW.md` (three‑file architecture + DRY enforcement + remediation checklist)
-- `docs/writing-style.md` (style & tone for human-facing docs)
 - `CONTRIBUTING.md` (contribution flow & validation requirements)
 
 Quick start recap:
@@ -238,7 +237,7 @@ bash prompts/<category>/<prompt-name>/test.sh
 
   
 
-See: `CONTRIBUTING.md`, `docs/writing-style.md` for detailed guidance.
+See: `CONTRIBUTING.md` for detailed guidance.
 
   
 
