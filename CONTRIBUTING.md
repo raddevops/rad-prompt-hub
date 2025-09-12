@@ -429,7 +429,6 @@ Only use prompt-scoped tags when a prompt is versioned independently for externa
 Help improve our guides:
 
 - `docs/usage-guide.md`: How to use prompts effectively
-- `docs/writing-style.md`: Style and tone guidelines
 - `docs/best-practices.md`: Prompt engineering best practices
 
 ## Governance and Merge Policy

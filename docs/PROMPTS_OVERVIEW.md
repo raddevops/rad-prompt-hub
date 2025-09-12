@@ -47,10 +47,10 @@ This architecture enforces DRY principles: executable content lives in JSON only
 - verbosity: keep low; raise only when longer narrative needed.
 
 ### Tooling
-- `scripts/validate_prompts.sh` basic structural checks.
-- `scripts/schema_validate_prompts.py` schema + pairing checks.
-- `scripts/build_prompts_index.py` generates `prompts/index.json`.
-- CI workflow `.github/workflows/prompt-guardrails.yml` runs all of the above.
+- `scripts/validate_prompts.sh`: Structural + sibling doc presence checks (calls schema validator per file).
+- `scripts/schema_validate_prompts.py`: Lightweight schema + pairing validation (JSON keys + `.md` sibling).
+- `scripts/build_prompts_index.py`: Manually regenerate `prompts/index.json` (hash + model metadata). Run this after adding or changing prompt JSON specs; it is not auto-run in CI.
+- CI workflows (`prompt-guardrails.yml`, `validate-prompts.yml`): Run structural + schema + index consistency checks (`check_prompt_index.sh`, `check_tools_index.sh`, stray detection). They validate that `prompts/index.json` matches files but do not rebuild it for you.
 
 ### Deprecated
 - `prompts_json/` (removed). Do not reintroduce; CI will fail PRs if present.
