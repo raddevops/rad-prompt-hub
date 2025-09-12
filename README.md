@@ -115,7 +115,7 @@ prompts/engineering/code-review/
 	
 	- Human-readable guidance for developers
 	
-	- Does NOT contain prompt content (prevents duplication)
+    - Does NOT contain prompt content (prevents duplication)
 
 - **`test.sh`**: Validation script demonstrating integration patterns
 
