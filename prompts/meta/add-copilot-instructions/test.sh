@@ -241,3 +241,36 @@ fi
 echo ""
 echo "✅ Add-copilot-instructions prompt validation complete!"
 echo "📊 Validated: JSON schema, codebase audit methodology, security guardrails, JSON-only output contract, minification, quality assurance"
+
+echo ""
+echo "🆕 Fast & Safe Behaviors & Version checks..."
+
+# Validate version bump
+VERSION=$(jq -r '.version // "unknown"' "$PROMPT_FILE")
+if [ "$VERSION" != "2.1.0" ]; then
+    echo "❌ Version mismatch (expected 2.1.0, got $VERSION)"
+    exit 1
+fi
+echo "✅ Version is 2.1.0"
+
+# Validate presence of Fast & Safe Behaviors header
+if echo "$SYSTEM_CONTENT" | grep -q -i "Fast & Safe Behaviors"; then
+    echo "✅ Fast & Safe Behaviors header present"
+else
+    echo "❌ Missing Fast & Safe Behaviors header"
+    exit 1
+fi
+
+# Validate presence of several representative behaviors
+REP_BEHAVIORS=("Plan-Then-Act" "Deterministic Output Contract" "Output Self-Test")
+for beh in "${REP_BEHAVIORS[@]}"; do
+    if echo "$SYSTEM_CONTENT" | grep -q "$beh"; then
+        echo "✅ Behavior present: $beh"
+    else
+        echo "❌ Missing behavior: $beh"
+        exit 1
+    fi
+done
+
+echo ""
+echo "✅ Extended validation: version & Fast & Safe Behaviors confirmed"
