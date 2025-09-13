@@ -206,6 +206,80 @@ This validates:
 - **Version format**: Semantic versioning if `version` field is present
 - **File pairing**: Every `.json` must have a corresponding `.md` file
 
+### Prompt Linting & Schema Enforcement
+
+We provide an opinionated lint script that layers **custom repository rules** on top of the canonical schema. Run it before every commit touching prompts:
+
+```bash
+bash scripts/lint_prompts.sh
+```
+
+What it does (in order):
+1. Discovers all prompt JSON specs under `prompts/**/<name>/<name>.json`
+2. Runs full schema validation (`scripts/schema_validate_prompts.py`)
+3. Applies custom lint rules:
+   - Minification: JSON prompt files should be ≤ 2 lines (token efficiency)
+   - Required keys present: `target_model`, `parameters.reasoning_effort`, `parameters.verbosity`, `messages`
+   - Allowed message roles: `system`, `user` only (no `assistant` authoring leakage)
+   - Semantic version regex (if `version` present)
+   - No trailing spaces (single‑line files)
+4. Produces a consolidated pass/fail report
+
+Sample successful output:
+```
+🔍 Collecting prompt JSON files...
+✅ Found 23 prompt files
+🔍 Running schema validation (python)...
+✅ Schema validation passed
+🔍 Applying custom lint rules...
+✅ All 23 prompt files passed custom lint rules
+```
+
+Failure example (truncated):
+```
+... version not valid semver -> 1.0
+... missing parameters.reasoning_effort
+❌ Lint failed (2 issues across 1 files)
+```
+
+Install prerequisites (if missing):
+```bash
+brew install jq            # macOS
+python3 --version          # Ensure Python 3 available
+```
+
+Add an optional git alias for convenience:
+```bash
+git config alias.lint-prompts '!bash scripts/lint_prompts.sh'
+```
+
+#### (Optional) Local Pre-commit Hook Integration
+
+We intentionally keep the lint script out of the default `.pre-commit-config.yaml` to preserve fast commits for docs‑only edits. If you want stricter local enforcement, append this to `.pre-commit-config.yaml` under `repos: - repo: local`:
+
+```yaml
+  - id: prompt-lint
+    name: Prompt JSON lint (schema + custom rules)
+    entry: bash scripts/lint_prompts.sh
+    language: system
+    pass_filenames: false
+    always_run: false
+    files: ^prompts/.*\.json$
+```
+
+Then reinstall hooks:
+```bash
+pre-commit install
+```
+
+#### When to Run
+- Before opening a PR that changes any prompt JSON
+- After rebasing if you pulled in upstream prompt changes
+- In CI (future enhancement) — today CI already runs schema & index checks; we may extend it to call `lint_prompts.sh` for unified reporting.
+
+#### Rationale
+Consistent minified JSON + enforced structural contract reduces diff noise, improves cache efficiency, and prevents subtle drift (e.g., accidental role additions or missing reasoning parameters) before prompts reach production workflows.
+
 ### Full Validation Suite
 
 Run all validation checks (same as CI):

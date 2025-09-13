@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# NOTE (follow-up idea): We may optionally integrate this script into CI or a pre-commit hook.
+# Rationale: unify schema + custom rule enforcement and surface consistent reporting.
+# Decision deferred to keep fast iteration for docs-only changes. Contributors can opt-in locally.
+
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SCHEMA="${ROOT_DIR}/scripts/prompt.schema.json"
 PROMPTS_DIR="${ROOT_DIR}/prompts"
