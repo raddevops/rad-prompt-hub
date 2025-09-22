@@ -13,7 +13,7 @@
     },
     {
       "role": "user",
-      "content": "MODE={{MODE|silent}}\nREPO_ROOT={{./}}\nKATA_BRIEF_JSON={{PASTE_BRIEF_JSON_HERE}}\n\nInstructions:\n- Validate the brief; if MODE=interview and fields are missing, ask ≤8 clarifying questions **first** and wait for answers. Otherwise proceed silently.\n- Run the full process and return only the Output Contract JSON (with `quality_report` and `files[]`)."
+      "content": "MODE={{MODE|silent}}\nREPO_ROOT={{REPO_ROOT|./}}\nKATA_BRIEF_JSON={{PASTE_BRIEF_JSON_HERE}}\n\nInstructions:\n- Validate the brief; if MODE=interview and fields are missing, ask ≤8 clarifying questions **first** and wait for answers. Otherwise proceed silently.\n- Run the full process and return only the Output Contract JSON (with `quality_report` and `files[]`)."
     }
   ]
 }
