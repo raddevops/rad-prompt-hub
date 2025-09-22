@@ -115,7 +115,7 @@ else
 fi
 
 # Validate question limitation for interview mode
-if echo "$USER_CONTENT" | grep -q "≤8.*questions\|up to 8.*questions\|8.*questions"; then
+if echo "$USER_CONTENT" | grep -q "8.*questions"; then
     echo "✅ Question limitation specified"
 else
     echo "❌ Missing question limitation for interview mode"
