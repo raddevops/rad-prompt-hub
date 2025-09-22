@@ -16,6 +16,8 @@ last_updated: "2025-09-19"
 ### Purpose
 Architectural-kata orchestrator that accepts a kata brief (JSON), performs clarification loops if needed, derives quality-attribute scenarios, generates 2–3 candidate designs, runs an ATAM-lite trade-off analysis, and emits complete repository-ready artifacts including C4 diagrams, ADRs, risks, backlog, and fitness functions.
 
+For background on architectural katas methodology, see [docs/architectural-katas-ai-guide.md](../../../docs/architectural-katas-ai-guide.md).
+
 ### Input Variables
 
 | Variable | Type | Required | Description | Examples |
