@@ -159,7 +159,7 @@ echo ""
 echo "🎯 Quality gates validation..."
 
 # Validate quality gates
-QUALITY_GATES=("≥5.*QAS\|5.*QAS" "≥2.*candidate\|2.*candidate" "ADR.*0001\|ADR-0001" "walking.*skeleton" "3.*must.*have.*capabilities")
+QUALITY_GATES=("5.*QAS" "2.*candidate" "ADR.?0001" "walking.*skeleton" "3.*must.*have.*capabilities")
 for gate in "${QUALITY_GATES[@]}"; do
     if echo "$SYSTEM_CONTENT" | grep -q -i "$gate"; then
         echo "✅ Quality gate specified: $(echo "$gate" | cut -d'\\' -f1)"
