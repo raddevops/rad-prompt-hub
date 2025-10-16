@@ -19,6 +19,7 @@ permissions:
 jobs:
   validate-prompts:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -53,14 +54,16 @@ jobs:
   branch-name-policy:
     name: Branch name policy
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     if: github.event_name == 'pull_request'
     steps:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Check branch naming convention
+        id: branch_check
         continue-on-error: true
         run: |
           bash scripts/check_branch_name.sh "${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}" 
       - name: Note
-        if: failure()
+        if: steps.branch_check.outcome == 'failure'
         run: echo "Branch name policy violated; not blocking merge."
