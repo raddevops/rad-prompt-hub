@@ -133,8 +133,21 @@ Create a test PR that modifies files in `prompts/`:
 git checkout -b test/prompt-change-20251016
 # Create a test prompt directory (following the repository structure)
 mkdir -p prompts/test-category/test-prompt
-echo '{"target_model":"gpt-4","parameters":{"reasoning_effort":"standard","verbosity":"concise"},"messages":[{"role":"system","content":"Test prompt"}]}' > prompts/test-category/test-prompt/test-prompt.json
-echo "# Test Prompt" > prompts/test-category/test-prompt/test-prompt.md
+cat > prompts/test-category/test-prompt/test-prompt.json << 'EOF'
+{"name":"Test Prompt","description":"A test prompt for validation","target_model":"gpt-4","parameters":{"reasoning_effort":"standard","verbosity":"concise"},"messages":[{"role":"system","content":"You are a test assistant."},{"role":"user","content":"Process this input: {INPUT}"}]}
+EOF
+cat > prompts/test-category/test-prompt/test-prompt.md << 'EOF'
+---
+title: "Test Prompt"
+tags: ["test", "validation"]
+author: "test-user"
+last_updated: "2025-10-16"
+---
+
+# Test Prompt
+
+This is a test prompt for validating the ruleset configuration.
+EOF
 git add prompts/test-category/
 git commit -m "test: add test prompt"
 git push origin test/prompt-change-20251016
