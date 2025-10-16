@@ -6,6 +6,43 @@ This is a quick reference for implementing path-based branch protection using Gi
 
 GitHub Rulesets allow you to require status checks only when specific files are modified. This prevents "expected" checks from appearing on PRs that don't need validation.
 
+## How It Works
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Pull Request Created                                         │
+└─────────────────────────────────────────────────────────────┘
+                           ▼
+┌─────────────────────────────────────────────────────────────┐
+│ GitHub checks which files were modified                      │
+└─────────────────────────────────────────────────────────────┘
+                           ▼
+         ┌─────────────────┴─────────────────┐
+         ▼                                    ▼
+┌──────────────────┐                  ┌──────────────────┐
+│ Matches pattern? │                  │ Matches pattern? │
+│ prompts/**       │                  │ docs/**          │
+│ scripts/**       │                  │ (no ruleset)     │
+└──────────────────┘                  └──────────────────┘
+         │ Yes                                 │ No match
+         ▼                                     ▼
+┌──────────────────┐                  ┌──────────────────┐
+│ Apply ruleset:   │                  │ Skip prompt      │
+│ - Prompt checks  │                  │ validation       │
+│ - Script checks  │                  │ checks           │
+│ - Required       │                  │                  │
+└──────────────────┘                  └──────────────────┘
+```
+
+**Example Scenarios:**
+
+| Files Changed | Required Checks Triggered |
+|---------------|---------------------------|
+| `prompts/engineering/code-review.json` | ✅ Prompt Guardrails, validate-prompts |
+| `scripts/validate_prompts.sh` | ✅ Prompt Guardrails, validate-prompts |
+| `docs/README.md` only | ❌ No prompt checks (base protections only) |
+| `prompts/test.json` + `docs/guide.md` | ✅ Prompt Guardrails (because prompts/ is touched) |
+
 ## Quick Implementation
 
 ### Option 1: GitHub Web UI (Recommended)

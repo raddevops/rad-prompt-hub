@@ -293,7 +293,6 @@ When repository structure changes:
 - [GitHub Rulesets Documentation](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets-for-a-branch)
 - [Repository Documentation: BRANCH_PROTECTION_RULESET.md](BRANCH_PROTECTION_RULESET.md)
 - [Repository Documentation: RULESET_QUICK_START.md](RULESET_QUICK_START.md)
-- [Original Issue: Implement GitHub ruleset with path-based branch protection](https://github.com/raddevops/rad-prompt-hub/issues/XXX)
 
 ## Notes
 
