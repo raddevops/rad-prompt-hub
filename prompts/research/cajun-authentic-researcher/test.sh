@@ -41,10 +41,18 @@ echo "🌶️  Testing Cajun authenticity components..."
 SYSTEM_CONTENT=$(jq -r '.messages[] | select(.role == "system") | .content' "$JSON_FILE")
 
 # Validate parish-specific references
-if echo "$SYSTEM_CONTENT" | grep -q "New Iberia.*Avery Island.*Lafayette"; then
-    echo "✅ Parish-specific references present (New Iberia, Avery Island, Lafayette)"
-else
-    echo "❌ Missing parish-specific references"
+REQUIRED_PARISHES=("New Iberia" "Avery Island" "Lafayette")
+MISSING_PARISHES=()
+for parish in "${REQUIRED_PARISHES[@]}"; do
+    if echo "$SYSTEM_CONTENT" | grep -q "$parish"; then
+        echo "✅ Parish-specific reference present: $parish"
+    else
+        MISSING_PARISHES+=("$parish")
+    fi
+done
+
+if [[ ${#MISSING_PARISHES[@]} -gt 0 ]]; then
+    echo "❌ Missing parish-specific references: ${MISSING_PARISHES[*]}"
     exit 1
 fi
 
