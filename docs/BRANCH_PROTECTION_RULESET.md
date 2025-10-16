@@ -131,8 +131,11 @@ Create a test PR that modifies files in `prompts/`:
 
 ```bash
 git checkout -b test/prompt-change-20251016
-echo '{"test": "data"}' > prompts/test/test.json
-git add prompts/test/test.json
+# Create a test prompt directory (following the repository structure)
+mkdir -p prompts/test-category/test-prompt
+echo '{"target_model":"gpt-4","parameters":{"reasoning_effort":"standard","verbosity":"concise"},"messages":[{"role":"system","content":"Test prompt"}]}' > prompts/test-category/test-prompt/test-prompt.json
+echo "# Test Prompt" > prompts/test-category/test-prompt/test-prompt.md
+git add prompts/test-category/
 git commit -m "test: add test prompt"
 git push origin test/prompt-change-20251016
 ```
@@ -147,8 +150,8 @@ Create a test PR that modifies only documentation files:
 
 ```bash
 git checkout -b test/docs-change-20251016
-echo "# Test" >> docs/test.md
-git add docs/test.md
+echo "# Test Documentation Update" >> docs/test-update.md
+git add docs/test-update.md
 git commit -m "docs: update test documentation"
 git push origin test/docs-change-20251016
 ```
@@ -164,10 +167,11 @@ Create a test PR that modifies both prompts and documentation:
 
 ```bash
 git checkout -b test/mixed-change-20251016
-echo "# Test" >> docs/test.md
-echo '{"test": "data"}' > prompts/test/test2.json
-git add docs/test.md prompts/test/test2.json
-git commit -m "feat: add test prompt and docs"
+echo "# Updated Documentation" >> docs/usage-guide.md
+# Modify an existing prompt (to be realistic)
+echo "Updated" >> prompts/engineering/code-review/code-review.md
+git add docs/usage-guide.md prompts/engineering/code-review/code-review.md
+git commit -m "feat: update code review prompt and docs"
 git push origin test/mixed-change-20251016
 ```
 

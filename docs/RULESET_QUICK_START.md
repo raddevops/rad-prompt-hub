@@ -38,10 +38,11 @@ GitHub Rulesets allow you to require status checks only when specific files are 
 
 | Files Changed | Required Checks Triggered |
 |---------------|---------------------------|
-| `prompts/engineering/code-review.json` | ✅ Prompt Guardrails, validate-prompts |
+| `prompts/engineering/code-review/code-review.json` | ✅ Prompt Guardrails, validate-prompts |
 | `scripts/validate_prompts.sh` | ✅ Prompt Guardrails, validate-prompts |
-| `docs/README.md` only | ❌ No prompt checks (base protections only) |
-| `prompts/test.json` + `docs/guide.md` | ✅ Prompt Guardrails (because prompts/ is touched) |
+| `docs/usage-guide.md` only | ❌ No prompt checks (base protections only) |
+| `prompts/meta/promptsmith/promptsmith.json` + `README.md` | ✅ Prompt Guardrails (because prompts/ is touched) |
+| `.github/workflows/prompt-guardrails.yml` | ✅ Prompt Guardrails (workflow file is protected) |
 
 ## Quick Implementation
 
