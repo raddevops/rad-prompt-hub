@@ -174,6 +174,23 @@ Before submitting, verify:
 - [ ] No typos or grammatical errors
 - [ ] Example provided if prompt is complex
 
+## CI and Required Checks
+
+This repository uses **path-based GitHub Rulesets** to ensure required status checks only appear when relevant files are modified. This means:
+
+- **Prompt/script changes** (files in `prompts/**`, `scripts/**`, or workflow files) trigger `Prompt Guardrails` and `validate-prompts` checks
+- **Documentation-only changes** (files in `docs/**`, `README.md`, etc.) do not require prompt validation checks
+- **No more stuck PRs** waiting for "expected" checks that will never run
+
+**Understanding required checks:**
+- When you modify prompts or scripts, you'll see required checks appear in your PR
+- When you modify only documentation, you won't see prompt-specific checks
+- All PRs require conversation resolution and base branch protections
+
+**For detailed information:**
+- Implementation guide: [docs/RULESET_QUICK_START.md](docs/RULESET_QUICK_START.md)
+- Full documentation: [docs/BRANCH_PROTECTION_RULESET.md](docs/BRANCH_PROTECTION_RULESET.md)
+
 ## Validation and Testing
 
 
@@ -489,6 +506,7 @@ Notes:
 - Branch protections require the `validate` check to pass before merge
 - Conversation resolution may be enforced; resolve any open PR threads
 - After a public flip, badges and links should render without auth
+- See [docs/BRANCH_PROTECTION_RULESET.md](docs/BRANCH_PROTECTION_RULESET.md) for path-based branch protection configuration
 
 ## Prompt-specific Tags (Optional)
 

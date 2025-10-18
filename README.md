@@ -345,6 +345,20 @@ head prompts/index.json | jq .
 
   
 
+## Branch Protection & CI
+
+This repository uses path-based GitHub Rulesets to ensure required status checks only appear when relevant files are modified. This prevents "expected" checks from blocking PRs that don't touch prompts or scripts.
+
+**Quick Start:** See [`docs/RULESET_QUICK_START.md`](docs/RULESET_QUICK_START.md) for setup instructions.
+
+**Full Documentation:** See [`docs/BRANCH_PROTECTION_RULESET.md`](docs/BRANCH_PROTECTION_RULESET.md) for detailed configuration, testing, and troubleshooting.
+
+**Key workflows with path-based triggers:**
+- `prompt-guardrails.yml` - Runs on changes to `prompts/**`, `scripts/**`, workflow files
+- `validate-prompts.yml` - Runs on all pull requests
+
+  
+
 ## Roadmap Ideas
 
 - Auto index regeneration pre-commit hook
