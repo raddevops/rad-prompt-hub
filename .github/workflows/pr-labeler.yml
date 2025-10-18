@@ -8,12 +8,17 @@ permissions:
 jobs:
   triage:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Label PR
+        id: labeler
         uses: actions/labeler@634933edcd8ababfe52f92936142cc22ac488b1b # v6.0.1
         continue-on-error: true
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           configuration-path: .github/labeler.yml
+      - name: Report outcome
+        if: steps.labeler.outcome == 'failure'
+        run: echo "::warning::PR labeling failed but not blocking the PR"
